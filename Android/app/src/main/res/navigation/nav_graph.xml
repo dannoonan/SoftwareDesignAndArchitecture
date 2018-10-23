@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/menuFragment">
+
+    <fragment
+        android:id="@+id/rentBikeFragment"
+        android:name="com.macmanus.jamie.bikerentalapp.RentBikeFragment"
+        android:label="fragment_second"
+        tools:layout="@layout/fragment_rent_bike" />
+    <fragment
+        android:id="@+id/findBikeFragment"
+        android:name="com.macmanus.jamie.bikerentalapp.FindBikeFragment"
+        android:label="fragment_find_bike"
+        tools:layout="@layout/fragment_find_bike" />
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="com.macmanus.jamie.bikerentalapp.MenuFragment"
+        android:label="fragment_menu"
+        tools:layout="@layout/fragment_menu" >
+        <action
+            android:id="@+id/action_menuFragment_to_findBikeFragment"
+            app:destination="@id/findBikeFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_rentBikeFragment"
+            app:destination="@id/rentBikeFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_reportBikeFragment"
+            app:destination="@id/reportBikeFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_returnBikeFragment"
+            app:destination="@id/returnBikeFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_mapsActivity"
+            app:destination="@id/mapsActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/reportBikeFragment"
+        android:name="com.macmanus.jamie.bikerentalapp.ReportBikeFragment"
+        android:label="fragment_report_bike"
+        tools:layout="@layout/fragment_report_bike" />
+    <fragment
+        android:id="@+id/returnBikeFragment"
+        android:name="com.macmanus.jamie.bikerentalapp.ReturnBikeFragment"
+        android:label="fragment_return_bike"
+        tools:layout="@layout/fragment_return_bike" />
+    <activity
+        android:id="@+id/mapsActivity"
+        android:name="com.macmanus.jamie.bikerentalapp.MapsActivity"
+        android:label="activity_maps"
+        tools:layout="@layout/activity_maps" />
+</navigation>
