@@ -6,7 +6,6 @@ import ie.demo.domain.User;
 
 public interface UserService {
 	
-	public List<User> findAll();
+	public int register(User u);
 	
-	public void insertUser(User u);
 }

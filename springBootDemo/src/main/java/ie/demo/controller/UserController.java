@@ -22,16 +22,13 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	
-	@RequestMapping(value="/", method=RequestMethod.GET)
-	public MsgResponse findAll() {
-		List<User> list = userService.findAll();
-		return MsgResponse.success().add("users", list);
-	}
-
-	@RequestMapping(value= "/insert", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+	@RequestMapping(value= "/user", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
 	public MsgResponse insertUser(@RequestBody User u) {
-		userService.insertUser(u);
-		return MsgResponse.success();
+		int result = userService.register(u);
+		if(result >= 0) {
+			return MsgResponse.success();
+		} else {
+			return MsgResponse.fail().add("error", "fail to register");
+		}
 	}
 }

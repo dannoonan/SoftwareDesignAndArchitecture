@@ -5,17 +5,18 @@ import java.util.Date;
 
 public class User implements Serializable{
 
-	private Integer id;
+	private int userId;
 	private String username;
-	private Date birthday;
-	private String gender;
-	private String address;
+	private String password;
+	private boolean banned;
+	private long studentCardId;
+	private int userTypeId;
 	
-	public Integer getId() {
-		return id;
+	public int getUserId() {
+		return userId;
 	}
-	public void setId(Integer id) {
-		this.id = id;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 	public String getUsername() {
 		return username;
@@ -23,22 +24,29 @@ public class User implements Serializable{
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public Date getBirthday() {
-		return birthday;
+	public String getPassword() {
+		return password;
 	}
-	public void setBirthday(Date date) {
-		this.birthday = date;
+	public void setPassword(String password) {
+		this.password = password;
 	}
-	public String getGender() {
-		return gender;
+	public boolean isBanned() {
+		return banned;
 	}
-	public void setGender(String gender) {
-		this.gender = gender;
+	public void setBanned(boolean banned) {
+		this.banned = banned;
 	}
-	public String getAddress() {
-		return address;
+	public long getStudentCardId() {
+		return studentCardId;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+	public void setStudentCardId(long studentCardId) {
+		this.studentCardId = studentCardId;
 	}
+	public int getUserTypeId() {
+		return userTypeId;
+	}
+	public void setUserTypeId(int userTypeId) {
+		this.userTypeId = userTypeId;
+	}
+	
 }

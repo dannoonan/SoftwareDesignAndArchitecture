@@ -2,11 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ie.demo.mapper.UserMapper">	
-	<select id="findAll" resultType="ie.demo.domain.User">
-		select * from user
-	</select>
-	<insert id="insertUser" parameterType="ie.demo.domain.User" flushCache="true" useGeneratedKeys="true" keyProperty="id">
-		insert into user (username, birthday, gender, address)
-		values (#{username}, #{birthday}, #{gender}, #{address})
+	<insert id="register" parameterType="ie.demo.domain.User" flushCache="true" useGeneratedKeys="true" keyProperty="userId">
+		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="userId">    
+      	SELECT LAST_INSERT_ID() AS ID      
+    	</selectKey>
+		insert into User(username, password, studentCardId) values (#{username}, #{password}, #{studentCardId})
 	</insert>
 </mapper>
