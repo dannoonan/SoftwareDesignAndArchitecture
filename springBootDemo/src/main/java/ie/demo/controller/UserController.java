@@ -25,7 +25,7 @@ public class UserController {
 	@RequestMapping(value= "/user", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
 	public MsgResponse insertUser(@RequestBody User u) {
 		int result = userService.register(u);
-		if(result >= 0) {
+		if(result > 0) {
 			return MsgResponse.success();
 		} else {
 			return MsgResponse.fail().add("error", "fail to register");

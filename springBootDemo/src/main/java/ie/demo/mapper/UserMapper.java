@@ -10,4 +10,6 @@ public interface UserMapper {
 
 	public int register(User u);
 	
+	public int userExists(String username);
+	
 }
