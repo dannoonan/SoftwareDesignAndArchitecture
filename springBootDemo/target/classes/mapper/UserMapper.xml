@@ -15,6 +15,7 @@
     	</selectKey>
 		INSERT into User(username, password, studentCardId) VALUES (#{username}, #{password}, #{studentCardId})
 	</insert>
+<<<<<<< HEAD
 <<<<<<< bdd6169a5b17b843a06a8a88337f337f3bbad69f
 	
 	<select id="userExists" parameterType="String" resultType="int">
@@ -24,5 +25,10 @@
 	<select id="findUserByUserName" resultMap="UserResultMap">
 		select username, password, studentCardId from User WHERE username=#{username}
 >>>>>>> Added simple Login functionality:
+=======
+
+	<select id="findUserByUserName" resultMap="UserResultMap">
+		select username, password, studentCardId from User WHERE username=#{username}
+>>>>>>> 04203a99566d46b782dfdc4dada6b8c6fdd31cf7
 	</select>
 </mapper>
