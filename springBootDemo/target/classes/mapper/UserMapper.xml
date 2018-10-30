@@ -1,15 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="ie.demo.mapper.UserMapper">	
+<mapper namespace="ie.demo.mapper.UserMapper">
+
+	<resultMap id="UserResultMap" type="ie.demo.domain.User">
+		<result column="username" property="username" />
+		<result column="password" property="password" />
+		<result column="studentCardId" property="studentCardId" />
+	</resultMap>
+
 	<insert id="register" parameterType="ie.demo.domain.User" flushCache="true" useGeneratedKeys="true" keyProperty="userId">
 		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="userId">    
       	SELECT LAST_INSERT_ID() AS ID      
     	</selectKey>
 		INSERT into User(username, password, studentCardId) VALUES (#{username}, #{password}, #{studentCardId})
 	</insert>
+<<<<<<< HEAD
+<<<<<<< bdd6169a5b17b843a06a8a88337f337f3bbad69f
 	
 	<select id="userExists" parameterType="String" resultType="int">
 		SELECT count(*) FROM User WHERE username = #{username}
+=======
+
+	<select id="findUserByUserName" resultMap="UserResultMap">
+		select username, password, studentCardId from User WHERE username=#{username}
+>>>>>>> Added simple Login functionality:
+=======
+
+	<select id="findUserByUserName" resultMap="UserResultMap">
+		select username, password, studentCardId from User WHERE username=#{username}
+>>>>>>> 04203a99566d46b782dfdc4dada6b8c6fdd31cf7
 	</select>
 </mapper>
