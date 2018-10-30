@@ -6,6 +6,10 @@
 		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="userId">    
       	SELECT LAST_INSERT_ID() AS ID      
     	</selectKey>
-		insert into User(username, password, studentCardId) values (#{username}, #{password}, #{studentCardId})
+		INSERT into User(username, password, studentCardId) VALUES (#{username}, #{password}, #{studentCardId})
 	</insert>
+	
+	<select id="userExists" parameterType="String" resultType="int">
+		SELECT count(*) FROM User WHERE username = #{username}
+	</select>
 </mapper>
