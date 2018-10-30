@@ -5,10 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 import ie.demo.domain.User;
@@ -29,6 +26,17 @@ public class UserController {
 			return MsgResponse.success();
 		} else {
 			return MsgResponse.fail().add("error", "fail to register");
+		}
+	}
+
+	@RequestMapping(value= "/login", method=RequestMethod.PUT, produces="application/json;charset=UTF-8")
+	public MsgResponse login(@RequestParam(value = "username")String username,
+							 @RequestParam(value = "password")String password) {
+		int result = userService.login(username, password);
+		if(result > 0) {
+			return MsgResponse.success();
+		} else {
+			return MsgResponse.fail().add("error", "fail to login");
 		}
 	}
 }

@@ -9,5 +9,6 @@ import ie.demo.domain.User;
 public interface UserMapper {
 
 	public int register(User u);
+	User findUserByUserName(String username);
 	
 }
