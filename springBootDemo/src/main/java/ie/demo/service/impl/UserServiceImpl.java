@@ -14,16 +14,11 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private UserMapper userMapper;
-	
+
 	@Override
-	public List<User> findAll(){
-		List<User> list = userMapper.findAll();
-		return list;
-	}
-	
-	@Override
-	public void insertUser(User u) {
-		userMapper.insertUser(u);
+	public int register(User u) {
+		int result = userMapper.register(u);
+		return result;
 	}
 
 }

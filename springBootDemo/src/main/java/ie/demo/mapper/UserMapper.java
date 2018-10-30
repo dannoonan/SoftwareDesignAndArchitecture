@@ -8,8 +8,6 @@ import ie.demo.domain.User;
 @Mapper
 public interface UserMapper {
 
-	public List<User> findAll();
-	
-	public void insertUser(User u);
+	public int register(User u);
 	
 }
