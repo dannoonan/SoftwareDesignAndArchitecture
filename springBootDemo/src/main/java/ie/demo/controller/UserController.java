@@ -20,7 +20,10 @@ public class UserController {
 	private UserService userService;
 	
 	@RequestMapping(value= "/user", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
-	public MsgResponse insertUser(@RequestBody User u) {
+	public MsgResponse insertUser(@RequestParam(value = "username")String username,
+								  @RequestParam(value = "password")String password,
+								  @RequestParam(value = "studentCardId") String studentCardId) {
+		User u = new User(username, password, Long.parseLong(studentCardId));
 		int result = userService.register(u);
 		if(result > 0) {
 			return MsgResponse.success();
@@ -29,7 +32,7 @@ public class UserController {
 		}
 	}
 
-	@RequestMapping(value= "/login", method=RequestMethod.PUT, produces="application/json;charset=UTF-8")
+	@RequestMapping(value= "/user", method=RequestMethod.PUT, produces="application/json;charset=UTF-8")
 	public MsgResponse login(@RequestParam(value = "username")String username,
 							 @RequestParam(value = "password")String password) {
 		int result = userService.login(username, password);

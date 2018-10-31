@@ -12,6 +12,13 @@ public class User implements Serializable{
 	private long studentCardId;
 	private int userTypeId;
 	
+	public User() {
+	}
+	public User(String username, String password, long studentCardId) {
+		this.username = username;
+		this.password = password;
+		this.studentCardId = studentCardId;
+	}
 	public int getUserId() {
 		return userId;
 	}

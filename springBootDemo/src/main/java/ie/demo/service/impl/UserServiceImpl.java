@@ -30,6 +30,8 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int login(String username, String password) {
 		User user = userMapper.findUserByUserName(username);
+		if(user == null)
+			return 0;
 		if(user.getPassword().equals(password))
 			return 1;
 		else
