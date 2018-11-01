@@ -1,4 +1,4 @@
-package com.macmanus.jamie.bikerentalapp;
+package com.macmanus.jamie.bikerentalapp.view;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -25,6 +25,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.macmanus.jamie.bikerentalapp.R;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
