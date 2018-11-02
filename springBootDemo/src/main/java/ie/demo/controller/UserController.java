@@ -1,17 +1,11 @@
 package ie.demo.controller;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 
 import ie.demo.domain.User;
 import ie.demo.service.UserService;
 import ie.response.MsgResponse;
-
 
 @RestController
 public class UserController {
