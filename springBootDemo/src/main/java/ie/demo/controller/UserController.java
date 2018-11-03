@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import ie.demo.domain.User;
+import ie.demo.service.UserFactory;
 import ie.demo.service.UserService;
 import ie.response.MsgResponse;
 
@@ -12,12 +13,16 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private UserFactory userFactory;
 	
 	@RequestMapping(value= "/user", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
 	public MsgResponse insertUser(@RequestParam(value = "username")String username,
 								  @RequestParam(value = "password")String password,
-								  @RequestParam(value = "studentCardId") String studentCardId) {
-		User u = new User(username, password, Long.parseLong(studentCardId));
+								  @RequestParam(value = "studentCardId") String studentCardId,
+								  @RequestParam(value = "email") String email) {
+		User u = userFactory.createUser(username, password, Long.parseLong(studentCardId), email);
+		System.out.println(u.getStudentCardId());
 		int result = userService.register(u);
 		if(result > 0) {
 			return MsgResponse.success();

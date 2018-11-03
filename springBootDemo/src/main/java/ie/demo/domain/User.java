@@ -10,13 +10,15 @@ public class User implements Serializable{
 	private boolean banned;
 	private long studentCardId;
 	private int userTypeId;
+	private String email;
 	
 	public User() {
 	}
-	public User(String username, String password, long studentCardId) {
+	public User(String username, String password, long studentCardId, String email, int userTypeId) {
 		this.username = username;
 		this.password = password;
 		this.studentCardId = studentCardId;
+		this.email = email;
 	}
 	public int getUserId() {
 		return userId;
@@ -53,6 +55,12 @@ public class User implements Serializable{
 	}
 	public void setUserTypeId(int userTypeId) {
 		this.userTypeId = userTypeId;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 }

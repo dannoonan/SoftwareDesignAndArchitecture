@@ -13,14 +13,14 @@
 		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="userId">    
       	SELECT LAST_INSERT_ID() AS ID      
     	</selectKey>
-		INSERT into User(username, password, studentCardId) VALUES (#{username}, #{password}, #{studentCardId})
+		INSERT INTO Users (StudentCardId, UserTypeId, Username, Email, Password) VALUES (#{studentCardId}, 1, #{username}, #{email}, #{password});
 	</insert>
-	
+	 
 	<select id="userExists" parameterType="String" resultType="int">
-		SELECT count(*) FROM User WHERE username = #{username}
+		SELECT count(*) FROM Users WHERE username = #{username}
 	</select>
 
 	<select id="findUserByUserName" resultMap="UserResultMap">
-		select username, password, studentCardId from User WHERE username=#{username}
+		select username, password, studentCardId from Users WHERE username=#{username}
 	</select>
 </mapper>
