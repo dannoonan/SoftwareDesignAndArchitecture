@@ -10,3 +10,9 @@ spring:
 
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
+
+logging:
+  level:
+    ie:
+      demo:
+        mapper: debug
