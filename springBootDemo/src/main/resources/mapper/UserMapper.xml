@@ -23,4 +23,5 @@
 	<select id="findUserByUserName" resultMap="UserResultMap">
 		select username, password, studentCardId from Users WHERE username=#{username}
 	</select>
+
 </mapper>
