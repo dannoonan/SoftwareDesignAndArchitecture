@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ie.demo.mapper.UserMapper">
+
+	<resultMap id="UserResultMap" type="ie.demo.domain.User">
+		<result column="username" property="username" />
+		<result column="password" property="password" />
+		<result column="studentCardId" property="studentCardId" />
+	</resultMap>
+
+	<insert id="register" parameterType="ie.demo.domain.User" flushCache="true" useGeneratedKeys="true" keyProperty="userId">
+		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="userId">    
+      	SELECT LAST_INSERT_ID() AS ID      
+    	</selectKey>
+		INSERT INTO Users (StudentCardId, UserTypeId, Username, Email, Password) VALUES (#{studentCardId}, 1, #{username}, #{email}, #{password});
+	</insert>
+	 
+	<select id="userExists" parameterType="String" resultType="int">
+		SELECT count(*) FROM Users WHERE username = #{username}
+	</select>
+
+	<select id="findUserByUserName" resultMap="UserResultMap">
+		select username, password, studentCardId from Users WHERE username=#{username}
+	</select>
+
+</mapper>
