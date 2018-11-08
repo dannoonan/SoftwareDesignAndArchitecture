@@ -14,7 +14,19 @@
         android:id="@+id/findBikeFragment"
         android:name="com.macmanus.jamie.bikerentalapp.view.FindBikeFragment"
         android:label="fragment_find_bike"
-        tools:layout="@layout/fragment_find_bike" />
+        tools:layout="@layout/fragment_find_bike" >
+        <action
+            android:id="@+id/action_findBikeFragment_to_viewBikesFragment2"
+            app:destination="@id/viewBikesFragment" />
+    </fragment>
+        <action
+            android:id="@+id/action_findBikeFragment_to_viewBikesFragment"
+            app:destination="@id/viewBikesFragment" />
+    <fragment
+        android:id = "@+id/viewBikesFragment"
+        android:name="com.macmanus.jamie.bikerentalapp.view.ViewBikesFragment"
+        android:label="fragment_view_bikes"
+        tools:layout="@layout/fragment_view_bikes" />
     <fragment
         android:id="@+id/menuFragment"
         android:name="com.macmanus.jamie.bikerentalapp.view.MenuFragment"
@@ -65,11 +77,12 @@
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.macmanus.jamie.bikerentalapp.view.RegisterFragment"
+        android:name="com.macmanus.jamie.bikerentalapp.view.RegisterUserFragment"
         android:label="fragment_register"
-        tools:layout="@layout/fragment_register" >
+        tools:layout="@layout/fragment_register_user" >
         <action
             android:id="@+id/action_registerFragment_to_menuFragment"
             app:destination="@id/menuFragment" />
     </fragment>
+
 </navigation>
