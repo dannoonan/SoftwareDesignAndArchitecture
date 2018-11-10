@@ -4,10 +4,14 @@ ie/demo/MySpringBootDemo.class
 ie/demo/service/impl/NodeServiceImpl.class
 ie/demo/service/impl/UserServiceImpl.class
 ie/demo/service/impl/BrokeBikeFilter.class
+ie/demo/controller/OrderController.class
 ie/demo/service/impl/PasswordServiceImpl.class
 ie/demo/service/impl/ConcreteBikeFactory.class
 ie/demo/mapper/BikeMapper.class
+ie/demo/service/OrderService.class
 ie/demo/service/BikeService.class
+ie/demo/mapper/OrderMapper.class
+ie/demo/domain/Order.class
 ie/demo/mapper/NodeMapper.class
 ie/demo/service/UserFactory.class
 ie/demo/service/BikeFactory.class
@@ -22,5 +26,6 @@ ie/demo/service/NodeService.class
 ie/demo/service/impl/OccupiedBikeFIlter.class
 ie/demo/domain/User.class
 ie/demo/service/impl/CustomerFactory.class
+ie/demo/service/impl/OrderServiceImpl.class
 ie/demo/domain/Bike.class
 ie/demo/service/impl/BikeServiceImpl.class

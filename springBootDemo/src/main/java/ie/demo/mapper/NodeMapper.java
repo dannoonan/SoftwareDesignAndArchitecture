@@ -9,6 +9,6 @@ import ie.demo.domain.Node;
 @Mapper
 public interface NodeMapper {
 	
-	public List<Node> findNode();
+	List<Node> findNode();
 	
 }

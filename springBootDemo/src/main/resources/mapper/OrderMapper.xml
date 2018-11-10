@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ie.demo.mapper.OrderMapper">
+	<resultMap id="OrderResultMap" type="ie.demo.domain.Order">
+		<id column="OrderId" property="orderId" />
+		<result column="Position" property="position" />
+	</resultMap>
+
+	<insert id="placeOrder" parameterType="ie.demo.domain.Order" flushCache="true" useGeneratedKeys="true" keyProperty="orderId">
+		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="orderId">
+			SELECT LAST_INSERT_ID() AS ID
+		</selectKey>
+		INSERT INTO Orders (BikeId, UserId, PaidStatus, MoneyConsumed, OrderTime) VALUES (#{bikeId}, #{userId}, #{paidStatus}, #{moneyConsumed}, #{orderTime});
+	</insert>
+</mapper>
