@@ -5,17 +5,17 @@ import java.io.Serializable;
 public class User implements Serializable{
 
 	private int userId;
-	private String username;
-	private String password;
-	private boolean banned;
-	private long studentCardId;
+	private int studentCardId;
 	private int userTypeId;
+	private String userName;
+	private String password;
 	private String email;
+	private boolean isBanned;
 	
 	public User() {
 	}
-	public User(String username, String password, long studentCardId, String email, int userTypeId) {
-		this.username = username;
+	public User(String username, String password, int studentCardId, String email, int userTypeId) {
+		this.userName = username;
 		this.password = password;
 		this.studentCardId = studentCardId;
 		this.email = email;
@@ -27,10 +27,10 @@ public class User implements Serializable{
 		this.userId = userId;
 	}
 	public String getUsername() {
-		return username;
+		return userName;
 	}
 	public void setUsername(String username) {
-		this.username = username;
+		this.userName = username;
 	}
 	public String getPassword() {
 		return password;
@@ -39,15 +39,15 @@ public class User implements Serializable{
 		this.password = password;
 	}
 	public boolean isBanned() {
-		return banned;
+		return isBanned;
 	}
 	public void setBanned(boolean banned) {
-		this.banned = banned;
+		this.isBanned = banned;
 	}
 	public long getStudentCardId() {
 		return studentCardId;
 	}
-	public void setStudentCardId(long studentCardId) {
+	public void setStudentCardId(int studentCardId) {
 		this.studentCardId = studentCardId;
 	}
 	public int getUserTypeId() {

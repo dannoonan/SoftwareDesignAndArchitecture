@@ -4,6 +4,6 @@ import ie.demo.domain.User;
 
 public interface UserFactory {
 	
-	public User createUser(String username, String password, long studentCardId, String email);
+	User createUser(String username, String password, int studentCardId, String email);
 
 }

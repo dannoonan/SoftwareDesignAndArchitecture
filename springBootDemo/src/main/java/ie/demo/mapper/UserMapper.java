@@ -8,7 +8,7 @@ import ie.demo.domain.User;
 @Mapper
 public interface UserMapper {
 
-	public int register(User u);
+	int register(User u);
 	User findUserByUserName(String username);
-	public int userExists(String username);
+	int userExists(String username);
 }

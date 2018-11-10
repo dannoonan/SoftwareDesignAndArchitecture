@@ -22,6 +22,12 @@ public class BikeServiceImpl implements BikeService {
 	}
 
 	@Override
+	public Bike findBikeById(int id) {
+		Bike bike = bikeMapper.findBikeById(id);
+		return bike;
+	}
+
+	@Override
 	public int createBike(Bike bike) {
 		int result = bikeMapper.createBike(bike);
 		return result;

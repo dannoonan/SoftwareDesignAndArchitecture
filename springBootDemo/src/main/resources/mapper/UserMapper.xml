@@ -4,9 +4,13 @@
 <mapper namespace="ie.demo.mapper.UserMapper">
 
 	<resultMap id="UserResultMap" type="ie.demo.domain.User">
-		<result column="username" property="username" />
-		<result column="password" property="password" />
-		<result column="studentCardId" property="studentCardId" />
+		<result column="UserId" property="userId" />
+		<result column="StudentCardId" property="studentCardId" />
+		<result column="UserTypeId" property="userTypeId" />
+		<result column="UserName" property="userName" />
+		<result column="Password" property="password" />
+		<result column="Email" property="email" />
+		<result column="isBanned" property="isBanned" />
 	</resultMap>
 
 	<insert id="register" parameterType="ie.demo.domain.User" flushCache="true" useGeneratedKeys="true" keyProperty="userId">
@@ -21,7 +25,7 @@
 	</select>
 
 	<select id="findUserByUserName" resultMap="UserResultMap">
-		select username, password, studentCardId from Users WHERE username=#{username}
+		select UserId, StudentCardId, UserTypeId, UserName, Password, Email, isBanned from Users WHERE username=#{username}
 	</select>
 
 </mapper>

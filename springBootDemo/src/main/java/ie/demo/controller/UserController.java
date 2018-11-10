@@ -19,9 +19,9 @@ public class UserController {
 	@RequestMapping(value= "/user", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
 	public MsgResponse insertUser(@RequestParam(value = "username")String username,
 								  @RequestParam(value = "password")String password,
-								  @RequestParam(value = "studentCardId") String studentCardId,
+								  @RequestParam(value = "studentCardId") int studentCardId,
 								  @RequestParam(value = "email") String email) {
-		User u = userFactory.createUser(username, password, Long.parseLong(studentCardId), email);
+		User u = userFactory.createUser(username, password, studentCardId, email);
 		System.out.println(u.getStudentCardId());
 		int result = userService.register(u);
 		if(result > 0) {
