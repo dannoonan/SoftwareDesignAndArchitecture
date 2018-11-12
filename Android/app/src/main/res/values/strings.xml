@@ -16,10 +16,9 @@
     <string name="return_bike">Return Bike</string>
     <string name="rent_bike">Rent Bike</string>
     <string name="title_activity_maps">Map</string>
-    <string name="username">Username</string>
+    <string name="login">login</string>
     <string name="password">Password</string>
     <string name="not_a_member"><u>Not a Member?</u></string>
-    <string name="login">Login</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="register">Register</string>
 </resources>

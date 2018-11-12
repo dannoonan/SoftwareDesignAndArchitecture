@@ -9,18 +9,13 @@ import com.macmanus.jamie.bikerentalapp.web.Webservice;
 import java.io.IOException;
 import java.util.concurrent.Executor;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
 import retrofit2.Response;
 
-@Singleton
 public class UserRepository {
     private final Webservice webservice;
     private final UserDao userDao;
     private final Executor executor;
 
-    @Inject
     public UserRepository(Webservice webservice, UserDao userDao, Executor executor){
         this.webservice = webservice;
         this.userDao = userDao;

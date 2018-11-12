@@ -84,5 +84,10 @@
             android:id="@+id/action_registerFragment_to_menuFragment"
             app:destination="@id/menuFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/testFragment"
+        android:name="com.macmanus.jamie.bikerentalapp.view.TestFragment"
+        android:label="fragment_test"
+        tools:layout="@layout/fragment_test" />
 
 </navigation>
