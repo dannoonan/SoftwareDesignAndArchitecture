@@ -203,7 +203,7 @@ CREATE TABLE IF NOT EXISTS `Bikes` (
 `BikeType` varchar(128) NOT NULL,
 `NodeId` int(10) unsigned NOT NULL,
 `Position` varchar(128) NOT NULL,
-`isAvailable` boolean NOT NULL DEFAULT 0,
+`isAvailable` boolean NOT NULL DEFAULT 1,
 `LastUserId` int(10) unsigned NOT NULL ,
 PRIMARY KEY (`BikeId`),
 CONSTRAINT FOREIGN KEY (`NodeId`) REFERENCES `Nodes`(`NodeId`)ON DELETE CASCADE ON UPDATE CASCADE,
