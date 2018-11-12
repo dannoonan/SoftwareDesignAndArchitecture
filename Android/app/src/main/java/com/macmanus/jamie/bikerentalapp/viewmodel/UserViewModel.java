@@ -6,14 +6,11 @@ import android.arch.lifecycle.ViewModel;
 import com.macmanus.jamie.bikerentalapp.model.entity.User;
 import com.macmanus.jamie.bikerentalapp.repository.UserRepository;
 
-import javax.inject.Inject;
-
 public class UserViewModel extends ViewModel {
 
     private LiveData<User> user;
     private UserRepository userRepository;
 
-    @Inject
     public UserViewModel(UserRepository userRepo) {
         this.userRepository = userRepo;
     }

@@ -1,5 +1,6 @@
 package com.macmanus.jamie.bikerentalapp.web;
 
+import com.macmanus.jamie.bikerentalapp.model.entity.GithubUser;
 import com.macmanus.jamie.bikerentalapp.model.entity.User;
 
 import retrofit2.Call;
@@ -19,4 +20,7 @@ public interface Webservice {
 
     @POST("/user")
     Call<User> registerUser(@Body String userId, @Body String password);
+
+    @GET("https://api.github.com/users/{username}")
+    Call<GithubUser> getGithubUserData(@Path("username") String username);
 }
