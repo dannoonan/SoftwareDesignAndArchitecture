@@ -161,7 +161,7 @@ PRIMARY KEY (`UserTypeId`)
 
 CREATE TABLE IF NOT EXISTS `StudentCard` (
 `StudentCardId` int(10) unsigned NOT NULL AUTO_INCREMENT,
-`Balance` int(10) NOT NULL,
+`Balance` float(10) NOT NULL,
 PRIMARY KEY (`StudentCardId`)
 );
 
@@ -181,7 +181,7 @@ PRIMARY KEY (`NodeId`)
 
 CREATE TABLE IF NOT EXISTS `Users` (
 `UserId` int(10) unsigned NOT NULL AUTO_INCREMENT,
-`StudentCardId` int(10) unsigned NOT NULL,
+`StudentCardId` int(10) unsigned NULL,
 `UserTypeId` int(10) unsigned NOT NULL,
 `Username` varchar(128) NOT NULL,
 `Email` varchar(128) NOT NULL,
@@ -203,7 +203,7 @@ CREATE TABLE IF NOT EXISTS `Bikes` (
 `BikeType` varchar(128) NOT NULL,
 `NodeId` int(10) unsigned NOT NULL,
 `Position` varchar(128) NOT NULL,
-`Status` boolean NOT NULL,
+`isAvailable` boolean NOT NULL DEFAULT 1,
 `LastUserId` int(10) unsigned NOT NULL ,
 PRIMARY KEY (`BikeId`),
 CONSTRAINT FOREIGN KEY (`NodeId`) REFERENCES `Nodes`(`NodeId`)ON DELETE CASCADE ON UPDATE CASCADE,
@@ -218,7 +218,7 @@ CREATE TABLE IF NOT EXISTS `Orders` (
 `OrderId` int(10) unsigned NOT NULL AUTO_INCREMENT, 
 `BikeId` int(10) unsigned NOT NULL,
 `UserId` int(10) unsigned NOT NULL,
-`PaidStatus` int(10) unsigned NOT NULL,
+`isPaid` boolean NOT NULL DEFAULT 0,
 `MoneyConsumed` int(10) NOT NULL DEFAULT 0,
 `OrderTime` datetime NOT NULL,
 PRIMARY KEY (`OrderId`),
@@ -226,9 +226,74 @@ CONSTRAINT FOREIGN KEY (`BikeId`) REFERENCES `Bikes`(`BikeId`) ON DELETE CASCADE
 CONSTRAINT FOREIGN KEY (`UserId`) REFERENCES `Users`(`UserId`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+--
+--
+-- Table structure for table `Reports`
+--
 
+CREATE TABLE IF NOT EXISTS `Reports` (
+`ReportId` int(10) unsigned NOT NULL AUTO_INCREMENT,
+`BikeId` int(10) unsigned NOT NULL,
+`UserId` int(10) unsigned NOT NULL,
+`ReportText` varchar(256) NOT NULL,
+PRIMARY KEY (`ReportId`),
+CONSTRAINT FOREIGN KEY (`BikeId`) REFERENCES `Bikes`(`BikeId`) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT FOREIGN KEY (`UserId`) REFERENCES `Users`(`UserId`) ON DELETE CASCADE ON UPDATE CASCADE
+);
 
+--
+--
+-- Table structure for table `Collections`
+--
 
+CREATE TABLE IF NOT EXISTS `Collections` (
+`CollectionId` int(10) unsigned NOT NULL AUTO_INCREMENT,
+`DriverId` int(10) unsigned NOT NULL,
+`AdminId` int(10) unsigned NOT NULL,
+PRIMARY KEY (`CollectionId`),
+CONSTRAINT FOREIGN KEY (`DriverId`) REFERENCES `Users`(`UserId`) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT FOREIGN KEY (`AdminId`) REFERENCES `Users`(`UserId`) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+--
+--
+-- Table structure for table `CollectionScheduledBikes`
+--
+
+CREATE TABLE IF NOT EXISTS `CollectionScheduledBikes` (
+`BikeId` int(10) unsigned NOT NULL,
+`CollectionId` int(10) unsigned NOT NULL,
+PRIMARY KEY (`BikeId`),
+CONSTRAINT FOREIGN KEY (`BikeId`) REFERENCES `Bikes`(`BikeId`) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT FOREIGN KEY (`CollectionId`) REFERENCES `Collections`(`CollectionId`) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+--
+--
+-- Table structure for table `Repairs`
+--
+
+CREATE TABLE IF NOT EXISTS `Repairs` (
+`RepairId` int(10) unsigned NOT NULL AUTO_INCREMENT,
+`DriverId` int(10) unsigned NOT NULL,
+`AdminId` int(10) unsigned NOT NULL,
+PRIMARY KEY (`RepairId`),
+CONSTRAINT FOREIGN KEY (`DriverId`) REFERENCES `Users`(`UserId`) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT FOREIGN KEY (`AdminId`) REFERENCES `Users`(`UserId`) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+--
+--
+-- Table structure for table `RepairScheduledBikes`
+--
+
+CREATE TABLE IF NOT EXISTS `RepairScheduledBikes` (
+`BikeId` int(10) unsigned NOT NULL,
+`RepairId` int(10) unsigned NOT NULL,
+PRIMARY KEY (`BikeId`),
+CONSTRAINT FOREIGN KEY (`BikeId`) REFERENCES `Bikes`(`BikeId`) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT FOREIGN KEY (`RepairId`) REFERENCES `Repairs`(`RepairId`) ON DELETE CASCADE ON UPDATE CASCADE
+);
 
 -- --------------------------------------------------------
 
