@@ -25,7 +25,7 @@ public class UserController {
 		User u = userFactory.createUser(username, password, studentCardId, userTypeId, email);
 		System.out.println(u.getStudentCardId());
 		int result = userService.register(u);
-		if(result == 0) {
+		if(result == 1) {
 			return MsgResponse.success();
 		}
 		else if(result == 409) {
