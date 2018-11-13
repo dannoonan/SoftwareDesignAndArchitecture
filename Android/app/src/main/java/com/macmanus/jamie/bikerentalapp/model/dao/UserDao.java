@@ -17,7 +17,4 @@ public interface UserDao {
 
     @Query("SELECT * FROM user WHERE username LIKE :username")
     LiveData<User> load(String username);
-
-    @Query("SELECT * FROM user WHERE username LIKE :username")
-    User getUser(String username);
 }

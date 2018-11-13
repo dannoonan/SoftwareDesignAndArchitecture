@@ -1,9 +1,11 @@
 package com.macmanus.jamie.bikerentalapp.repository;
 
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
+import android.util.Log;
 
-import com.macmanus.jamie.bikerentalapp.model.entity.User;
 import com.macmanus.jamie.bikerentalapp.model.dao.UserDao;
+import com.macmanus.jamie.bikerentalapp.model.entity.User;
 import com.macmanus.jamie.bikerentalapp.web.Webservice;
 
 import java.io.IOException;
@@ -23,29 +25,42 @@ public class UserRepository {
     }
 
     public LiveData<User> getUser(String userId) {
-
         refreshUser(userId);
-
-        // Returns a LiveData object directly from the database.
         return userDao.load(userId);
     }
 
-    private void refreshUser(final String username) {
-        // Runs in a background thread.
+    public LiveData<Response> registerUser(String username, String password, String email,
+                             int userTypeId, String studentCardId){
+
+        MutableLiveData<Response> liveResponse = new MutableLiveData<>();
+
         executor.execute(() -> {
-            // Check if user data was fetched recently.
-            User user = userDao.getUser(username);
+            Response response;
+
+            try {
+                response = webservice.
+                        registerUser(username, password, email, userTypeId, studentCardId).execute();
+
+                liveResponse.postValue(response);
+            }
+            catch(IOException e){
+                e.printStackTrace();
+            }
+        });
+
+        return liveResponse;
+    }
+
+    private void refreshUser(final String username) {
+        executor.execute(() -> {
+            User user = userDao.load(username).getValue();
             if (!(user == null)) {
-                // Refreshes the data.
                 Response<User> response = null;
                 try {
                     response = webservice.getUser(username).execute();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
-                // Updates the database. The LiveData object automatically
-                // refreshes, so we don't need to do anything else here.
                 userDao.save(response.body());
             }
         });

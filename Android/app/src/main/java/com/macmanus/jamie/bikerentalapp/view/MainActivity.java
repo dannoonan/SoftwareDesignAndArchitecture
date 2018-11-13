@@ -6,8 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.macmanus.jamie.bikerentalapp.R;
 import com.macmanus.jamie.bikerentalapp.model.dao.GithubUserDao;
+import com.macmanus.jamie.bikerentalapp.model.dao.UserDao;
 import com.macmanus.jamie.bikerentalapp.model.db.GithubUserDatabase;
+import com.macmanus.jamie.bikerentalapp.model.db.UserDatabase;
 import com.macmanus.jamie.bikerentalapp.repository.TestRepository;
+import com.macmanus.jamie.bikerentalapp.repository.UserRepository;
 import com.macmanus.jamie.bikerentalapp.sl.ServiceLocator;
 import com.macmanus.jamie.bikerentalapp.web.RetrofitInstance;
 import com.macmanus.jamie.bikerentalapp.web.Webservice;
@@ -27,20 +30,43 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * All Repositories should be added to the ServiceLocator here
+     *
+     * TODO: Find a cleaner way of implementing this. Perhaps using factory classes.
      * */
     private void initializeServiceLocator(){
         Webservice webservice = RetrofitInstance.getRetrofitInstance().create(Webservice.class);
 
-        GithubUserDao guDao = Room.databaseBuilder(this, GithubUserDatabase.class,
-                "GithubUserDatabase")
+        // TEST REPOSITORY
+
+        GithubUserDao githubUserDao = Room.databaseBuilder(this,
+                GithubUserDatabase.class,
+                GithubUserDatabase.class.getName())
                 .fallbackToDestructiveMigration()
                 .build()
                 .githubUserDao();
-        TestRepository tRepo = new TestRepository(webservice, guDao, Executors.newSingleThreadExecutor());
 
+        TestRepository testRepository = new TestRepository(webservice,
+                githubUserDao,
+                Executors.newSingleThreadExecutor());
+
+        // USER REPOSITORY
+
+        UserDao userDao = Room.databaseBuilder(this,
+                UserDatabase.class,
+                UserDatabase.class.getName())
+                .fallbackToDestructiveMigration()
+                .build()
+                .userDao();
+
+        UserRepository userRepository = new UserRepository(webservice,
+                userDao,
+                Executors.newSingleThreadExecutor());
 
         ServiceLocator.init(this);
-        ServiceLocator.addServiceInstance(TestRepository.class, tRepo);
         ServiceLocator.addServiceInstance(Webservice.class, webservice);
+        ServiceLocator.addServiceInstance(TestRepository.class, testRepository);
+        ServiceLocator.addServiceInstance(UserRepository.class, userRepository);
     }
+
+
 }
