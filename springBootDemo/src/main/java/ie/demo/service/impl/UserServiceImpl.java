@@ -2,7 +2,9 @@ package ie.demo.service.impl;
 
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import ie.demo.domain.User;
@@ -26,22 +28,26 @@ public class UserServiceImpl implements UserService {
 		String newPassword = passwordService.encryptPassword(u.getPassword());
 		u.setPassword(newPassword);
 		if(userMapper.userExists(username) == 0) {
-			result = userMapper.register(u);
+			try {
+				result = userMapper.register(u);
+			} catch (DataIntegrityViolationException e) {
+				result = 400;
+			}
 		} else {
-			result = 0;
+			result = 409;
 		}
 		return result;
 	}
 
 	@Override
 	public int login(String username, String password) {
-		User user = userMapper.findUserByUserName(username);
+		User user = findUserByUserName(username);
 		if(user == null)
-			return 0;
+			return 404;
 		if(password.equals(passwordService.decryptPassword(user.getPassword())))
-			return 1;
+			return 200;
 		else
-			return 0;
+			return 400;
 	}
 
 	@Override

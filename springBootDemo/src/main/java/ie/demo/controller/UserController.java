@@ -19,15 +19,20 @@ public class UserController {
 	@RequestMapping(value= "/user", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
 	public MsgResponse insertUser(@RequestParam(value = "username")String username,
 								  @RequestParam(value = "password")String password,
-								  @RequestParam(value = "studentCardId") int studentCardId,
+								  @RequestParam(value = "studentCardId", required = false) Integer studentCardId,
+								  @RequestParam(value = "userTypeId") int userTypeId,
 								  @RequestParam(value = "email") String email) {
-		User u = userFactory.createUser(username, password, studentCardId, email);
+		User u = userFactory.createUser(username, password, studentCardId, userTypeId, email);
 		System.out.println(u.getStudentCardId());
 		int result = userService.register(u);
-		if(result > 0) {
+		if(result == 0) {
 			return MsgResponse.success();
-		} else {
-			return MsgResponse.fail().add("error", "fail to register");
+		}
+		else if(result == 409) {
+			return MsgResponse.fail(result).add("error", "User already exists.");
+		}
+		else {
+			return MsgResponse.fail(result).add("error", "Register failed.");
 		}
 	}
 
@@ -35,10 +40,14 @@ public class UserController {
 	public MsgResponse login(@RequestParam(value = "username")String username,
 							 @RequestParam(value = "password")String password) {
 		int result = userService.login(username, password);
-		if(result > 0) {
+		if(result == 200) {
 			return MsgResponse.success();
-		} else {
-			return MsgResponse.fail().add("error", "fail to login");
+		}
+		else if(result == 404) {
+			return MsgResponse.fail(result).add("error", "User not found.");
+		}
+		else {
+			return MsgResponse.fail(result).add("error", "Login failed.");
 		}
 	}
 }

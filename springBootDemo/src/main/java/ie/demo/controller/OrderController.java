@@ -20,10 +20,14 @@ public class OrderController {
 								  @RequestParam(value = "amountPaid") int amountPaid) {
 
 		int result = orderService.placeOrder(userName, bikeId, amountPaid);
-		if(result > 0) {
+		if(result == 200) {
 			return MsgResponse.success();
-		} else {
-			return MsgResponse.fail().add("error", "fail to order");
+		}
+		else if(result == 404) {
+			return MsgResponse.fail(result).add("error", "Bike or User does not exist.");
+		}
+		else {
+			return MsgResponse.fail(result).add("error", "Failed to place order.");
 		}
 	}
 }

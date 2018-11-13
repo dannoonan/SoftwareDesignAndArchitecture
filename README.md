@@ -47,3 +47,30 @@ pull request as well as request a code review.
 
 When atleast one person has reviewed the code and any necessary 
 changes have been made then we can merge the new changes into master.
+
+## Interacting with the API
+
+When sending a http request to the api, a json response will be returned. This response will contain a http code, a generic message and an optional extended message. Responses will look as follows:
+
+```
+{"code":404,"msg":"Failure.","extend":{"error":"Bike or User does not exist."}}
+```
+
+### Register User
+To register a new user, send a http POST request with the parameters username, password, email, userTypeId and optionally studentCardId to the "/user" path. If no studentCardId is provided value will default to null. Example request:
+
+```
+curl -X POST -d "username=roryegan&password=password&userTypeId=1&email=rory@gmail.com" http://localhost:1234/user
+```
+
+If register is successful the http response code will be 200. If an existing username is already in the database the code will be 400 and if any other error such as non-existing userTypeId or studentCardId are provided the code will be 400.
+
+### Login User
+
+To login an existing user, send a PUT request with username and password as parameters to the "/user" path:
+```
+curl -X PUT -d "username=roryegan&password=password" http://localhost:1234/user
+```
+
+If login is successful the standard 200 code will be returned. If password is incorrect 400 will be returned. If username is not present in the database 404 will be returned.
+
