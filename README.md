@@ -74,3 +74,12 @@ curl -X PUT -d "username=roryegan&password=password" http://localhost:1234/user
 
 If login is successful the standard 200 code will be returned. If password is incorrect 400 will be returned. If username is not present in the database 404 will be returned.
 
+### Place Order
+
+To place a new order, send a POST request to "/order". Parameters required are username, bikeId and amountPaid. Example:
+```
+curl -X POST -d "userName=roryegan&bikeId=3&amountPaid=100" http://localhost:1234/order
+```
+
+If successful, code 200 will be returned, if bike or user do not exist 404 will be returned and for any other errors 400 will be returned.
+
