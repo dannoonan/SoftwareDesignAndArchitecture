@@ -11,14 +11,14 @@ public class MsgResponse {
 	public static MsgResponse success() {
 		MsgResponse msg = new MsgResponse();
 		msg.setCode(200);
-		msg.setMsg("success");
+		msg.setMsg("Success.");
 		return msg;
 	}
 	
-	public static MsgResponse fail() {
+	public static MsgResponse fail(int code) {
 		MsgResponse msg = new MsgResponse();
-		msg.setCode(400);
-		msg.setMsg("fail");
+		msg.setCode(code);
+		msg.setMsg("Failure.");
 		return msg;
 	}
 	

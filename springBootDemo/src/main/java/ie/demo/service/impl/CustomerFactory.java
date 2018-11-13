@@ -9,8 +9,8 @@ import ie.demo.service.UserFactory;
 public class CustomerFactory implements UserFactory {
 
 	@Override
-	public User createUser(String username, String password, int studentCardId, String email) {
-		return new User(username, password, studentCardId, email, 1);
+	public User createUser(String username, String password, Integer studentCardId, int userTypeId, String email) {
+		return new User(username, password, studentCardId, userTypeId, email);
 	}
 
 }
