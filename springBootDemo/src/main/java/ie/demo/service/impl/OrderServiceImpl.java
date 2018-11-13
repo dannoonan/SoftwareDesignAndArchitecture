@@ -27,21 +27,28 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public int placeOrder(String userName, int bikeId, int amountPaid) {
 		int result;
-		User user = userService.findUserByUserName(userName);
-		Bike bike = bikeService.findBikeById(bikeId);
-		Order order = new Order();
-		order.setBikeId(bike.getBikeId());
-		order.setUserId(user.getUserId());
-		order.setMoneyConsumed(amountPaid); // need to take from student card balance too
-		order.setOrderTime(new java.util.Date());
-		if(amountPaid != 0) {
-			order.setPaidStatus(1);
-		} else {
-			order.setPaidStatus(0);
-		}
-		result = orderMapper.placeOrder(order);
-		if(result == 1) {
-			bikeService.setStatus(1, bikeId);
+		try {
+			User user = userService.findUserByUserName(userName);
+			Bike bike = bikeService.findBikeById(bikeId);
+			Order order = new Order();
+			order.setBikeId(bike.getBikeId());
+			order.setUserId(user.getUserId());
+			order.setMoneyConsumed(amountPaid); // need to take from student card balance too
+			order.setOrderTime(new java.util.Date());
+			if(amountPaid != 0) {
+				order.setPaidStatus(1);
+			} else {
+				order.setPaidStatus(0);
+			}
+			result = orderMapper.placeOrder(order);
+			if(result == 1) {
+				result = 200;
+				bikeService.setStatus(1, bikeId);
+			} else {
+				result = 400;
+			}
+		} catch (NullPointerException e) {
+			result = 404;
 		}
 		return result;
 	}

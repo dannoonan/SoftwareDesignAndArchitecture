@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class User implements Serializable{
 
 	private int userId;
-	private int studentCardId;
+	private Integer studentCardId;
 	private int userTypeId;
 	private String userName;
 	private String password;
@@ -14,10 +14,11 @@ public class User implements Serializable{
 	
 	public User() {
 	}
-	public User(String username, String password, int studentCardId, String email, int userTypeId) {
+	public User(String username, String password, Integer studentCardId, int userTypeId, String email) {
 		this.userName = username;
 		this.password = password;
 		this.studentCardId = studentCardId;
+		this.userTypeId = userTypeId;
 		this.email = email;
 	}
 	public int getUserId() {
@@ -44,10 +45,10 @@ public class User implements Serializable{
 	public void setBanned(boolean banned) {
 		this.isBanned = banned;
 	}
-	public long getStudentCardId() {
+	public Integer getStudentCardId() {
 		return studentCardId;
 	}
-	public void setStudentCardId(int studentCardId) {
+	public void setStudentCardId(Integer studentCardId) {
 		this.studentCardId = studentCardId;
 	}
 	public int getUserTypeId() {

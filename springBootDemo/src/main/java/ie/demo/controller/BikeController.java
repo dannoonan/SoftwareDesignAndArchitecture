@@ -33,7 +33,7 @@ public class BikeController {
 	public MsgResponse getNode() {
 		List<Node> nodes = nodeService.findNode();
 		if(nodes == null) {
-			return MsgResponse.fail().add("error", "no node exsits");
+			return MsgResponse.fail(404).add("error", "No nodes found.");
 		} else {
 			return MsgResponse.success().add("nodes", nodes);
 		}
@@ -43,7 +43,7 @@ public class BikeController {
 	public MsgResponse getBikesByNode(@PathVariable int id) {
 		List<Bike> bikes = bikeService.findBikeByNodes(id);
 		if(bikes == null) {
-			return MsgResponse.success().add("warning", "sorry, no bike exsits in this node");
+			return MsgResponse.success().add("warning", "Empty node.");
 		} else {
 			return MsgResponse.success().add("bikes", bikes);
 		}
@@ -58,7 +58,7 @@ public class BikeController {
 		if(result > 0) {
 			return MsgResponse.success();
 		} else {
-			return MsgResponse.fail().add("error", "fail to insert this bike");
+			return MsgResponse.fail(result).add("error", "fail to insert this bike");
 		}
 	}
 	
