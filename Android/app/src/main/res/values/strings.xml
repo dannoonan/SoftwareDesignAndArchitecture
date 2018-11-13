@@ -21,4 +21,7 @@
     <string name="not_a_member"><u>Not a Member?</u></string>
     <string name="confirm_password">Confirm Password</string>
     <string name="register">Register</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="studentCardNum">Student card number</string>
 </resources>

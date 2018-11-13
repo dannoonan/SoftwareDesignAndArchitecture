@@ -45,8 +45,6 @@ public class TestRepository {
                 webservice.getGithubUserData(userId).enqueue(new Callback<GithubUser>() {
                     @Override
                     public void onResponse(Call<GithubUser> call, Response<GithubUser> response) {
-
-                        Log.e("RESPONSE: ", response.body().getLogin());
                         executor.execute(() -> {
                                GithubUser user = response.body();
                                githubUserDao.save(user);

@@ -5,6 +5,8 @@ import com.macmanus.jamie.bikerentalapp.model.entity.User;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -18,8 +20,13 @@ public interface Webservice {
     @PUT("/user")
     Call<User> loginUser(@Body String userId, @Body String password);
 
+    @FormUrlEncoded
     @POST("/user")
-    Call<User> registerUser(@Body String userId, @Body String password);
+    Call<User> registerUser(@Field("username") String username,
+                            @Field("password") String password,
+                            @Field("email") String email,
+                            @Field("userTypeId") int userTypeId,
+                            @Field("studentCardId") String studentCardId);
 
     @GET("https://api.github.com/users/{username}")
     Call<GithubUser> getGithubUserData(@Path("username") String username);
