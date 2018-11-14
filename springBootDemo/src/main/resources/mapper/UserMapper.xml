@@ -27,5 +27,9 @@
 	<select id="findUserByUserName" resultMap="UserResultMap">
 		select UserId, StudentCardId, UserTypeId, UserName, Password, Email, isBanned from Users WHERE username=#{username}
 	</select>
+	
+	<select id="findUserByUserId" resultMap="UserResultMap">
+		select UserId, StudentCardId, UserTypeId, UserName, Password, Email, isBanned from Users WHERE UserId=#{userID}
+	</select>
 
 </mapper>

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ie.demo.domain.Bike;
 import ie.demo.domain.Node;
+import ie.demo.domain.Reports;
 import ie.demo.service.BikeFactory;
 import ie.demo.service.BikeService;
 import ie.demo.service.NodeService;
@@ -67,5 +68,35 @@ public class BikeController {
 		bikeService.setStatus(status, id);
 		return MsgResponse.success();
 	}
+	
+	@RequestMapping(value= "/bike/{id}/rent", method=RequestMethod.PUT, produces="application/json;charset=UTF-8")
+	public MsgResponse rentBike(@PathVariable int id) {
+		int result = bikeService.bikeRent(id);
+		return MsgResponse.success();
+	}
+	
+	@RequestMapping(value= "/report/{id}", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+	public MsgResponse reportBike(@PathVariable int id,
+					@RequestParam(value = "userId") int userId,
+					@RequestParam(value = "reportText") String reportText) {
+		int result = bikeService.reportBike(id, userId, reportText);
+		if(result > 0) {
+			return MsgResponse.success();
+		} else {
+			return MsgResponse.fail(result);
+		}
+	}
+	
+	@RequestMapping(value= "/reports", method=RequestMethod.GET, produces="application/json;charset=UTF-8")
+	public MsgResponse getReportedBikes() {
+		List<Reports> reports = bikeService.getReports();
+		if(reports == null) {
+			return MsgResponse.success().add("warning", "Empty reports.");
+		} else {
+			return MsgResponse.success().add("reports", reports);
+		}
+	}
+	
+	
 	
 }
