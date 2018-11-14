@@ -6,11 +6,14 @@ import android.util.Log;
 
 import com.macmanus.jamie.bikerentalapp.model.dao.UserDao;
 import com.macmanus.jamie.bikerentalapp.model.entity.User;
+import com.macmanus.jamie.bikerentalapp.web.ResponseBody;
 import com.macmanus.jamie.bikerentalapp.web.Webservice;
 
 import java.io.IOException;
 import java.util.concurrent.Executor;
 
+import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 
 public class UserRepository {
@@ -29,24 +32,40 @@ public class UserRepository {
         return userDao.load(userId);
     }
 
-    public LiveData<Response> registerUser(String username, String password, String email,
+    public LiveData<ResponseBody> registerUser(String username, String password, String email,
                              int userTypeId, String studentCardId){
 
-        MutableLiveData<Response> liveResponse = new MutableLiveData<>();
+        MutableLiveData<ResponseBody> liveResponse = new MutableLiveData<>();
 
-        executor.execute(() -> {
+        Call<ResponseBody> response = webservice.registerUser(username, password, email, userTypeId);
+
+        response.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.e("RESPONSE ", "" + response.body().getResponseCode());
+                liveResponse.postValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.e("FAILED", "FAILED");
+            }
+        });
+
+       /* executor.execute(() -> {
             Response response;
 
             try {
-                response = webservice.
-                        registerUser(username, password, email, userTypeId, studentCardId).execute();
+                response = webservice.registerUser(username, password, email, userTypeId).execute();
+
+                Log.e("RESPONSE: ", response.body().toString());
 
                 liveResponse.postValue(response);
             }
             catch(IOException e){
                 e.printStackTrace();
             }
-        });
+        });*/
 
         return liveResponse;
     }

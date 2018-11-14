@@ -22,11 +22,18 @@ public interface Webservice {
 
     @FormUrlEncoded
     @POST("/user")
-    Call<User> registerUser(@Field("username") String username,
+    Call<ResponseBody> registerUser(@Field("username") String username,
                             @Field("password") String password,
                             @Field("email") String email,
                             @Field("userTypeId") int userTypeId,
                             @Field("studentCardId") String studentCardId);
+
+    @FormUrlEncoded
+    @POST("/user")
+    Call<ResponseBody> registerUser(@Field("username") String username,
+                            @Field("password") String password,
+                            @Field("email") String email,
+                            @Field("userTypeId") int userTypeId);
 
     @GET("https://api.github.com/users/{username}")
     Call<GithubUser> getGithubUserData(@Path("username") String username);
