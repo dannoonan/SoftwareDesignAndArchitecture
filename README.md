@@ -39,7 +39,7 @@ If there are any merge conflicts we resolve them and merge again.
 Finally we push our local feature branch to github.
 
 ```console
-git push
+git push origin feature-branch
 ```
 
 After the feature branch has been added to github we can the make a 
