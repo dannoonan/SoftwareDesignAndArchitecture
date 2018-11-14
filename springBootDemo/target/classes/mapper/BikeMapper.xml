@@ -20,12 +20,12 @@
 		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="bikeId">    
       	SELECT LAST_INSERT_ID() AS ID      
     	</selectKey>
-		INSERT INTO Bikes (BikeType, NodeId, Position, Status) VALUES (#{bikeType}, #{nodeId}, #{position}, #{status});
+		INSERT INTO Bikes (BikeType, NodeId, Position) VALUES (#{bikeType}, #{nodeId}, #{position});
 	</insert>
 	
 	<update id="setStatus" parameterType="Integer">
 		UPDATE Bikes
-			SET Status = #{status}
+			SET isAvailable = #{status}
 		WHERE BikeID = #{bikeId}
 	</update>
 </mapper>
