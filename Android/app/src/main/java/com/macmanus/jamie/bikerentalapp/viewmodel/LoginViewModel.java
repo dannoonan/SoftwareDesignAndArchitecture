@@ -4,8 +4,7 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 
 import com.macmanus.jamie.bikerentalapp.repository.UserRepository;
-
-import retrofit2.Response;
+import com.macmanus.jamie.bikerentalapp.web.ResponseBody;
 
 public class LoginViewModel extends ViewModel {
     private UserRepository repository;
@@ -14,7 +13,7 @@ public class LoginViewModel extends ViewModel {
         this.repository = repository;
     }
 
-    public LiveData<Response> login(String username, String password){
+    public LiveData<ResponseBody> login(String username, String password){
 
         return repository.loginUser(username, password);
     }

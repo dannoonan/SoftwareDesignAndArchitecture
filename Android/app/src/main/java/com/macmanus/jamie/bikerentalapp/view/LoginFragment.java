@@ -16,11 +16,11 @@ import com.macmanus.jamie.bikerentalapp.R;
 import com.macmanus.jamie.bikerentalapp.repository.UserRepository;
 import com.macmanus.jamie.bikerentalapp.sl.ServiceLocator;
 import com.macmanus.jamie.bikerentalapp.viewmodel.LoginViewModel;
+import com.macmanus.jamie.bikerentalapp.web.ResponseBody;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
-import retrofit2.Response;
 
 
 public class LoginFragment extends Fragment {
@@ -81,7 +81,7 @@ public class LoginFragment extends Fragment {
         String password = passwordField.getText().toString();
 
 
-        LiveData<Response> liveResponse = loginViewModel
+        LiveData<ResponseBody> liveResponse = loginViewModel
                 .login(username, password);
 
 
@@ -91,9 +91,9 @@ public class LoginFragment extends Fragment {
 
     }
 
-    private void observeResponse(@Nullable Response response){
+    private void observeResponse(@Nullable ResponseBody response){
         if(response != null) {
-            if (response.isSuccessful()) {
+            if (response.getResponseCode() == 200) {
                 showToast("Login Successful");
 
                 navController.navigate(R.id.action_loginFragment_to_menuFragment);

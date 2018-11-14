@@ -2,7 +2,6 @@ package com.macmanus.jamie.bikerentalapp.repository;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
-import android.util.Log;
 
 import com.macmanus.jamie.bikerentalapp.model.dao.UserDao;
 import com.macmanus.jamie.bikerentalapp.model.entity.User;
@@ -42,33 +41,32 @@ public class UserRepository {
         response.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Log.e("RESPONSE ", "" + response.body().getResponseCode());
                 liveResponse.postValue(response.body());
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.e("FAILED", "FAILED");
+
             }
         });
 
         return liveResponse;
     }
 
-    public LiveData<Response> loginUser(String username, String password){
-        MutableLiveData<Response> liveResponse = new MutableLiveData<>();
+    public LiveData<ResponseBody> loginUser(String username, String password){
+        MutableLiveData<ResponseBody> liveResponse = new MutableLiveData<>();
 
-        executor.execute(() -> {
-            Response response;
+        Call<ResponseBody> call = webservice.loginUser(username, password);
 
-            try {
-                response = webservice.
-                        loginUser(username, password).execute();
-
-                liveResponse.postValue(response);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                liveResponse.postValue(response.body());
             }
-            catch(IOException e){
-                e.printStackTrace();
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
             }
         });
 
