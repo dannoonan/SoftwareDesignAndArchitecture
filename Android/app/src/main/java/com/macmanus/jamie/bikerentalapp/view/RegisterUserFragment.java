@@ -15,11 +15,11 @@ import com.macmanus.jamie.bikerentalapp.R;
 import com.macmanus.jamie.bikerentalapp.repository.UserRepository;
 import com.macmanus.jamie.bikerentalapp.sl.ServiceLocator;
 import com.macmanus.jamie.bikerentalapp.viewmodel.RegisterViewModel;
+import com.macmanus.jamie.bikerentalapp.web.ResponseBody;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
-import retrofit2.Response;
 
 
 public class RegisterUserFragment extends Fragment {
@@ -83,7 +83,7 @@ public class RegisterUserFragment extends Fragment {
         String id = studentCardId.getText().toString();
 
         if(password.equals(confirmPassword)){
-            LiveData<Response> liveResponse = registerViewModel
+            LiveData<ResponseBody> liveResponse = registerViewModel
                     .register(username, password, email, 1, id);
 
             navController.navigate(R.id.action_registerFragment_to_menuFragment);
@@ -94,9 +94,9 @@ public class RegisterUserFragment extends Fragment {
         }
     }
 
-    private void observeResponse(@Nullable Response response){
+    private void observeResponse(@Nullable ResponseBody response){
         if(response != null) {
-            if (response.isSuccessful()) {
+            if (response.getResponseCode() == 200) {
                 showToast("Registration Successful");
 
                 navController.navigate(R.id.action_registerFragment_to_menuFragment);
