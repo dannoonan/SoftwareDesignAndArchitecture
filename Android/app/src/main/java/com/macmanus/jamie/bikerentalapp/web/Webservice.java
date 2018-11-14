@@ -17,9 +17,10 @@ public interface Webservice {
     @GET("/user/{user}")
     Call<User> getUser(@Path("user") String userId);
 
+    @FormUrlEncoded
     @PUT("/user")
-    Call<User> loginUser(@Body String userId, @Body String password);
-
+    Call<User> loginUser(@Field("username") String userId, @Field("password") String password);
+    //issue with 2 body params
     @FormUrlEncoded
     @POST("/user")
     Call<ResponseBody> registerUser(@Field("username") String username,
