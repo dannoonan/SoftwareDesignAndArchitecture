@@ -51,27 +51,6 @@ public class UserRepository {
         return liveResponse;
     }
 
-    public LiveData<Response> loginUser(String username, String password){
-        MutableLiveData<Response> liveResponse = new MutableLiveData<>();
-
-        executor.execute(() -> {
-            Response response;
-
-            try {
-                response = webservice.
-                        loginUser(username, password).execute();
-
-                liveResponse.postValue(response);
-            }
-            catch(IOException e){
-                e.printStackTrace();
-            }
-        });
-
-        return liveResponse;
-    }
-
-
     private void refreshUser(final String username) {
         executor.execute(() -> {
             User user = userDao.load(username).getValue();
