@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
@@ -130,9 +131,13 @@ public class RentBikeFragment extends Fragment { //extends Fragment {
                         public void run() {
 
                                 intentData = barcodes.valueAt(0).displayValue;
-                                txtBarcodeValue.setText(intentData);
-                            txtView.setText(intentData);
-                            }
+
+                                ConfirmRentFragment confirmRentFragment = new ConfirmRentFragment(1, intentData);
+                                FragmentManager manager = getFragmentManager();
+                                manager.beginTransaction()
+                                        .replace(R.id.rentBikeFragment, confirmRentFragment, confirmRentFragment.getTag())
+                                        .commit();
+                        }
 
                     });
 
