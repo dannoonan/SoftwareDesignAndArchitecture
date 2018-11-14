@@ -52,21 +52,6 @@ public class UserRepository {
             }
         });
 
-       /* executor.execute(() -> {
-            Response response;
-
-            try {
-                response = webservice.registerUser(username, password, email, userTypeId).execute();
-
-                Log.e("RESPONSE: ", response.body().toString());
-
-                liveResponse.postValue(response);
-            }
-            catch(IOException e){
-                e.printStackTrace();
-            }
-        });*/
-
         return liveResponse;
     }
 
