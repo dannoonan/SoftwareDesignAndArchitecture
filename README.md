@@ -83,3 +83,17 @@ curl -X POST -d "userName=roryegan&bikeId=3&amountPaid=100" http://localhost:123
 
 If successful, code 200 will be returned, if bike or user do not exist 404 will be returned and for any other errors 400 will be returned.
 
+## API
+
+* login `PUT /user`   Body required: username, password
+* register `POST /user` Body required: username, password, studentCardId, userTypeId, email
+* nodes `GET /node`
+* bikeByNodes `GET /node/{nodeId}`
+* creatBike `POST /bike` Body required: bikeType, nodeId, position (ps: position format would be string for instance 120, 129)
+* **ABORTED** ~~setStatus `PUT /bike/{bikeId}` Body required: status~~
+* reportBike `POST /report/{bikeId}` Body required: userId, reportText
+* reports `GET /reports`
+* rent `POST /rent/{bikeId}` Body required: userId
+* reductions `GET /money/{minutes}`
+* return `POST /return` Body required: orderId, latitude, longitude, amountPaid, studentCardId, nodeId
+* **ABORTED** ~~playOrder `POST /order` Body required: userName, bikeId, amountPaid~~
