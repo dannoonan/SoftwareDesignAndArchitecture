@@ -10,6 +10,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface Webservice {
 
@@ -37,4 +38,11 @@ public interface Webservice {
 
     @GET("https://api.github.com/users/{username}")
     Call<GithubUser> getGithubUserData(@Path("username") String username);
+
+    @PUT("/bike/{id}")
+    Call<User> setBikeStatus(@Path("id") int id, @Query("status") int statusid);
+
+    @POST("/order")
+    Call<ResponseBody> placeOrder(@Query("userName") String username,@Query("bikeId") int bikeId, @Query("amountPaid") int paid);
+
 }

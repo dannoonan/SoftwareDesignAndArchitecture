@@ -9,6 +9,7 @@ import com.macmanus.jamie.bikerentalapp.model.dao.GithubUserDao;
 import com.macmanus.jamie.bikerentalapp.model.dao.UserDao;
 import com.macmanus.jamie.bikerentalapp.model.db.GithubUserDatabase;
 import com.macmanus.jamie.bikerentalapp.model.db.UserDatabase;
+import com.macmanus.jamie.bikerentalapp.repository.BikeRepository;
 import com.macmanus.jamie.bikerentalapp.repository.TestRepository;
 import com.macmanus.jamie.bikerentalapp.repository.UserRepository;
 import com.macmanus.jamie.bikerentalapp.sl.ServiceLocator;
@@ -62,10 +63,15 @@ public class MainActivity extends AppCompatActivity {
                 userDao,
                 Executors.newSingleThreadExecutor());
 
+        BikeRepository bikeRepository = new BikeRepository(webservice,
+                Executors.newSingleThreadExecutor());
+
         ServiceLocator.init(this);
         ServiceLocator.addServiceInstance(Webservice.class, webservice);
         ServiceLocator.addServiceInstance(TestRepository.class, testRepository);
         ServiceLocator.addServiceInstance(UserRepository.class, userRepository);
+
+        ServiceLocator.addServiceInstance(BikeRepository.class, bikeRepository);
     }
 
 
