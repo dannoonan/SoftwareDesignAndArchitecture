@@ -8,9 +8,18 @@
 	</resultMap>
 
 	<insert id="placeOrder" parameterType="ie.demo.domain.Order" flushCache="true" useGeneratedKeys="true" keyProperty="orderId">
+		INSERT INTO Orders (BikeId, UserId, isPaid, MoneyConsumed, OrderTime) VALUES (#{bikeId}, #{userId}, #{paidStatus}, #{moneyConsumed}, #{orderTime});
 		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="orderId">
 			SELECT LAST_INSERT_ID() AS ID
 		</selectKey>
-		INSERT INTO Orders (BikeId, UserId, PaidStatus, MoneyConsumed, OrderTime) VALUES (#{bikeId}, #{userId}, #{paidStatus}, #{moneyConsumed}, #{orderTime});
 	</insert>
+	
+	<update id="setOrder" parameterType="ie.demo.domain.Order">
+		UPDATE Orders
+			SET isPaid = #{isPaid}, MoneyConsumed = #{amountPaid}
+		WHERE OrderId = #{orderId}
+		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="orderId">
+			SELECT BikeID FROM Orders WHERE OrderId = #{orderId}
+		</selectKey>
+	</update>
 </mapper>
