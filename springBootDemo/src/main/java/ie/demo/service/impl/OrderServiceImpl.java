@@ -5,6 +5,7 @@ import ie.demo.domain.Order;
 import ie.demo.domain.User;
 import ie.demo.mapper.BikeMapper;
 import ie.demo.mapper.OrderMapper;
+import ie.demo.mapper.StudentCardMapper;
 import ie.demo.mapper.UserMapper;
 import ie.demo.service.BikeService;
 import ie.demo.service.OrderService;
@@ -23,6 +24,15 @@ public class OrderServiceImpl implements OrderService {
 
 	@Autowired
 	private OrderMapper orderMapper;
+	
+	@Autowired
+	private UserMapper userMapper;
+	
+	@Autowired
+	private StudentCardMapper studentCardMapper;
+	
+	@Autowired
+	private BikeMapper bikeMapper;
 
 	@Override
 	public int placeOrder(String userName, int bikeId, int amountPaid) {
@@ -51,6 +61,62 @@ public class OrderServiceImpl implements OrderService {
 			result = 404;
 		}
 		return result;
+	}
+	
+	@Override
+	public int bikeRent(int bikeId, int userId) {
+		try {
+		User u = userMapper.findUserByUserId(userId);
+		int studentCardId = u.getStudentCardId();
+		float balance = studentCardMapper.getBalance(studentCardId);
+		if(balance <= 0) {
+			return -1;
+		} else {
+			bikeMapper.setStatus(0, bikeId);
+			Order order = new Order();
+			order.setBikeId(bikeId);
+			order.setUserId(userId);
+			order.setOrderTime(new java.util.Date());
+			order.setMoneyConsumed(0);
+			order.setPaidStatus(0);
+			int result = orderMapper.placeOrder(order);
+			if(result == 1) {
+				 return order.getOrderId();
+			} else {
+				return 0;
+			}
+		}
+		} catch (NullPointerException e) {
+			return -2;
+		}
+	}
+
+	@Override
+	public float calculateDeductions(float minutes) {
+		if(minutes <= 1) {
+			return 0;
+		} else if(minutes > 1 && minutes <= 30) {
+			return 2;
+		} else if(minutes > 30 && minutes <= 60) {
+			return 5;
+		} else {
+			return (float) (minutes * 0.1);
+		}
+	}
+
+	@Override
+	public int bikeReturn(int orderId, float latitude, float longitude, float amountPaid, int studentCardId, int nodeId) {
+		float balance = studentCardMapper.getBalance(studentCardId);
+		balance = balance - amountPaid;
+		if(balance < 0) {
+			return -1;
+		} else {
+			studentCardMapper.setDeduction(amountPaid, studentCardId);
+			int bikeId = orderMapper.setOrder(amountPaid, 1, orderId);
+			String position = "" + latitude + "," + longitude;
+			bikeMapper.setReturnStatus(1, bikeId, position, nodeId);
+			return 1;
+		}
 	}
 
 }

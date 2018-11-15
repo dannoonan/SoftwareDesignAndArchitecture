@@ -2,13 +2,13 @@ package ie.demo.service.impl;
 
 import java.util.List;
 
-import org.eclipse.jetty.server.Authentication.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ie.demo.domain.Bike;
 import ie.demo.domain.Reports;
 import ie.demo.mapper.BikeMapper;
+import ie.demo.mapper.OrderMapper;
 import ie.demo.mapper.ReportMapper;
 import ie.demo.mapper.StudentCardMapper;
 import ie.demo.mapper.UserMapper;
@@ -29,6 +29,8 @@ public class BikeServiceImpl implements BikeService {
 	@Autowired
 	private UserMapper userMapper;
 
+	@Autowired
+	private OrderMapper orderMapper;
 	
 	@Override
 	public List<Bike> findBikeByNodes(int id) {
@@ -67,12 +69,6 @@ public class BikeServiceImpl implements BikeService {
 	public List<Reports> getReports() {
 		List<Reports> reports = reportMapper.getReports();
 		return reports;
-	}
-
-	@Override
-	public int bikeRent(int id) {
-		
-		return 0;
 	}
 
 }

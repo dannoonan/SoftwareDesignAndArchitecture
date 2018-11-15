@@ -7,7 +7,7 @@ spring:
     url: jdbc:mysql://cs4125projectdb.ccie0ho6qgll.eu-west-1.rds.amazonaws.com:3306/BikeRental
     username: cs4125
     password: cs4125_indigo
-    
+  
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
 

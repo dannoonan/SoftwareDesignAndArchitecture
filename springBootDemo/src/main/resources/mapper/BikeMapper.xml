@@ -28,4 +28,11 @@
 			SET isAvailable = #{status}
 		WHERE BikeID = #{bikeId}
 	</update>
+	
+	<update id="setReturnStatus" parameterType="ie.demo.domain.Bike">
+		UPDATE Bikes
+			SET isAvailable = #{status}, NodeId = #{nodeId}, Position = #{position}
+		WHERE BikeID = #{bikeId}
+	</update>
+	
 </mapper>

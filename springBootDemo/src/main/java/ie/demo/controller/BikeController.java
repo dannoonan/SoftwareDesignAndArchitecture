@@ -69,11 +69,6 @@ public class BikeController {
 		return MsgResponse.success();
 	}
 	
-	@RequestMapping(value= "/bike/{id}/rent", method=RequestMethod.PUT, produces="application/json;charset=UTF-8")
-	public MsgResponse rentBike(@PathVariable int id) {
-		int result = bikeService.bikeRent(id);
-		return MsgResponse.success();
-	}
 	
 	@RequestMapping(value= "/report/{id}", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
 	public MsgResponse reportBike(@PathVariable int id,

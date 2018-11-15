@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="ie.demo.mapper.StudentCardMapper">
-	<resultMap id="StudentCardResultMap" type="ie.demo.domain.Node">
-		<id column="StudentCardId" property="studentCardId" />
-		<result column="Balance" property="balance" />
-	</resultMap>
-	
-	<select id="findNode" resultMap="StudentCardResultMap">
-		SELECT Balance FROM StudentCard WHERE StudentCardId = {#{studentCardId}}
+<mapper namespace="ie.demo.mapper.StudentCardMapper">	
+	<select id="getBalance" resultType="float">
+		SELECT Balance FROM StudentCard WHERE StudentCardId = #{studentCardId}
 	</select>
+	
+	<update id="setDeduction">
+		UPDATE StudentCard
+			SET Balance = Balance - #{amountPaid}
+		WHERE StudentCardId = #{studentCardId}
+	</update>
 </mapper>
