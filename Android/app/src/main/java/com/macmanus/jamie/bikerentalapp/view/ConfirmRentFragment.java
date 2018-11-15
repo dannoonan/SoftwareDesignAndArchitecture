@@ -14,14 +14,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.macmanus.jamie.bikerentalapp.R;
-import com.macmanus.jamie.bikerentalapp.repository.UserRepository;
+import com.macmanus.jamie.bikerentalapp.repository.BikeRepository;
 import com.macmanus.jamie.bikerentalapp.sl.ServiceLocator;
 import com.macmanus.jamie.bikerentalapp.viewmodel.RentViewModel;
+import com.macmanus.jamie.bikerentalapp.web.ResponseBody;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
-import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,6 +31,7 @@ public class ConfirmRentFragment extends Fragment {
 
     private String input = "";
     private int RentOrReturn;
+    private int bikeId;
     Button confirm;
     private RentViewModel rentViewModel;
     private NavController navController;
@@ -49,24 +50,29 @@ public class ConfirmRentFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_confirm_rent, container, false);
+
+        configureUI(v);
+        configureUiItems(v);
+        configureServiceLocator();
+        configureViewModel();
+
+        return v;
+    }
+
+    private void configureUI(View v){
         String[] data = input.split(",");
         TextView idText;
         TextView typeText;
+        bikeId = Integer.parseInt(data[0]);
         confirm = v.findViewById(R.id.confirmBtn);
         idText = v.findViewById(R.id.idText);
         typeText = v.findViewById(R.id.typeText);
         idText.setText("Bike ID: "+data[0]);
         typeText.setText("Bike Type: "+data[1]);
-        configureUiItems(v);
-        configureServiceLocator();
-        configureViewModel();
-
-
-        return v;
     }
 
     private void configureServiceLocator(){
-        RentViewModel rentViewModel = new RentViewModel(ServiceLocator.get(UserRepository.class));
+        RentViewModel rentViewModel = new RentViewModel(ServiceLocator.get(BikeRepository.class));
         ServiceLocator.addServiceInstance(RentViewModel.class, rentViewModel);
     }
 
@@ -84,33 +90,33 @@ public class ConfirmRentFragment extends Fragment {
 
 
     private void setBikeStatus(){
-        int UserId = 48;
+        String username = "roryegan";
+
+        LiveData<ResponseBody> liveResponse;
         int statusId;
-        if(RentOrReturn == 1)
-        {
-            statusId = 0;
+        if(RentOrReturn == 1){
+            liveResponse = rentViewModel
+                    .rentBike(username, bikeId, 100);
         }
-        else
-        {
-            statusId=1;
+        else{
+            liveResponse = null;
         }
 
 
-            LiveData<Response> liveResponse = rentViewModel
-                    .setStatus(UserId, statusId);
+
 
             liveResponse.observe(this, this::observeResponse);
 
     }
 
-    private void observeResponse(@Nullable Response response){
+    private void observeResponse(@Nullable ResponseBody response){
         if(response != null) {
-            if (response.isSuccessful()) {
+            if (response.getResponseCode() == 200) {
                 showToast("Rent/Return Successful");
 
-                //navController.navigate(R.id.action_registerFragment_to_menuFragment);
+
             } else {
-                showToast(response.toString());
+                showToast("Rent/Return Failed");
             }
         }
     }

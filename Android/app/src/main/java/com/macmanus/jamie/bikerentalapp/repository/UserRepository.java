@@ -88,25 +88,4 @@ public class UserRepository {
             }
         });
     }
-
-    public LiveData<Response> setBikeStatus(int UserId, int StatusId){
-
-        MutableLiveData<Response> liveResponse = new MutableLiveData<>();
-
-        executor.execute(() -> {
-            Response response;
-
-            try {
-                response = webservice.
-                        setBikeStatus(UserId, StatusId).execute();
-
-                liveResponse.postValue(response);
-            }
-            catch(IOException e){
-                e.printStackTrace();
-            }
-        });
-
-        return liveResponse;
-    }
 }

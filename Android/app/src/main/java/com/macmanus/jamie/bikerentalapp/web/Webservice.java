@@ -39,7 +39,10 @@ public interface Webservice {
     @GET("https://api.github.com/users/{username}")
     Call<GithubUser> getGithubUserData(@Path("username") String username);
 
-    @PUT(" http://34.254.254.125:1234/bike/{id}")
+    @PUT("/bike/{id}")
     Call<User> setBikeStatus(@Path("id") int id, @Query("status") int statusid);
+
+    @POST("/order")
+    Call<ResponseBody> placeOrder(@Query("userName") String username,@Query("bikeId") int bikeId, @Query("amountPaid") int paid);
 
 }
