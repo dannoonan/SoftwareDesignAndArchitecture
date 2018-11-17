@@ -9,7 +9,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 @MapperScan("ie.demo.mapper")
 public class MySpringBootDemo extends SpringBootServletInitializer {
 
-	public static void main(String[] args) {
-		SpringApplication.run(MySpringBootDemo.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(MySpringBootDemo.class, args);
+    }
 }
