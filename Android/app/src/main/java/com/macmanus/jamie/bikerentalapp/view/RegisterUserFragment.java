@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.macmanus.jamie.bikerentalapp.R;
 import com.macmanus.jamie.bikerentalapp.repository.UserRepository;
 import com.macmanus.jamie.bikerentalapp.sl.ServiceLocator;
+import com.macmanus.jamie.bikerentalapp.viewmodel.IRegisterViewModel;
 import com.macmanus.jamie.bikerentalapp.viewmodel.RegisterViewModel;
 import com.macmanus.jamie.bikerentalapp.web.ResponseBody;
 
@@ -32,7 +33,7 @@ public class RegisterUserFragment extends Fragment {
     private Button   registerButton;
     private NavController navController;
 
-    private RegisterViewModel registerViewModel;
+    private IRegisterViewModel registerViewModel;
 
 
     @Override
@@ -49,12 +50,14 @@ public class RegisterUserFragment extends Fragment {
     }
 
     private void configureServiceLocator(){
-        RegisterViewModel registerViewModel = new RegisterViewModel(ServiceLocator.get(UserRepository.class));
-        ServiceLocator.addServiceInstance(RegisterViewModel.class, registerViewModel);
+        ServiceLocator.bindCustomServiceImplementation(
+                IRegisterViewModel.class,
+                RegisterViewModel.class);
     }
 
     private void configureViewModel(){
         registerViewModel = ServiceLocator.get(RegisterViewModel.class);
+        registerViewModel.init(ServiceLocator.get(UserRepository.class));
     }
 
 
@@ -84,9 +87,8 @@ public class RegisterUserFragment extends Fragment {
 
         if(password.equals(confirmPassword)){
             LiveData<ResponseBody> liveResponse = registerViewModel
-                    .register(username, password, email, 1, id);
+                    .register(username, password, email, id);
 
-            navController.navigate(R.id.action_registerFragment_to_menuFragment);
             liveResponse.observe(this, this::observeResponse);
         }
         else{

@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.macmanus.jamie.bikerentalapp.R;
 import com.macmanus.jamie.bikerentalapp.repository.BikeRepository;
 import com.macmanus.jamie.bikerentalapp.sl.ServiceLocator;
+import com.macmanus.jamie.bikerentalapp.viewmodel.IRentViewModel;
 import com.macmanus.jamie.bikerentalapp.viewmodel.RentViewModel;
 import com.macmanus.jamie.bikerentalapp.web.ResponseBody;
 
@@ -33,7 +34,7 @@ public class ConfirmRentFragment extends Fragment {
     private int RentOrReturn;
     private int bikeId;
     Button confirm;
-    private RentViewModel rentViewModel;
+    private IRentViewModel rentViewModel;
     private NavController navController;
     public ConfirmRentFragment() {
     }
@@ -72,12 +73,12 @@ public class ConfirmRentFragment extends Fragment {
     }
 
     private void configureServiceLocator(){
-        RentViewModel rentViewModel = new RentViewModel(ServiceLocator.get(BikeRepository.class));
-        ServiceLocator.addServiceInstance(RentViewModel.class, rentViewModel);
+        ServiceLocator.bindCustomServiceImplementation(IRentViewModel.class, RentViewModel.class);
     }
 
     private void configureViewModel(){
-        rentViewModel = ServiceLocator.get(RentViewModel.class);
+        rentViewModel = ServiceLocator.get(IRentViewModel.class);
+        rentViewModel.init(ServiceLocator.get(BikeRepository.class));
     }
 
 
@@ -93,7 +94,6 @@ public class ConfirmRentFragment extends Fragment {
         String username = "roryegan";
 
         LiveData<ResponseBody> liveResponse;
-        int statusId;
         if(RentOrReturn == 1){
             liveResponse = rentViewModel
                     .rentBike(username, bikeId, 100);
@@ -101,10 +101,6 @@ public class ConfirmRentFragment extends Fragment {
         else{
             liveResponse = null;
         }
-
-
-
-
             liveResponse.observe(this, this::observeResponse);
 
     }

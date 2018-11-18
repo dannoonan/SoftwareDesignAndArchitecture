@@ -5,6 +5,7 @@ import android.arch.lifecycle.MutableLiveData;
 
 import com.macmanus.jamie.bikerentalapp.model.dao.UserDao;
 import com.macmanus.jamie.bikerentalapp.model.entity.User;
+import com.macmanus.jamie.bikerentalapp.util.UserType;
 import com.macmanus.jamie.bikerentalapp.web.ResponseBody;
 import com.macmanus.jamie.bikerentalapp.web.Webservice;
 
@@ -31,12 +32,11 @@ public class UserRepository {
         return userDao.load(userId);
     }
 
-    public LiveData<ResponseBody> registerUser(String username, String password, String email,
-                             int userTypeId, String studentCardId){
+    public LiveData<ResponseBody> registerUser(String username, String password,
+                                               String email, String studentCardId){
 
         MutableLiveData<ResponseBody> liveResponse = new MutableLiveData<>();
-
-        Call<ResponseBody> response = webservice.registerUser(username, password, email, userTypeId);
+        Call<ResponseBody> response = getRegisterRequest(username, password, email, studentCardId);
 
         response.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -87,5 +87,18 @@ public class UserRepository {
                 userDao.save(response.body());
             }
         });
+    }
+
+    private Call<ResponseBody> getRegisterRequest(String username, String password,
+                                                  String email, String studentCardId){
+        Call<ResponseBody> request;
+        if(studentCardId.equals("")){
+            request = webservice.registerUser(username, password, email, UserType.ADMIN.getValue());
+        }
+        else{
+            request = webservice.registerUser(username, password, email, UserType.CUSTOMER.getValue(), studentCardId);
+        }
+
+        return request;
     }
 }

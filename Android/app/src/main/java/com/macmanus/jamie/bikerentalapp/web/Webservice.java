@@ -1,6 +1,5 @@
 package com.macmanus.jamie.bikerentalapp.web;
 
-import com.macmanus.jamie.bikerentalapp.model.entity.GithubUser;
 import com.macmanus.jamie.bikerentalapp.model.entity.User;
 
 import retrofit2.Call;
@@ -35,9 +34,6 @@ public interface Webservice {
                             @Field("password") String password,
                             @Field("email") String email,
                             @Field("userTypeId") int userTypeId);
-
-    @GET("https://api.github.com/users/{username}")
-    Call<GithubUser> getGithubUserData(@Path("username") String username);
 
     @PUT("/bike/{id}")
     Call<User> setBikeStatus(@Path("id") int id, @Query("status") int statusid);

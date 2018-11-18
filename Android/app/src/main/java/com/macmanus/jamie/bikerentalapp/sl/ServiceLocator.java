@@ -19,13 +19,6 @@ import java.util.Map;
 @SuppressWarnings({"unused", "WeakerAccess"})
 public class ServiceLocator {
 
-    /**
-     * All Services provided by the Service Locator have to implement this interface.
-     * This is just a "marker interface pattern", it can be replaced by an annotation later.
-     */
-    public interface IService {
-    }
-
     private static final Map<String, Object> sServicesInstances = new HashMap<>();
     private static final Map<String, Class> sServicesImplementationsMapping = new HashMap<>();
     @SuppressLint("StaticFieldLeak")
@@ -86,10 +79,6 @@ public class ServiceLocator {
                     } catch (NoSuchMethodException var6) {
                         Constructor constructor = clazz.getConstructor();
                         serviceInstance = constructor.newInstance();
-                    }
-
-                    if (!(serviceInstance instanceof ServiceLocator.IService)) {
-                        throw new IllegalArgumentException("Requested service must implement IService interface");
                     }
                     sServicesInstances.put(name, serviceInstance);
                     return serviceInstance;

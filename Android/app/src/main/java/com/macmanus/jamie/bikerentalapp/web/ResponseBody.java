@@ -40,4 +40,10 @@ public class ResponseBody {
     public void setExtend(Extend extend) {
         this.extend = extend;
     }
+
+    @Override
+    public String toString(){
+        return "{" + "code:" + responseCode + " msg: "
+                + message + " extend: " + extend.toString() + "}";
+    }
 }

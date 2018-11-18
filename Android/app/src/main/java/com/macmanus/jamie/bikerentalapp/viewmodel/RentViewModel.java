@@ -11,7 +11,7 @@ import retrofit2.Response;
 public class RentViewModel extends ViewModel {
     private BikeRepository repository;
 
-    public RentViewModel(BikeRepository repository){
+    public void init(BikeRepository repository){
         this.repository = repository;
     }
 

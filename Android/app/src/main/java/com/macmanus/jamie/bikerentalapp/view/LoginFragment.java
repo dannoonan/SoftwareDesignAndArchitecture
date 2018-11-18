@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.macmanus.jamie.bikerentalapp.R;
 import com.macmanus.jamie.bikerentalapp.repository.UserRepository;
 import com.macmanus.jamie.bikerentalapp.sl.ServiceLocator;
+import com.macmanus.jamie.bikerentalapp.viewmodel.ILoginViewModel;
 import com.macmanus.jamie.bikerentalapp.viewmodel.LoginViewModel;
 import com.macmanus.jamie.bikerentalapp.web.ResponseBody;
 
@@ -30,7 +31,7 @@ public class LoginFragment extends Fragment {
     private Button   loginButton;
     private Button goToRegisterButton;
     private NavController navController;
-    private LoginViewModel loginViewModel;
+    private ILoginViewModel loginViewModel;
 
 
     @Override
@@ -47,12 +48,12 @@ public class LoginFragment extends Fragment {
     }
 
     private void configureServiceLocator(){
-        LoginViewModel loginViewModel = new LoginViewModel(ServiceLocator.get(UserRepository.class));
-        ServiceLocator.addServiceInstance(LoginViewModel.class, loginViewModel);
+        ServiceLocator.bindCustomServiceImplementation(ILoginViewModel.class, LoginViewModel.class);
     }
 
     private void configureViewModel(){
-        loginViewModel = ServiceLocator.get(LoginViewModel.class);
+        loginViewModel = ServiceLocator.get(ILoginViewModel.class);
+        loginViewModel.init(ServiceLocator.get(UserRepository.class));
     }
 
 
@@ -84,11 +85,7 @@ public class LoginFragment extends Fragment {
         LiveData<ResponseBody> liveResponse = loginViewModel
                 .login(username, password);
 
-
         liveResponse.observe(this, this::observeResponse);
-
-
-
     }
 
     private void observeResponse(@Nullable ResponseBody response){

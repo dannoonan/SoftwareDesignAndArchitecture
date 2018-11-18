@@ -7,4 +7,9 @@ public class Extend{
     @SerializedName("error")
     @Expose
     private String error;
+
+    @Override
+    public String toString(){
+        return "error: " + error;
+    }
 }

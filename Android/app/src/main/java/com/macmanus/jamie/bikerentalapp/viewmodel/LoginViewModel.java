@@ -6,10 +6,10 @@ import android.arch.lifecycle.ViewModel;
 import com.macmanus.jamie.bikerentalapp.repository.UserRepository;
 import com.macmanus.jamie.bikerentalapp.web.ResponseBody;
 
-public class LoginViewModel extends ViewModel {
+public class LoginViewModel extends ViewModel implements ILoginViewModel {
     private UserRepository repository;
 
-    public LoginViewModel(UserRepository repository){
+    public void init(UserRepository repository){
         this.repository = repository;
     }
 

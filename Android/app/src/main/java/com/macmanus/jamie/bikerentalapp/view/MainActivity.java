@@ -5,12 +5,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.macmanus.jamie.bikerentalapp.R;
-import com.macmanus.jamie.bikerentalapp.model.dao.GithubUserDao;
 import com.macmanus.jamie.bikerentalapp.model.dao.UserDao;
-import com.macmanus.jamie.bikerentalapp.model.db.GithubUserDatabase;
 import com.macmanus.jamie.bikerentalapp.model.db.UserDatabase;
 import com.macmanus.jamie.bikerentalapp.repository.BikeRepository;
-import com.macmanus.jamie.bikerentalapp.repository.TestRepository;
 import com.macmanus.jamie.bikerentalapp.repository.UserRepository;
 import com.macmanus.jamie.bikerentalapp.sl.ServiceLocator;
 import com.macmanus.jamie.bikerentalapp.web.RetrofitInstance;
@@ -37,20 +34,8 @@ public class MainActivity extends AppCompatActivity {
     private void initializeServiceLocator(){
         Webservice webservice = RetrofitInstance.getRetrofitInstance().create(Webservice.class);
 
-        // TEST REPOSITORY
-
-        GithubUserDao githubUserDao = Room.databaseBuilder(this,
-                GithubUserDatabase.class,
-                GithubUserDatabase.class.getName())
-                .fallbackToDestructiveMigration()
-                .build()
-                .githubUserDao();
-
-        TestRepository testRepository = new TestRepository(webservice,
-                githubUserDao,
-                Executors.newSingleThreadExecutor());
-
         // USER REPOSITORY
+
 
         UserDao userDao = Room.databaseBuilder(this,
                 UserDatabase.class,
@@ -68,9 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         ServiceLocator.init(this);
         ServiceLocator.addServiceInstance(Webservice.class, webservice);
-        ServiceLocator.addServiceInstance(TestRepository.class, testRepository);
         ServiceLocator.addServiceInstance(UserRepository.class, userRepository);
-
         ServiceLocator.addServiceInstance(BikeRepository.class, bikeRepository);
     }
 

@@ -44,9 +44,6 @@
         <action
             android:id="@+id/action_menuFragment_to_returnBikeFragment"
             app:destination="@id/returnBikeFragment" />
-        <action
-            android:id="@+id/action_menuFragment_to_mapsActivity"
-            app:destination="@id/mapsActivity" />
     </fragment>
     <fragment
         android:id="@+id/reportBikeFragment"
@@ -58,11 +55,6 @@
         android:name="com.macmanus.jamie.bikerentalapp.view.ReturnBikeFragment"
         android:label="fragment_return_bike"
         tools:layout="@layout/fragment_return_bike" />
-    <activity
-        android:id="@+id/mapsActivity"
-        android:name="com.macmanus.jamie.bikerentalapp.view.MapsActivity"
-        android:label="activity_maps"
-        tools:layout="@layout/activity_maps" />
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.macmanus.jamie.bikerentalapp.view.LoginFragment"
@@ -84,10 +76,5 @@
             android:id="@+id/action_registerFragment_to_menuFragment"
             app:destination="@id/menuFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/testFragment"
-        android:name="com.macmanus.jamie.bikerentalapp.view.TestFragment"
-        android:label="fragment_test"
-        tools:layout="@layout/fragment_test" />
 
 </navigation>

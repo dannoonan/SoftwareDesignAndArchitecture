@@ -6,18 +6,16 @@ import android.arch.lifecycle.ViewModel;
 import com.macmanus.jamie.bikerentalapp.repository.UserRepository;
 import com.macmanus.jamie.bikerentalapp.web.ResponseBody;
 
-public class RegisterViewModel extends ViewModel {
+public class RegisterViewModel extends ViewModel implements IRegisterViewModel{
     private UserRepository repository;
 
-    public RegisterViewModel(UserRepository repository){
+    public void init(UserRepository repository){
         this.repository = repository;
     }
 
     public LiveData<ResponseBody> register(String username, String password,
-                                           String email, int userTypeId,
-                                           String studentCardId){
+                                           String email, String studentCardId){
 
-        return repository.registerUser(username, password, email,
-                userTypeId, studentCardId);
+        return repository.registerUser(username, password, email, studentCardId);
     }
 }

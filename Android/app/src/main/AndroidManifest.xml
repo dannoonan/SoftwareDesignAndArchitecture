@@ -50,11 +50,6 @@
             android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="barcode"/>
 
-        <activity
-            android:name=".view.MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
-
-
 
     </application>
 
