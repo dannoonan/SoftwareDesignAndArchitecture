@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/rentBikeFragment"
-        android:name="com.macmanus.jamie.bikerentalapp.view.RentBikeFragment"
+        android:name="com.cs4125.bikerentalapp.view.RentBikeFragment"
         android:label="fragment_second"
         tools:layout="@layout/fragment_rent_bike" />
     <fragment
         android:id="@+id/findBikeFragment"
-        android:name="com.macmanus.jamie.bikerentalapp.view.FindBikeFragment"
+        android:name="com.cs4125.bikerentalapp.view.FindBikeFragment"
         android:label="fragment_find_bike"
         tools:layout="@layout/fragment_find_bike" >
         <action
@@ -24,12 +24,12 @@
             app:destination="@id/viewBikesFragment" />
     <fragment
         android:id = "@+id/viewBikesFragment"
-        android:name="com.macmanus.jamie.bikerentalapp.view.ViewBikesFragment"
+        android:name="com.cs4125.bikerentalapp.view.ViewBikesFragment"
         android:label="fragment_view_bikes"
         tools:layout="@layout/fragment_view_bikes" />
     <fragment
         android:id="@+id/menuFragment"
-        android:name="com.macmanus.jamie.bikerentalapp.view.MenuFragment"
+        android:name="com.cs4125.bikerentalapp.view.MenuFragment"
         android:label="fragment_menu"
         tools:layout="@layout/fragment_menu" >
         <action
@@ -47,17 +47,17 @@
     </fragment>
     <fragment
         android:id="@+id/reportBikeFragment"
-        android:name="com.macmanus.jamie.bikerentalapp.view.ReportBikeFragment"
+        android:name="com.cs4125.bikerentalapp.view.ReportBikeFragment"
         android:label="fragment_report_bike"
         tools:layout="@layout/fragment_report_bike" />
     <fragment
         android:id="@+id/returnBikeFragment"
-        android:name="com.macmanus.jamie.bikerentalapp.view.ReturnBikeFragment"
+        android:name="com.cs4125.bikerentalapp.view.ReturnBikeFragment"
         android:label="fragment_return_bike"
         tools:layout="@layout/fragment_return_bike" />
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.macmanus.jamie.bikerentalapp.view.LoginFragment"
+        android:name="com.cs4125.bikerentalapp.view.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -69,7 +69,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.macmanus.jamie.bikerentalapp.view.RegisterUserFragment"
+        android:name="com.cs4125.bikerentalapp.view.RegisterUserFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register_user" >
         <action
