@@ -12,5 +12,12 @@ public interface IRentViewModel {
 
     LiveData<Response> setStatus(int UserId, int StatusId);
 
-    LiveData<ResponseBody> rentBike(String username, int bikeId, int paid);
+    LiveData<ResponseBody> rentBike(int bikeId, int userId);
+
+    LiveData<ResponseBody> returnBike(int orderId,
+                                      int latitude,
+                                      int longitude,
+                                      int amountPaid,
+                                      int studentCardId,
+                                      int nodeId);
 }

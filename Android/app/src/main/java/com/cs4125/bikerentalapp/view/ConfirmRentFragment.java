@@ -91,17 +91,18 @@ public class ConfirmRentFragment extends Fragment {
 
 
     private void setBikeStatus(){
-        String username = "roryegan";
-
         LiveData<ResponseBody> liveResponse;
         if(RentOrReturn == 1){
             liveResponse = rentViewModel
-                    .rentBike(username, bikeId, 100);
+                    .rentBike(bikeId, 46);
         }
         else{
-            liveResponse = null;
-        }
-            liveResponse.observe(this, this::observeResponse);
+            liveResponse = null;        }
+
+
+
+
+        liveResponse.observe(this, this::observeResponse);
 
     }
 

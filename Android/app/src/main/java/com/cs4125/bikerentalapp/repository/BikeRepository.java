@@ -42,7 +42,7 @@ public class BikeRepository {
         return liveResponse;
     }
 
-    public LiveData<ResponseBody> placeOrder(String username, int bikeId, int paid){
+    public LiveData<ResponseBody> Rent(int bikeId, int userId){
 
         MutableLiveData<ResponseBody> liveResponse = new MutableLiveData<>();
 
@@ -51,7 +51,33 @@ public class BikeRepository {
 
             try {
                 response = webservice.
-                        placeOrder(username, bikeId, paid).execute();
+                        Rent(bikeId, userId).execute();
+
+                liveResponse.postValue(response.body());
+            }
+            catch(IOException e){
+                e.printStackTrace();
+            }
+        });
+
+        return liveResponse;
+    }
+
+    public LiveData<ResponseBody> Return(int orderId,
+                                         int latitude,
+                                         int longitude,
+                                         int amountPaid,
+                                         int studentCardId,
+                                         int nodeId){
+
+        MutableLiveData<ResponseBody> liveResponse = new MutableLiveData<>();
+
+        executor.execute(() -> {
+            Response<ResponseBody> response;
+
+            try {
+                response = webservice.
+                        Return(orderId, latitude, longitude, amountPaid, studentCardId, nodeId).execute();
 
                 liveResponse.postValue(response.body());
             }
