@@ -22,7 +22,7 @@ public class RentViewModel extends ViewModel implements IRentViewModel {
 
     public LiveData<ResponseBody> rentBike(int bikeId, int userId){
 
-        return repository.Rent(bikeId, userId);
+        return repository.rent(bikeId, userId);
     }
 
     public LiveData<ResponseBody> returnBike(int orderId,
@@ -32,6 +32,6 @@ public class RentViewModel extends ViewModel implements IRentViewModel {
                                              int studentCardId,
                                              int nodeId){
 
-        return repository.Return(orderId, latitude, longitude, amountPaid, studentCardId, nodeId);
+        return repository.ret(orderId, latitude, longitude, amountPaid, studentCardId, nodeId);
     }
 }

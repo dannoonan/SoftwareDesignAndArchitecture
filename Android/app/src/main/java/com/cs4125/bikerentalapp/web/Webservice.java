@@ -43,11 +43,11 @@ public interface Webservice {
 
     @FormUrlEncoded
     @POST("/rent/{bikeId}")
-    Call<ResponseBody> Rent(@Path("bikeId") int bikeId, @Field("userId") int userId);
+    Call<ResponseBody> rent(@Path("bikeId") int bikeId, @Field("userId") int userId);
 
     @FormUrlEncoded
     @POST("/return}")
-    Call<ResponseBody> Return(@Field("orderId") int orderId,
+    Call<ResponseBody> ret(@Field("orderId") int orderId,
                               @Field("latitude") int latitude,
                               @Field("longitude") int longitude,
                               @Field("amountPaid") int amountPaid,
