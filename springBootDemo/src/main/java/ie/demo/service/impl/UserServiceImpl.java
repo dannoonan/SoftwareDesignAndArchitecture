@@ -63,6 +63,11 @@ public class UserServiceImpl implements UserService {
 				result.add(user.getUsername());
 				result.add(user.getEmail());
 				result.add(Integer.toString(user.getIsBanned() ? 1 : 0 ));
+				if(user.getStudentCardId() != null) {
+					result.add(Integer.toString(user.getStudentCardId()));
+				} else {
+					result.add("null");
+				}
 			}
 			else {
 				result.add(0,"400");

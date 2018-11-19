@@ -44,7 +44,8 @@ public class UserController {
 		List<String> result = userService.login(username, password);
 		if(result.get(0).equals("200")) {
 			return MsgResponse.success().add("userId: ", result.get(1)).add("userTypeId: ", result.get(2))
-					.add("username: ", result.get(3)).add("email: ", result.get(4)).add("isBanned: ", result.get(5));
+					.add("username: ", result.get(3)).add("email: ", result.get(4)).add("isBanned: ", result.get(5))
+					.add("studentCardId: ", result.get(6));
 		}
 		else if(result.get(0).equals("404")) {
 			return MsgResponse.fail(404).add("error", "User not found.");
