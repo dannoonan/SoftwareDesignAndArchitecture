@@ -8,7 +8,7 @@ import com.cs4125.bikerentalapp.web.ResponseBody;
 
 import retrofit2.Response;
 
-public class RentViewModel extends ViewModel {
+public class RentViewModel extends ViewModel implements IRentViewModel {
     private BikeRepository repository;
 
     public void init(BikeRepository repository){
@@ -20,8 +20,18 @@ public class RentViewModel extends ViewModel {
         return repository.setBikeStatus(UserId, StatusId);
     }
 
-    public LiveData<ResponseBody> rentBike(String username, int bikeId, int paid){
+    public LiveData<ResponseBody> rentBike(int bikeId, int userId){
 
-        return repository.placeOrder(username, bikeId, paid);
+        return repository.rent(bikeId, userId);
+    }
+
+    public LiveData<ResponseBody> returnBike(int orderId,
+                                             int latitude,
+                                             int longitude,
+                                             int amountPaid,
+                                             int studentCardId,
+                                             int nodeId){
+
+        return repository.ret(orderId, latitude, longitude, amountPaid, studentCardId, nodeId);
     }
 }

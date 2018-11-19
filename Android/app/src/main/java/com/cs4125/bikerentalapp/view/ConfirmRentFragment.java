@@ -31,7 +31,7 @@ public class ConfirmRentFragment extends Fragment {
 
 
     private String input = "";
-    private int RentOrReturn;
+    private int rentOrReturn;
     private int bikeId;
     Button confirm;
     private IRentViewModel rentViewModel;
@@ -41,7 +41,7 @@ public class ConfirmRentFragment extends Fragment {
 
     @SuppressLint("ValidFragment")
     public ConfirmRentFragment(int ROrR, String in) {
-        RentOrReturn = ROrR;
+        rentOrReturn = ROrR;
        input = in;
     }
 
@@ -91,17 +91,17 @@ public class ConfirmRentFragment extends Fragment {
 
 
     private void setBikeStatus(){
-        String username = "roryegan";
-
-        LiveData<ResponseBody> liveResponse;
-        if(RentOrReturn == 1){
+        LiveData<ResponseBody> liveResponse = null;
+        if(rentOrReturn == 1){
             liveResponse = rentViewModel
-                    .rentBike(username, bikeId, 100);
+                    .rentBike(bikeId, 46);
         }
-        else{
-            liveResponse = null;
-        }
-            liveResponse.observe(this, this::observeResponse);
+
+
+
+
+
+        liveResponse.observe(this, this::observeResponse);
 
     }
 
