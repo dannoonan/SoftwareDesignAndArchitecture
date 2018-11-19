@@ -8,6 +8,8 @@ import ie.demo.service.UserFactory;
 import ie.demo.service.UserService;
 import ie.response.MsgResponse;
 
+import java.util.List;
+
 @RestController
 public class UserController {
 	
@@ -39,15 +41,16 @@ public class UserController {
 	@RequestMapping(value= "/user", method=RequestMethod.PUT, produces="application/json;charset=UTF-8")
 	public MsgResponse login(@RequestParam(value = "username")String username,
 							 @RequestParam(value = "password")String password) {
-		int result = userService.login(username, password);
-		if(result == 200) {
-			return MsgResponse.success();
+		List<String> result = userService.login(username, password);
+		if(result.get(0).equals("200")) {
+			return MsgResponse.success().add("userId: ", result.get(1)).add("userTypeId: ", result.get(2))
+					.add("username: ", result.get(3)).add("email: ", result.get(4)).add("isBanned: ", result.get(5));
 		}
-		else if(result == 404) {
-			return MsgResponse.fail(result).add("error", "User not found.");
+		else if(result.get(0).equals("404")) {
+			return MsgResponse.fail(404).add("error", "User not found.");
 		}
 		else {
-			return MsgResponse.fail(result).add("error", "Login failed.");
+			return MsgResponse.fail(400).add("error", "Login failed.");
 		}
 	}
 }

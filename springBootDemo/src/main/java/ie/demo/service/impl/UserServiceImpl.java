@@ -1,7 +1,9 @@
 package ie.demo.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import ie.demo.mapper.StudentCardMapper;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -19,6 +21,9 @@ public class UserServiceImpl implements UserService {
 	private UserMapper userMapper;
 
 	@Autowired
+	private StudentCardMapper studentCardMapper;
+
+	@Autowired
 	private PasswordService passwordService;
 
 	@Override
@@ -27,6 +32,11 @@ public class UserServiceImpl implements UserService {
 		String username = u.getUsername();
 		String newPassword = passwordService.encryptPassword(u.getPassword());
 		u.setPassword(newPassword);
+		if(u.getStudentCardId() != null) {
+			if(studentCardMapper.cardExists(u.getStudentCardId()) == 0) {
+				studentCardMapper.createCard(u.getStudentCardId());
+			}
+		}
 		if(userMapper.userExists(username) == 0) {
 			try {
 				result = userMapper.register(u);
@@ -40,14 +50,26 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int login(String username, String password) {
+	public List<String> login(String username, String password) {
 		User user = findUserByUserName(username);
+		List<String> result = new ArrayList<>();
 		if(user == null)
-			return 404;
-		if(password.equals(passwordService.decryptPassword(user.getPassword())))
-			return 200;
-		else
-			return 400;
+			result.add(0, "404");
+		else {
+			if(password.equals(passwordService.decryptPassword(user.getPassword()))) {
+				result.add(0,"200");
+				result.add(Integer.toString(user.getUserId()));
+				result.add(Integer.toString(user.getUserTypeId()));
+				result.add(user.getUsername());
+				result.add(user.getEmail());
+				result.add(Integer.toString(user.getIsBanned() ? 1 : 0 ));
+			}
+			else {
+				result.add(0,"400");
+			}
+		}
+
+		return result;
 	}
 
 	@Override
