@@ -63,5 +63,7 @@ public class User implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public boolean getIsBanned() { return isBanned; }
+	public void setIsBanned(boolean isBanned) { this.isBanned = isBanned; }
 	
 }
