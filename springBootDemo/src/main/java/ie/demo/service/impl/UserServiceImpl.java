@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import ie.demo.domain.User;
 import ie.demo.mapper.UserMapper;
 import ie.demo.service.UserService;
+import ie.util.StateCode;
 import ie.demo.service.PasswordService;
 
 @Service
@@ -41,10 +42,10 @@ public class UserServiceImpl implements UserService {
 			try {
 				result = userMapper.register(u);
 			} catch (DataIntegrityViolationException e) {
-				result = 400;
+				result = StateCode.FAIL.getCode();
 			}
 		} else {
-			result = 409;
+			result = StateCode.ALREADY_EXISTS.getCode();
 		}
 		return result;
 	}
@@ -54,10 +55,10 @@ public class UserServiceImpl implements UserService {
 		User user = findUserByUserName(username);
 		List<String> result = new ArrayList<>();
 		if(user == null)
-			result.add(0, "404");
+			result.add(0, "" + StateCode.ERROR.getCode());
 		else {
 			if(password.equals(passwordService.decryptPassword(user.getPassword()))) {
-				result.add(0,"200");
+				result.add(0,"" + StateCode.PROCESS_SUCCESS.getCode());
 				result.add(Integer.toString(user.getUserId()));
 				result.add(Integer.toString(user.getUserTypeId()));
 				result.add(user.getUsername());
@@ -70,7 +71,7 @@ public class UserServiceImpl implements UserService {
 				}
 			}
 			else {
-				result.add(0,"400");
+				result.add(0,"" + StateCode.USER_NOT_FOUND.getCode());
 			}
 		}
 

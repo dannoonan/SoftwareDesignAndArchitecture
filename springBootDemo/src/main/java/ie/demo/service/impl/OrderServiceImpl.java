@@ -1,27 +1,22 @@
 package ie.demo.service.impl;
 
-import ie.demo.domain.Bike;
 import ie.demo.domain.Order;
 import ie.demo.domain.User;
-import ie.demo.mapper.BikeMapper;
 import ie.demo.mapper.OrderMapper;
 import ie.demo.mapper.StudentCardMapper;
 import ie.demo.mapper.UserMapper;
-import ie.demo.service.BikeService;
+import ie.demo.service.BikeState;
+import ie.demo.service.CalculatePayment;
 import ie.demo.service.OrderService;
-import ie.demo.service.UserService;
+import ie.util.StateCode;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
 public class OrderServiceImpl implements OrderService {
 	
-	@Autowired
-	private BikeService bikeService;
-
-	@Autowired
-	private UserService userService;
-
 	@Autowired
 	private OrderMapper orderMapper;
 	
@@ -32,76 +27,79 @@ public class OrderServiceImpl implements OrderService {
 	private StudentCardMapper studentCardMapper;
 	
 	@Autowired
-	private BikeMapper bikeMapper;
-
-	@Override
-	public int placeOrder(String userName, int bikeId, int amountPaid) {
-		int result;
-		try {
-			User user = userService.findUserByUserName(userName);
-			Bike bike = bikeService.findBikeById(bikeId);
-			Order order = new Order();
-			order.setBikeId(bike.getBikeId());
-			order.setUserId(user.getUserId());
-			order.setMoneyConsumed(amountPaid); // need to take from student card balance too
-			order.setOrderTime(new java.util.Date());
-			if(amountPaid != 0) {
-				order.setPaidStatus(1);
-			} else {
-				order.setPaidStatus(0);
-			}
-			result = orderMapper.placeOrder(order);
-			if(result == 1) {
-				result = 200;
-				bikeService.setStatus(1, bikeId);
-			} else {
-				result = 400;
-			}
-		} catch (NullPointerException e) {
-			result = 404;
-		}
-		return result;
-	}
+	@Qualifier("FreePayment")
+	private CalculatePayment freePayment;
+	
+	@Autowired
+	@Qualifier("LessHalfHourPayment")
+	private CalculatePayment lessHalfHourPayment;
+	
+	@Autowired
+	@Qualifier("LessOneHourPayment")
+	private CalculatePayment lessOneHourPayment;
+	
+	@Autowired
+	@Qualifier("GreaterOneHourPayment")
+	private CalculatePayment greaterOneHourPayment;
+	
+	@Autowired
+	private BikeContext bikeContext;
+	
+	@Autowired
+	@Qualifier("BikeUnavailableState")
+	private  BikeState bikeUnavailableState;
+	
+	@Autowired
+	@Qualifier("BikeAvailableState")
+	private  BikeState bikeAvailableState;
 	
 	@Override
 	public int bikeRent(int bikeId, int userId) {
 		try {
-		User u = userMapper.findUserByUserId(userId);
-		int studentCardId = u.getStudentCardId();
-		float balance = studentCardMapper.getBalance(studentCardId);
-		if(balance <= 0) {
-			return -1;
-		} else {
-			bikeMapper.setStatus(0, bikeId);
-			Order order = new Order();
-			order.setBikeId(bikeId);
-			order.setUserId(userId);
-			order.setOrderTime(new java.util.Date());
-			order.setMoneyConsumed(0);
-			order.setPaidStatus(0);
-			int result = orderMapper.placeOrder(order);
-			if(result == 1) {
-				 return order.getOrderId();
+			User u = userMapper.findUserByUserId(userId);
+			int studentCardId = u.getStudentCardId();
+			
+			float balance = studentCardMapper.getBalance(studentCardId);
+			
+			if(balance <= 0) {
+				return StateCode.INSUFFICIENT_BALANCE.getCode();
 			} else {
-				return 0;
+				
+				bikeContext.setBikeState(bikeUnavailableState);
+				bikeContext.setBikeId(bikeId);
+				bikeContext.setUserId(userId);
+				bikeContext.handleStateChange();
+				
+				Order order = new Order();
+				order.setBikeId(bikeId);
+				order.setUserId(userId);
+				order.setOrderTime(new java.util.Date());
+				order.setMoneyConsumed(0);
+				order.setPaidStatus(0);
+				
+				int result = orderMapper.placeOrder(order);
+				
+				if(result == StateCode.SUCCESS.getCode()) {
+					 return order.getOrderId();
+				} else {
+					return StateCode.FAIL.getCode();
+				}
 			}
-		}
 		} catch (NullPointerException e) {
-			return -2;
+			return StateCode.NOT_EXISTS.getCode();
 		}
 	}
 
 	@Override
 	public float calculateDeductions(float minutes) {
-		if(minutes <= 1) {
-			return 0;
-		} else if(minutes > 1 && minutes <= 30) {
-			return 2;
-		} else if(minutes > 30 && minutes <= 60) {
-			return 5;
-		} else {
-			return (float) (minutes * 0.1);
-		}
+		freePayment.setNextPaymentMethod(lessHalfHourPayment);
+		lessHalfHourPayment.setNextPaymentMethod(lessOneHourPayment);
+		lessOneHourPayment.setNextPaymentMethod(greaterOneHourPayment);
+		
+		freePayment.calculatePaidAmount(minutes);
+		float payment = freePayment.getFinalPay();
+		
+		return payment;
 	}
 
 	@Override
@@ -109,13 +107,34 @@ public class OrderServiceImpl implements OrderService {
 		float balance = studentCardMapper.getBalance(studentCardId);
 		balance = balance - amountPaid;
 		if(balance < 0) {
-			return -1;
+			return StateCode.INSUFFICIENT_BALANCE.getCode();
 		} else {
+			
 			studentCardMapper.setDeduction(amountPaid, studentCardId);
-			int bikeId = orderMapper.setOrder(amountPaid, 1, orderId);
-			String position = "" + latitude + "," + longitude;
-			bikeMapper.setReturnStatus(1, bikeId, position, nodeId);
-			return 1;
+			
+			Order order = new Order();
+			order.setMoneyConsumed(amountPaid);
+			order.setPaidStatus(1);
+			order.setOrderId(orderId);
+			
+			int result = orderMapper.setOrder(order);
+			
+			if(result == StateCode.SUCCESS.getCode()) {
+				int bikeId = orderMapper.getBikeId(orderId);
+				
+				String position = "" + latitude + "," + longitude;
+				
+				bikeContext.setBikeState(bikeAvailableState);
+				bikeContext.setBikeId(bikeId);
+				bikeContext.setNode(nodeId);
+				bikeContext.setPosition(position);
+				bikeContext.handleStateChange();
+				
+				return StateCode.SUCCESS.getCode();
+
+			} else  {
+				return StateCode.FAIL.getCode();
+			}
 		}
 	}
 

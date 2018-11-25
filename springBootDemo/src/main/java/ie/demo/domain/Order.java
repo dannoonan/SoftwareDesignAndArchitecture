@@ -8,8 +8,12 @@ public class Order {
     private int bikeId;
     private int userId;
     private int paidStatus;
-    private int moneyConsumed;
+    private float moneyConsumed;
     private Date orderTime;
+    
+    public Order() {
+    	
+    }
 
     public int getOrderId() { return this.orderId; }
     public void setOrderId(int orderId) { this.orderId = orderId; }
@@ -19,8 +23,8 @@ public class Order {
     public void setUserId(int userId) { this.userId = userId; }
     public int getPaidStatus() { return this.paidStatus; }
     public void setPaidStatus(int paidStatus) { this.paidStatus = paidStatus; }
-    public int getMoneyConsumed() { return this.moneyConsumed; }
-    public void setMoneyConsumed(int moneyConsumed) { this.moneyConsumed = moneyConsumed; }
+    public float getMoneyConsumed() { return this.moneyConsumed; }
+    public void setMoneyConsumed(float moneyConsumed) { this.moneyConsumed = moneyConsumed; }
     public Date getOrderTime() { return this.orderTime; }
     public void setOrderTime(Date orderTime) { this.orderTime = orderTime; }
 

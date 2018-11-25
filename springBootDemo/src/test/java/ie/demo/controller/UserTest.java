@@ -6,8 +6,7 @@ import static org.mockito.Mockito.when;
 import ie.demo.domain.User;
 import ie.demo.service.UserFactory;
 import ie.demo.service.impl.UserServiceImpl;
-
-import ie.response.MsgResponse;
+import ie.util.MsgResponse;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

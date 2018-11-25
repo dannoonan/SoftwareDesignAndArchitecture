@@ -16,7 +16,8 @@ import ie.demo.domain.Reports;
 import ie.demo.service.BikeFactory;
 import ie.demo.service.BikeService;
 import ie.demo.service.NodeService;
-import ie.response.MsgResponse;
+import ie.util.MsgResponse;
+import ie.util.StateCode;
 
 @RestController
 public class BikeController {
@@ -56,26 +57,19 @@ public class BikeController {
 			  @RequestParam(value = "position") String position) {
 		Bike bike = bikeFactory.createBike(bikeType, nodeId, position);
 		int result = bikeService.createBike(bike);
-		if(result > 0) {
+		if(result == StateCode.SUCCESS.getCode()) {
 			return MsgResponse.success();
 		} else {
 			return MsgResponse.fail(result).add("error", "fail to insert this bike");
 		}
 	}
 	
-	@RequestMapping(value= "/bike/{id}", method=RequestMethod.PUT, produces="application/json;charset=UTF-8")
-	public MsgResponse setBike(@PathVariable int id, @RequestParam(value = "status")int status) {
-		bikeService.setStatus(status, id);
-		return MsgResponse.success();
-	}
-	
-	
 	@RequestMapping(value= "/report/{id}", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
 	public MsgResponse reportBike(@PathVariable int id,
 					@RequestParam(value = "userId") int userId,
 					@RequestParam(value = "reportText") String reportText) {
 		int result = bikeService.reportBike(id, userId, reportText);
-		if(result > 0) {
+		if(result == StateCode.SUCCESS.getCode()) {
 			return MsgResponse.success();
 		} else {
 			return MsgResponse.fail(result);

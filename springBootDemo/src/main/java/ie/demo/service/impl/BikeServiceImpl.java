@@ -8,11 +8,9 @@ import org.springframework.stereotype.Service;
 import ie.demo.domain.Bike;
 import ie.demo.domain.Reports;
 import ie.demo.mapper.BikeMapper;
-import ie.demo.mapper.OrderMapper;
 import ie.demo.mapper.ReportMapper;
-import ie.demo.mapper.StudentCardMapper;
-import ie.demo.mapper.UserMapper;
 import ie.demo.service.BikeService;
+import ie.util.StateCode;
 
 @Service
 public class BikeServiceImpl implements BikeService {
@@ -22,15 +20,6 @@ public class BikeServiceImpl implements BikeService {
 	
 	@Autowired
 	private ReportMapper reportMapper;
-	
-	@Autowired
-	private StudentCardMapper studentCardMapper;
-	
-	@Autowired
-	private UserMapper userMapper;
-
-	@Autowired
-	private OrderMapper orderMapper;
 	
 	@Override
 	public List<Bike> findBikeByNodes(int id) {
@@ -59,10 +48,10 @@ public class BikeServiceImpl implements BikeService {
 	@Override
 	public int reportBike(int bikeId, int userId, String reportText) {
 		int result = reportMapper.reportBike(bikeId, userId, reportText);
-		if(result > 0) {
+		if(result == StateCode.SUCCESS.getCode()) {
 			bikeMapper.setStatus(0, bikeId);
 		}
-		return result;
+		return StateCode.SUCCESS.getCode();
 	}
 
 	@Override

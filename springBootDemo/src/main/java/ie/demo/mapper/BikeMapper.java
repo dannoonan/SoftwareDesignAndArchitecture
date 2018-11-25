@@ -12,5 +12,6 @@ public interface BikeMapper {
 	Bike findBikeById(int id);
 	int createBike(Bike bike);
 	int setStatus(int status, int bikeId);
+	int setRentStatus(int status, int bikeId, int userId);
 	int setReturnStatus(int status, int bikeId, String position, int nodeId);
 }

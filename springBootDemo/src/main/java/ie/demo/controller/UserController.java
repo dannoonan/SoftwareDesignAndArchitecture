@@ -6,7 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import ie.demo.domain.User;
 import ie.demo.service.UserFactory;
 import ie.demo.service.UserService;
-import ie.response.MsgResponse;
+import ie.util.MsgResponse;
+import ie.util.StateCode;
 
 import java.util.List;
 
@@ -27,10 +28,10 @@ public class UserController {
 		User u = userFactory.createUser(username, password, studentCardId, userTypeId, email);
 		System.out.println(u.getStudentCardId());
 		int result = userService.register(u);
-		if(result == 1) {
+		if(result == StateCode.SUCCESS.getCode()) {
 			return MsgResponse.success();
 		}
-		else if(result == 409) {
+		else if(result == StateCode.ALREADY_EXISTS.getCode()) {
 			return MsgResponse.fail(result).add("error", "User already exists.");
 		}
 		else {
@@ -42,16 +43,19 @@ public class UserController {
 	public MsgResponse login(@RequestParam(value = "username")String username,
 							 @RequestParam(value = "password")String password) {
 		List<String> result = userService.login(username, password);
-		if(result.get(0).equals("200")) {
-			return MsgResponse.success().add("userId: ", result.get(1)).add("userTypeId: ", result.get(2))
-					.add("username: ", result.get(3)).add("email: ", result.get(4)).add("isBanned: ", result.get(5))
+		if(result.get(0).equals("" + StateCode.PROCESS_SUCCESS.getCode())) {
+			return MsgResponse.success()
+					.add("userId: ", result.get(1))
+					.add("userTypeId: ", result.get(2))
+					.add("username: ", result.get(3))
+					.add("email: ", result.get(4)).add("isBanned: ", result.get(5))
 					.add("studentCardId: ", result.get(6));
 		}
 		else if(result.get(0).equals("404")) {
-			return MsgResponse.fail(404).add("error", "User not found.");
+			return MsgResponse.fail(StateCode.ERROR.getCode()).add("error", "User not found.");
 		}
 		else {
-			return MsgResponse.fail(400).add("error", "Login failed.");
+			return MsgResponse.fail(StateCode.USER_NOT_FOUND.getCode()).add("error", "Login failed.");
 		}
 	}
 }
