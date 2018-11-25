@@ -1,4 +1,4 @@
-package ie.response;
+package ie.util;
 
 import java.util.HashMap;
 import java.util.Map;

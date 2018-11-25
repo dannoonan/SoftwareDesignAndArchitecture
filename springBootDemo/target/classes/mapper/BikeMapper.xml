@@ -24,6 +24,9 @@
 	</insert>
 	
 	<update id="setStatus" parameterType="Integer">
+		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="bikeId">    
+      	SELECT LAST_INSERT_ID() AS ID      
+    	</selectKey>
 		UPDATE Bikes
 			SET isAvailable = #{status}
 		WHERE BikeID = #{bikeId}
@@ -32,6 +35,12 @@
 	<update id="setReturnStatus" parameterType="ie.demo.domain.Bike">
 		UPDATE Bikes
 			SET isAvailable = #{status}, NodeId = #{nodeId}, Position = #{position}
+		WHERE BikeID = #{bikeId}
+	</update>
+	
+	<update id="setRentStatus" parameterType="ie.demo.domain.Bike">
+		UPDATE Bikes
+			SET isAvailable = #{status}, LastUserId = #{userId}
 		WHERE BikeID = #{bikeId}
 	</update>
 	

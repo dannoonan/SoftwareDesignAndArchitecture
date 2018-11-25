@@ -16,10 +16,11 @@
 	
 	<update id="setOrder" parameterType="ie.demo.domain.Order">
 		UPDATE Orders
-			SET isPaid = #{isPaid}, MoneyConsumed = #{amountPaid}
+			SET isPaid = #{paidStatus}, MoneyConsumed = #{moneyConsumed}
 		WHERE OrderId = #{orderId}
-		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="orderId">
-			SELECT BikeID FROM Orders WHERE OrderId = #{orderId}
-		</selectKey>
 	</update>
+	
+	<select id="getBikeId" resultType="int">
+		SELECT BikeId FROM Orders WHERE OrderId = #{orderId}
+	</select>
 </mapper>
