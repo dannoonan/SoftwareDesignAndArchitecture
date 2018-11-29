@@ -3,6 +3,7 @@ package com.cs4125.bikerentalapp.view;
 
 import android.annotation.SuppressLint;
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,7 +17,6 @@ import android.widget.Toast;
 import com.cs4125.bikerentalapp.R;
 import com.cs4125.bikerentalapp.repository.BikeRepository;
 import com.cs4125.bikerentalapp.sl.ServiceLocator;
-import com.cs4125.bikerentalapp.viewmodel.IRentViewModel;
 import com.cs4125.bikerentalapp.viewmodel.RentViewModel;
 import com.cs4125.bikerentalapp.web.ResponseBody;
 
@@ -34,7 +34,7 @@ public class ConfirmRentFragment extends Fragment {
     private int rentOrReturn;
     private int bikeId;
     Button confirm;
-    private IRentViewModel rentViewModel;
+    private RentViewModel rentViewModel;
     private NavController navController;
     public ConfirmRentFragment() {
     }
@@ -54,7 +54,6 @@ public class ConfirmRentFragment extends Fragment {
 
         configureUI(v);
         configureUiItems(v);
-        configureServiceLocator();
         configureViewModel();
 
         return v;
@@ -72,12 +71,8 @@ public class ConfirmRentFragment extends Fragment {
         typeText.setText("Bike Type: "+data[1]);
     }
 
-    private void configureServiceLocator(){
-        ServiceLocator.bindCustomServiceImplementation(IRentViewModel.class, RentViewModel.class);
-    }
-
     private void configureViewModel(){
-        rentViewModel = ServiceLocator.get(IRentViewModel.class);
+        rentViewModel = ViewModelProviders.of(this).get(RentViewModel.class);
         rentViewModel.init(ServiceLocator.get(BikeRepository.class));
     }
 

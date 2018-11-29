@@ -17,8 +17,6 @@ public class UserViewModel extends ViewModel {
 
     public void init(String username) {
         if (this.user != null) {
-            // ViewModel is created on a per-Fragment basis, so the userId
-            // doesn't change.
             return;
         }
         user = userRepository.getUser(username);

@@ -8,7 +8,7 @@ import com.cs4125.bikerentalapp.web.ResponseBody;
 
 import retrofit2.Response;
 
-public class RentViewModel extends ViewModel implements IRentViewModel {
+public class RentViewModel extends ViewModel {
     private BikeRepository repository;
 
     public void init(BikeRepository repository){

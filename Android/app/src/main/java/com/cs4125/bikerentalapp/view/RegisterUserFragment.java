@@ -1,6 +1,7 @@
 package com.cs4125.bikerentalapp.view;
 
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,7 +15,6 @@ import android.widget.Toast;
 import com.cs4125.bikerentalapp.R;
 import com.cs4125.bikerentalapp.repository.UserRepository;
 import com.cs4125.bikerentalapp.sl.ServiceLocator;
-import com.cs4125.bikerentalapp.viewmodel.IRegisterViewModel;
 import com.cs4125.bikerentalapp.viewmodel.RegisterViewModel;
 import com.cs4125.bikerentalapp.web.ResponseBody;
 
@@ -33,7 +33,7 @@ public class RegisterUserFragment extends Fragment {
     private Button   registerButton;
     private NavController navController;
 
-    private IRegisterViewModel registerViewModel;
+    private RegisterViewModel registerViewModel;
 
 
     @Override
@@ -43,20 +43,13 @@ public class RegisterUserFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_register_user, container, false);
 
         configureUiItems(view);
-        configureServiceLocator();
         configureViewModel();
 
         return view;
     }
 
-    private void configureServiceLocator(){
-        ServiceLocator.bindCustomServiceImplementation(
-                IRegisterViewModel.class,
-                RegisterViewModel.class);
-    }
-
     private void configureViewModel(){
-        registerViewModel = ServiceLocator.get(RegisterViewModel.class);
+        registerViewModel = ViewModelProviders.of(this).get(RegisterViewModel.class);
         registerViewModel.init(ServiceLocator.get(UserRepository.class));
     }
 

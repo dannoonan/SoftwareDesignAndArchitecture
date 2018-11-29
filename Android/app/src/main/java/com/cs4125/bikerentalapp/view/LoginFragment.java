@@ -2,6 +2,7 @@ package com.cs4125.bikerentalapp.view;
 
 
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,7 +16,6 @@ import android.widget.Toast;
 import com.cs4125.bikerentalapp.R;
 import com.cs4125.bikerentalapp.repository.UserRepository;
 import com.cs4125.bikerentalapp.sl.ServiceLocator;
-import com.cs4125.bikerentalapp.viewmodel.ILoginViewModel;
 import com.cs4125.bikerentalapp.viewmodel.LoginViewModel;
 import com.cs4125.bikerentalapp.web.ResponseBody;
 
@@ -31,7 +31,7 @@ public class LoginFragment extends Fragment {
     private Button   loginButton;
     private Button goToRegisterButton;
     private NavController navController;
-    private ILoginViewModel loginViewModel;
+    private LoginViewModel loginViewModel;
 
 
     @Override
@@ -41,18 +41,13 @@ public class LoginFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
         configureUiItems(view);
-        configureServiceLocator();
         configureViewModel();
 
         return view;
     }
 
-    private void configureServiceLocator(){
-        ServiceLocator.bindCustomServiceImplementation(ILoginViewModel.class, LoginViewModel.class);
-    }
-
     private void configureViewModel(){
-        loginViewModel = ServiceLocator.get(ILoginViewModel.class);
+        loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
         loginViewModel.init(ServiceLocator.get(UserRepository.class));
     }
 
