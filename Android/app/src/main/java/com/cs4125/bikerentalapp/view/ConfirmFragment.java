@@ -20,14 +20,10 @@ import com.cs4125.bikerentalapp.sl.ServiceLocator;
 import com.cs4125.bikerentalapp.viewmodel.RentViewModel;
 import com.cs4125.bikerentalapp.web.ResponseBody;
 
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
-
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ConfirmRentFragment extends Fragment {
+public class ConfirmFragment extends Fragment {
 
 
     private String input = "";
@@ -35,14 +31,14 @@ public class ConfirmRentFragment extends Fragment {
     private int bikeId;
     Button confirm;
     private RentViewModel rentViewModel;
-    private NavController navController;
-    public ConfirmRentFragment() {
+
+    public ConfirmFragment() {
     }
 
     @SuppressLint("ValidFragment")
-    public ConfirmRentFragment(int ROrR, String in) {
+    public ConfirmFragment(int ROrR, String in) {
         rentOrReturn = ROrR;
-       input = in;
+        input = in;
     }
 
 
@@ -52,14 +48,13 @@ public class ConfirmRentFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_confirm_rent, container, false);
 
-        configureUI(v);
         configureUiItems(v);
         configureViewModel();
 
         return v;
     }
 
-    private void configureUI(View v){
+    private void configureUiItems(View v){
         String[] data = input.split(",");
         TextView idText;
         TextView typeText;
@@ -67,8 +62,9 @@ public class ConfirmRentFragment extends Fragment {
         confirm = v.findViewById(R.id.confirmBtn);
         idText = v.findViewById(R.id.idText);
         typeText = v.findViewById(R.id.typeText);
-        idText.setText("Bike ID: "+data[0]);
-        typeText.setText("Bike Type: "+data[1]);
+        idText.setText("Bike ID: "+ data[0]);
+        typeText.setText("Bike Type: "+ data[1]);
+        confirm.setOnClickListener(view1 -> setBikeStatus());
     }
 
     private void configureViewModel(){
@@ -77,35 +73,18 @@ public class ConfirmRentFragment extends Fragment {
     }
 
 
-    private void configureUiItems(View view) {
-        Navigation.setViewNavController(view, new NavController(getContext()));
-        navController = NavHostFragment.findNavController(this);
-
-        confirm.setOnClickListener(view1 -> setBikeStatus());
-    }
-
-
     private void setBikeStatus(){
         LiveData<ResponseBody> liveResponse = null;
         if(rentOrReturn == 1){
-            liveResponse = rentViewModel
-                    .rentBike(bikeId, 46);
+            liveResponse = rentViewModel.rentBike(bikeId, 46);
         }
-
-
-
-
-
         liveResponse.observe(this, this::observeResponse);
-
     }
 
     private void observeResponse(@Nullable ResponseBody response){
         if(response != null) {
             if (response.getResponseCode() == 200) {
                 showToast("Rent/Return Successful");
-
-
             } else {
                 showToast("Rent/Return Failed");
             }

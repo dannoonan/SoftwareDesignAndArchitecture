@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.cs4125.bikerentalapp.R;
+import com.cs4125.bikerentalapp.model.entity.UserCredential;
 import com.cs4125.bikerentalapp.repository.UserRepository;
 import com.cs4125.bikerentalapp.sl.ServiceLocator;
 import com.cs4125.bikerentalapp.viewmodel.RegisterViewModel;
@@ -28,7 +29,6 @@ public class RegisterUserFragment extends Fragment {
     private EditText usernameField;
     private EditText emailField;
     private EditText passwordField;
-    private EditText confirmPasswordField;
     private EditText studentCardId;
     private Button   registerButton;
     private NavController navController;
@@ -41,14 +41,13 @@ public class RegisterUserFragment extends Fragment {
                              ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_register_user, container, false);
-
         configureUiItems(view);
         configureViewModel();
-
         return view;
     }
 
     private void configureViewModel(){
+        //FACTORY PATTERN
         registerViewModel = ViewModelProviders.of(this).get(RegisterViewModel.class);
         registerViewModel.init(ServiceLocator.get(UserRepository.class));
     }
@@ -58,7 +57,6 @@ public class RegisterUserFragment extends Fragment {
         bindUiItems(view);
         Navigation.setViewNavController(view, new NavController(getContext()));
         navController = NavHostFragment.findNavController(this);
-
         registerButton.setOnClickListener(view1 -> registerUser());
     }
 
@@ -66,27 +64,23 @@ public class RegisterUserFragment extends Fragment {
         usernameField = view.findViewById(R.id.usernameTxt);
         emailField = view.findViewById(R.id.emailTxt);
         passwordField = view.findViewById(R.id.passwordTxt);
-        confirmPasswordField = view.findViewById(R.id.confirmPasswordTxt);
         studentCardId = view.findViewById(R.id.cardTxt);
         registerButton = view.findViewById(R.id.registerBtn);
     }
 
     private void registerUser(){
-        String username = usernameField.getText().toString();
-        String email = emailField.getText().toString();
-        String password = passwordField.getText().toString();
-        String confirmPassword = confirmPasswordField.getText().toString();
-        String id = studentCardId.getText().toString();
+        UserCredential registerCredential = new UserCredential
+                .Builder()
+                .setUsername(usernameField.getText().toString())
+                .setEmail(emailField.getText().toString())
+                .setPassword(passwordField.getText().toString())
+                .setStudentCardId(studentCardId.getText().toString())
+                .build();
 
-        if(password.equals(confirmPassword)){
-            LiveData<ResponseBody> liveResponse = registerViewModel
-                    .register(username, password, email, id);
+        LiveData<ResponseBody> liveResponse = registerViewModel.register(registerCredential);
 
-            liveResponse.observe(this, this::observeResponse);
-        }
-        else{
-            showToast("Passwords did not match");
-        }
+        //OBSERVER PATTERN
+        liveResponse.observe(this, this::observeResponse);
     }
 
     private void observeResponse(@Nullable ResponseBody response){

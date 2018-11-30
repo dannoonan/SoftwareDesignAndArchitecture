@@ -1,6 +1,6 @@
 package com.cs4125.bikerentalapp.web;
 
-import com.cs4125.bikerentalapp.model.entity.User;
+import com.cs4125.bikerentalapp.model.db_entity.User;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -42,16 +42,16 @@ public interface Webservice {
     Call<ResponseBody> placeOrder(@Query("userName") String username,@Query("bikeId") int bikeId, @Query("amountPaid") int paid);
 
     @FormUrlEncoded
-    @POST("/rent/{bikeId}")
-    Call<ResponseBody> rent(@Path("bikeId") int bikeId, @Field("userId") int userId);
+    @POST("/rentBike/{bikeId}")
+    Call<ResponseBody> rentBike(@Path("bikeId") int bikeId, @Field("userId") int userId);
 
     @FormUrlEncoded
     @POST("/return}")
-    Call<ResponseBody> ret(@Field("orderId") int orderId,
-                              @Field("latitude") int latitude,
-                              @Field("longitude") int longitude,
-                              @Field("amountPaid") int amountPaid,
-                              @Field("studentCardId") int studentCardId,
-                              @Field("nodeId") int nodeId);
+    Call<ResponseBody> returnBike(@Field("orderId") int orderId,
+                                  @Field("latitude") int latitude,
+                                  @Field("longitude") int longitude,
+                                  @Field("amountPaid") int amountPaid,
+                                  @Field("studentCardId") int studentCardId,
+                                  @Field("nodeId") int nodeId);
 
 }

@@ -3,7 +3,7 @@ package com.cs4125.bikerentalapp.viewmodel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 
-import com.cs4125.bikerentalapp.model.entity.User;
+import com.cs4125.bikerentalapp.model.db_entity.User;
 import com.cs4125.bikerentalapp.repository.UserRepository;
 
 public class UserViewModel extends ViewModel {

@@ -4,8 +4,8 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 
 import com.cs4125.bikerentalapp.model.dao.UserDao;
-import com.cs4125.bikerentalapp.model.entity.User;
-import com.cs4125.bikerentalapp.util.UserType;
+import com.cs4125.bikerentalapp.model.db_entity.User;
+import com.cs4125.bikerentalapp.model.entity.UserCredential;
 import com.cs4125.bikerentalapp.web.ResponseBody;
 import com.cs4125.bikerentalapp.web.Webservice;
 
@@ -32,11 +32,9 @@ public class UserRepository {
         return userDao.load(userId);
     }
 
-    public LiveData<ResponseBody> registerUser(String username, String password,
-                                               String email, String studentCardId){
-
+    public LiveData<ResponseBody> registerUser(UserCredential credential){
         MutableLiveData<ResponseBody> liveResponse = new MutableLiveData<>();
-        Call<ResponseBody> response = getRegisterRequest(username, password, email, studentCardId);
+        Call<ResponseBody> response = getRegisterRequest(credential);
 
         response.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -53,10 +51,11 @@ public class UserRepository {
         return liveResponse;
     }
 
-    public LiveData<ResponseBody> loginUser(String username, String password){
+    public LiveData<ResponseBody> loginUser(UserCredential credential){
         MutableLiveData<ResponseBody> liveResponse = new MutableLiveData<>();
-
-        Call<ResponseBody> call = webservice.loginUser(username, password);
+        Call<ResponseBody> call = webservice.loginUser(
+                credential.getUsername(),
+                credential.getPassword());
 
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -74,7 +73,7 @@ public class UserRepository {
     }
 
 
-    private void refreshUser(final String username) {
+    private void refreshUser(String username) {
         executor.execute(() -> {
             User user = userDao.load(username).getValue();
             if (!(user == null)) {
@@ -89,16 +88,13 @@ public class UserRepository {
         });
     }
 
-    private Call<ResponseBody> getRegisterRequest(String username, String password,
-                                                  String email, String studentCardId){
-        Call<ResponseBody> request;
-        if(studentCardId.equals("")){
-            request = webservice.registerUser(username, password, email, UserType.ADMIN.getValue());
-        }
-        else{
-            request = webservice.registerUser(username, password, email, UserType.CUSTOMER.getValue(), studentCardId);
-        }
+    private Call<ResponseBody> getRegisterRequest(UserCredential credential){
+        return webservice.registerUser(
+                credential.getUsername(),
+                credential.getPassword(),
+                credential.getEmail(),
+                credential.getUserType(),
+                credential.getStudentCardId());
 
-        return request;
     }
 }

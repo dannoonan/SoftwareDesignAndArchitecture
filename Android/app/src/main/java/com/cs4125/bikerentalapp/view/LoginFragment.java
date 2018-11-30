@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.cs4125.bikerentalapp.R;
+import com.cs4125.bikerentalapp.model.entity.UserCredential;
 import com.cs4125.bikerentalapp.repository.UserRepository;
 import com.cs4125.bikerentalapp.sl.ServiceLocator;
 import com.cs4125.bikerentalapp.viewmodel.LoginViewModel;
@@ -39,10 +40,8 @@ public class LoginFragment extends Fragment {
                              ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
-
         configureUiItems(view);
         configureViewModel();
-
         return view;
     }
 
@@ -56,7 +55,6 @@ public class LoginFragment extends Fragment {
         bindUiItems(view);
         Navigation.setViewNavController(view, new NavController(getContext()));
         navController = NavHostFragment.findNavController(this);
-
         loginButton.setOnClickListener(view1 -> loginUser());
         goToRegisterButton.setOnClickListener(view1 -> goToRegisterScreen());
     }
@@ -73,13 +71,13 @@ public class LoginFragment extends Fragment {
     }
 
     private void loginUser(){
-        String username = usernameField.getText().toString();
-        String password = passwordField.getText().toString();
+        UserCredential credential = new UserCredential
+                .Builder()
+                .setUsername(usernameField.getText().toString())
+                .setPassword(passwordField.getText().toString())
+                .build();
 
-
-        LiveData<ResponseBody> liveResponse = loginViewModel
-                .login(username, password);
-
+        LiveData<ResponseBody> liveResponse = loginViewModel.login(credential);
         liveResponse.observe(this, this::observeResponse);
     }
 

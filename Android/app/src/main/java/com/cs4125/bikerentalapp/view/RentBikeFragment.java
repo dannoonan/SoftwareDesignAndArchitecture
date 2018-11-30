@@ -37,37 +37,21 @@ public class RentBikeFragment extends Fragment { //extends Fragment {
     private static final int REQUEST_CAMERA_PERMISSION = 201;
     TextView txtView;
     String intentData = "";
-    boolean isEmail = false;
 
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_rent_bike, container, false);
+        configureUiItems(view);
+        txtView.setOnClickListener(v -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(intentData))));
+        return view;
+    }
 
+    private void configureUiItems(View view) {
         txtBarcodeValue = view.findViewById(R.id.txtBarcodeValue);
         surfaceView = view.findViewById(R.id.surfaceView);
         txtView = view.findViewById(R.id.TV);
-
-
-        txtView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                /* if (intentData.length() > 0) {
-                   if (isEmail)
-                        startActivity(new Intent(getActivity(), EmailActivity.class).putExtra("email_address", intentData));
-                    else {*/
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(intentData)));
-                   // }
-              //  }
-
-
-            }
-        });
-
-
-        return view;
     }
 
 
@@ -123,22 +107,14 @@ public class RentBikeFragment extends Fragment { //extends Fragment {
             public void receiveDetections(Detector.Detections<Barcode> detections) {
                 final SparseArray<Barcode> barcodes = detections.getDetectedItems();
                 if (barcodes.size() != 0) {
+                    txtBarcodeValue.post(() -> {
+                            intentData = barcodes.valueAt(0).displayValue;
 
-
-                    txtBarcodeValue.post(new Runnable() {
-
-                        @Override
-                        public void run() {
-
-                                intentData = barcodes.valueAt(0).displayValue;
-
-                                ConfirmRentFragment confirmRentFragment = new ConfirmRentFragment(1, intentData);
-                                FragmentManager manager = getFragmentManager();
-                                manager.beginTransaction()
-                                        .replace(R.id.rentBikeFragment, confirmRentFragment, confirmRentFragment.getTag())
-                                        .commit();
-                        }
-
+                            ConfirmFragment confirmFragment = new ConfirmFragment(1, intentData);
+                            FragmentManager manager = getFragmentManager();
+                            manager.beginTransaction()
+                                    .replace(R.id.rentBikeFragment, confirmFragment, confirmFragment.getTag())
+                                    .commit();
                     });
 
                 }

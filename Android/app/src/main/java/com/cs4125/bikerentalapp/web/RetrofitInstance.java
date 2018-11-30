@@ -8,8 +8,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitInstance {
-    private static Retrofit retrofit;
     private static final String BASE_URL = "http://34.254.254.125:1234";
+    private static Retrofit retrofit;
 
     /**
      * Create an instance of Retrofit object

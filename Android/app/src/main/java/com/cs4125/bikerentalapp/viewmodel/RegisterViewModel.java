@@ -3,6 +3,7 @@ package com.cs4125.bikerentalapp.viewmodel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 
+import com.cs4125.bikerentalapp.model.entity.UserCredential;
 import com.cs4125.bikerentalapp.repository.UserRepository;
 import com.cs4125.bikerentalapp.web.ResponseBody;
 
@@ -13,9 +14,8 @@ public class RegisterViewModel extends ViewModel{
         this.repository = repository;
     }
 
-    public LiveData<ResponseBody> register(String username, String password,
-                                           String email, String studentCardId){
+    public LiveData<ResponseBody> register(UserCredential credential){
 
-        return repository.registerUser(username, password, email, studentCardId);
+        return repository.registerUser(credential);
     }
 }
