@@ -1,4 +1,4 @@
-package com.cs4125.bikerentalapp.repository;
+package com.cs4125.bikerentalapp.repository.user;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
@@ -16,12 +16,15 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UserRepository {
-    private final Webservice webservice;
-    private final UserDao userDao;
-    private final Executor executor;
+public class UserRepository implements IUserRepository {
+    protected final Webservice webservice;
+    protected final UserDao userDao;
+    protected final Executor executor;
+    protected IUserRepository decoratedRepository;
 
-    public UserRepository(Webservice webservice, UserDao userDao, Executor executor){
+    public UserRepository(Webservice webservice,
+                          UserDao userDao,
+                          Executor executor){
         this.webservice = webservice;
         this.userDao = userDao;
         this.executor = executor;

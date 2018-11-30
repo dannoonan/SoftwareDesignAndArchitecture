@@ -8,7 +8,7 @@ import com.cs4125.bikerentalapp.R;
 import com.cs4125.bikerentalapp.model.dao.UserDao;
 import com.cs4125.bikerentalapp.model.db.UserDatabase;
 import com.cs4125.bikerentalapp.repository.BikeRepository;
-import com.cs4125.bikerentalapp.repository.UserRepository;
+import com.cs4125.bikerentalapp.repository.user.UserRepository;
 import com.cs4125.bikerentalapp.sl.ServiceLocator;
 import com.cs4125.bikerentalapp.web.RetrofitInstance;
 import com.cs4125.bikerentalapp.web.Webservice;

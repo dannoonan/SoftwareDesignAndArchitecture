@@ -2,6 +2,8 @@ package com.cs4125.bikerentalapp.web;
 
 import com.cs4125.bikerentalapp.model.db_entity.User;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -50,8 +52,27 @@ public interface Webservice {
     Call<ResponseBody> returnBike(@Field("orderId") int orderId,
                                   @Field("latitude") int latitude,
                                   @Field("longitude") int longitude,
-                                  @Field("amountPaid") int amountPaid,
+                                  @Field("amountPaid") double amountPaid,
                                   @Field("studentCardId") int studentCardId,
                                   @Field("nodeId") int nodeId);
+    @FormUrlEncoded
+    @POST("/bike/add")
+    Call<ResponseBody> addBikes(@Field("numBikes") int numBikes,
+                                @Field("bikeType") String bikeType,
+                                @Field("nodeId") int nodeId);
+
+    @FormUrlEncoded
+    @POST("/bike/collect")
+    Call<ResponseBody> scheduleCollection(@Field("bikeIds") List<Integer> bikeIds,
+                                          @Field("dropOffNodeId") int dropOffNodeId);
+
+    @FormUrlEncoded
+    @POST("/bike/repair")
+    Call<ResponseBody> scheduleRepair(@Field("bikeIds") List<Integer> bikeIds);
+
+    @FormUrlEncoded
+    @POST("/bike/reintroduce")
+    Call<ResponseBody> reintroduceBikes(@Field("bikeIds") List<Integer> bikIds,
+                                        @Field("nodeId") int nodeId);
 
 }

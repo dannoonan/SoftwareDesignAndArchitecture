@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import com.cs4125.bikerentalapp.R;
 import com.cs4125.bikerentalapp.model.entity.UserCredential;
-import com.cs4125.bikerentalapp.repository.UserRepository;
+import com.cs4125.bikerentalapp.repository.user.UserRepository;
 import com.cs4125.bikerentalapp.sl.ServiceLocator;
 import com.cs4125.bikerentalapp.viewmodel.LoginViewModel;
 import com.cs4125.bikerentalapp.web.ResponseBody;
