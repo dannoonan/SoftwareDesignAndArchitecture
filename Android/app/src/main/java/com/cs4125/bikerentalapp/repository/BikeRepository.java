@@ -12,7 +12,7 @@ import java.util.concurrent.Executor;
 
 import retrofit2.Response;
 
-public class BikeRepository {
+public class BikeRepository implements IBikeRepository{
     private final Webservice webservice;
     private final Executor executor;
 

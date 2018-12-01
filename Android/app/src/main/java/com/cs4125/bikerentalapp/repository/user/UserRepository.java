@@ -17,10 +17,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class UserRepository implements IUserRepository {
-    protected final Webservice webservice;
-    protected final UserDao userDao;
-    protected final Executor executor;
-    protected IUserRepository decoratedRepository;
+    private final Webservice webservice;
+    private final UserDao userDao;
+    private final Executor executor;
 
     public UserRepository(Webservice webservice,
                           UserDao userDao,
