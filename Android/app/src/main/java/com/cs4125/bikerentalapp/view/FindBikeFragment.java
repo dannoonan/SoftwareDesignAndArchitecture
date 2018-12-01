@@ -12,10 +12,6 @@ import com.cs4125.bikerentalapp.R;
 
 public class FindBikeFragment extends Fragment {
 
-    public static FindBikeFragment newInstance() {
-        return new FindBikeFragment();
-    }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,

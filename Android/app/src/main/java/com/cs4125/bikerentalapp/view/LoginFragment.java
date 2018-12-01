@@ -2,6 +2,7 @@ package com.cs4125.bikerentalapp.view;
 
 
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,9 +14,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.cs4125.bikerentalapp.R;
-import com.cs4125.bikerentalapp.repository.UserRepository;
+import com.cs4125.bikerentalapp.model.entity.UserCredential;
+import com.cs4125.bikerentalapp.repository.user.UserRepository;
 import com.cs4125.bikerentalapp.sl.ServiceLocator;
-import com.cs4125.bikerentalapp.viewmodel.ILoginViewModel;
 import com.cs4125.bikerentalapp.viewmodel.LoginViewModel;
 import com.cs4125.bikerentalapp.web.ResponseBody;
 
@@ -31,7 +32,7 @@ public class LoginFragment extends Fragment {
     private Button   loginButton;
     private Button goToRegisterButton;
     private NavController navController;
-    private ILoginViewModel loginViewModel;
+    private LoginViewModel loginViewModel;
 
 
     @Override
@@ -39,20 +40,13 @@ public class LoginFragment extends Fragment {
                              ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
-
         configureUiItems(view);
-        configureServiceLocator();
         configureViewModel();
-
         return view;
     }
 
-    private void configureServiceLocator(){
-        ServiceLocator.bindCustomServiceImplementation(ILoginViewModel.class, LoginViewModel.class);
-    }
-
     private void configureViewModel(){
-        loginViewModel = ServiceLocator.get(ILoginViewModel.class);
+        loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
         loginViewModel.init(ServiceLocator.get(UserRepository.class));
     }
 
@@ -61,7 +55,6 @@ public class LoginFragment extends Fragment {
         bindUiItems(view);
         Navigation.setViewNavController(view, new NavController(getContext()));
         navController = NavHostFragment.findNavController(this);
-
         loginButton.setOnClickListener(view1 -> loginUser());
         goToRegisterButton.setOnClickListener(view1 -> goToRegisterScreen());
     }
@@ -78,13 +71,13 @@ public class LoginFragment extends Fragment {
     }
 
     private void loginUser(){
-        String username = usernameField.getText().toString();
-        String password = passwordField.getText().toString();
+        UserCredential credential = new UserCredential
+                .Builder()
+                .setUsername(usernameField.getText().toString())
+                .setPassword(passwordField.getText().toString())
+                .build();
 
-
-        LiveData<ResponseBody> liveResponse = loginViewModel
-                .login(username, password);
-
+        LiveData<ResponseBody> liveResponse = loginViewModel.login(credential);
         liveResponse.observe(this, this::observeResponse);
     }
 

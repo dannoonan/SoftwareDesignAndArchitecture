@@ -1,6 +1,8 @@
 package com.cs4125.bikerentalapp.web;
 
-import com.cs4125.bikerentalapp.model.entity.User;
+import com.cs4125.bikerentalapp.model.db_entity.User;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -42,16 +44,35 @@ public interface Webservice {
     Call<ResponseBody> placeOrder(@Query("userName") String username,@Query("bikeId") int bikeId, @Query("amountPaid") int paid);
 
     @FormUrlEncoded
-    @POST("/rent/{bikeId}")
-    Call<ResponseBody> rent(@Path("bikeId") int bikeId, @Field("userId") int userId);
+    @POST("/rentBike/{bikeId}")
+    Call<ResponseBody> rentBike(@Path("bikeId") int bikeId, @Field("userId") int userId);
 
     @FormUrlEncoded
     @POST("/return}")
-    Call<ResponseBody> ret(@Field("orderId") int orderId,
-                              @Field("latitude") int latitude,
-                              @Field("longitude") int longitude,
-                              @Field("amountPaid") int amountPaid,
-                              @Field("studentCardId") int studentCardId,
-                              @Field("nodeId") int nodeId);
+    Call<ResponseBody> returnBike(@Field("orderId") int orderId,
+                                  @Field("latitude") int latitude,
+                                  @Field("longitude") int longitude,
+                                  @Field("amountPaid") double amountPaid,
+                                  @Field("studentCardId") int studentCardId,
+                                  @Field("nodeId") int nodeId);
+    @FormUrlEncoded
+    @POST("/bike/add")
+    Call<ResponseBody> addBikes(@Field("numBikes") int numBikes,
+                                @Field("bikeType") String bikeType,
+                                @Field("nodeId") int nodeId);
+
+    @FormUrlEncoded
+    @POST("/bike/collect")
+    Call<ResponseBody> scheduleCollection(@Field("bikeIds") List<Integer> bikeIds,
+                                          @Field("dropOffNodeId") int dropOffNodeId);
+
+    @FormUrlEncoded
+    @POST("/bike/repair")
+    Call<ResponseBody> scheduleRepair(@Field("bikeIds") List<Integer> bikeIds);
+
+    @FormUrlEncoded
+    @POST("/bike/reintroduce")
+    Call<ResponseBody> reintroduceBikes(@Field("bikeIds") List<Integer> bikIds,
+                                        @Field("nodeId") int nodeId);
 
 }

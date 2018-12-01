@@ -1,4 +1,4 @@
-package com.cs4125.bikerentalapp.util;
+package com.cs4125.bikerentalapp.model.entity;
 
 public enum UserType {
     ADMIN(1),

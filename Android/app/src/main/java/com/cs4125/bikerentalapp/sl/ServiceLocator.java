@@ -16,6 +16,8 @@ import java.util.Map;
  * Github: https://gist.github.com/DanielNovak/06bc27fa4ecea63207c424bef88199df
  * */
 
+//SERVICELOCATOR PATTERN
+
 @SuppressWarnings({"unused", "WeakerAccess"})
 public class ServiceLocator {
 

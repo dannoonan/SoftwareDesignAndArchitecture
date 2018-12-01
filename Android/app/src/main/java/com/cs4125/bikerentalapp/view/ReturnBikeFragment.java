@@ -32,12 +32,10 @@ public class ReturnBikeFragment extends Fragment {
 
     SurfaceView surfaceView;
     TextView txtBarcodeValue;
-    private BarcodeDetector barcodeDetector;
     private CameraSource cameraSource;
     private static final int REQUEST_CAMERA_PERMISSION = 201;
     TextView txtView;
     String intentData = "";
-    boolean isEmail = false;
 
 
     @Nullable
@@ -45,30 +43,15 @@ public class ReturnBikeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_return_bike, container, false);
+        configureUiComponents(view);
+        txtView.setOnClickListener(v -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(intentData))));
+        return view;
+    }
 
+    private void configureUiComponents(View view) {
         txtBarcodeValue = view.findViewById(R.id.txtBarcodeValue);
         surfaceView = view.findViewById(R.id.surfaceView);
         txtView = view.findViewById(R.id.TV);
-
-
-        txtView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                /* if (intentData.length() > 0) {
-                   if (isEmail)
-                        startActivity(new Intent(getActivity(), EmailActivity.class).putExtra("email_address", intentData));
-                    else {*/
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(intentData)));
-                // }
-                //  }
-
-
-            }
-        });
-
-
-        return view;
     }
 
 
@@ -76,7 +59,7 @@ public class ReturnBikeFragment extends Fragment {
 
         Toast.makeText(getContext(), "Barcode scanner started", Toast.LENGTH_SHORT).show();
 
-        barcodeDetector = new BarcodeDetector.Builder(getContext())
+        BarcodeDetector barcodeDetector = new BarcodeDetector.Builder(getContext())
                 .setBarcodeFormats(Barcode.ALL_FORMATS)
                 .build();
 
@@ -99,12 +82,11 @@ public class ReturnBikeFragment extends Fragment {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
-
             }
 
             @Override
             public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+
             }
 
             @Override
@@ -123,23 +105,16 @@ public class ReturnBikeFragment extends Fragment {
             @Override
             public void receiveDetections(Detector.Detections<Barcode> detections) {
                 final SparseArray<Barcode> barcodes = detections.getDetectedItems();
+
                 if (barcodes.size() != 0) {
+                    txtBarcodeValue.post(() -> {
 
-
-                    txtBarcodeValue.post(new Runnable() {
-
-                        @Override
-                        public void run() {
-
-                            intentData = barcodes.valueAt(0).displayValue;
-
-                            ConfirmRentFragment confirmRentFragment = new ConfirmRentFragment(2, intentData);
-                            FragmentManager manager = getFragmentManager();
-                            manager.beginTransaction()
-                                    .replace(R.id.returnBikeFragment, confirmRentFragment, confirmRentFragment.getTag())
-                                    .commit();
-                        }
-
+                        intentData = barcodes.valueAt(0).displayValue;
+                        ConfirmFragment confirmFragment = new ConfirmFragment(2, intentData);
+                        FragmentManager manager = getFragmentManager();
+                        manager.beginTransaction()
+                                .replace(R.id.returnBikeFragment, confirmFragment, confirmFragment.getTag())
+                                .commit();
                     });
 
                 }

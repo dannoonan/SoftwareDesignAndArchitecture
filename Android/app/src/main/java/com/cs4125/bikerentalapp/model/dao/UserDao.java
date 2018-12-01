@@ -5,7 +5,7 @@ import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 
-import com.cs4125.bikerentalapp.model.entity.User;
+import com.cs4125.bikerentalapp.model.db_entity.User;
 
 import static android.arch.persistence.room.OnConflictStrategy.REPLACE;
 
