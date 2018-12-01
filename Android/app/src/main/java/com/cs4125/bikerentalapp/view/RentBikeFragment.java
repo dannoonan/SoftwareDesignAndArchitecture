@@ -29,7 +29,7 @@ import java.io.IOException;
 
 
 
-public class RentBikeFragment extends Fragment { //extends Fragment {
+public class  RentBikeFragment extends Fragment { //extends Fragment {
     SurfaceView surfaceView;
     TextView txtBarcodeValue;
     private BarcodeDetector barcodeDetector;

@@ -129,18 +129,6 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="reportBikeFragment">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="771" />
-                            <option name="y" value="12" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
                   <entry key="returnBikeFragment">
                     <value>
                       <LayoutPositions>
