@@ -8,6 +8,8 @@ import ie.demo.service.UserFactory;
 import ie.demo.service.impl.UserServiceImpl;
 import ie.util.MsgResponse;
 
+import ie.util.StateCode;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -15,6 +17,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserTest {
@@ -27,6 +32,19 @@ public class UserTest {
 
     @InjectMocks
     private UserController controller;
+
+    private List<String> result = new ArrayList<>();
+
+    @Before
+    public void setUpMocks() {
+        result.add("1");
+        result.add("1");
+        result.add("test");
+        result.add("email");
+        result.add("0");
+        result.add("1");
+    }
+
 
     @Test
     public void insertUserSuccess() {
@@ -61,25 +79,28 @@ public class UserTest {
         assertEquals(400, msgResponse.getCode());
     }
 
-//    @Test
-//    public void loginSuccess() {
-//        when(userServiceMock.login(Mockito.anyString(),Mockito.anyString())).thenReturn(200);
-//        MsgResponse msgResponse = controller.login(Mockito.anyString(),Mockito.anyString());
-//        assertEquals(200, msgResponse.getCode());
-//    }
-//
-//    @Test
-//    public void loginNotFound() {
-//        when(userServiceMock.login(Mockito.anyString(),Mockito.anyString())).thenReturn(404);
-//        MsgResponse msgResponse = controller.login(Mockito.anyString(),Mockito.anyString());
-//        assertEquals(404, msgResponse.getCode());
-//    }
-//
-//    @Test
-//    public void loginFailure() {
-//        when(userServiceMock.login(Mockito.anyString(),Mockito.anyString())).thenReturn(400);
-//        MsgResponse msgResponse = controller.login(Mockito.anyString(),Mockito.anyString());
-//        assertEquals(400, msgResponse.getCode());
-//    }
+    @Test
+    public void loginSuccess() {
+        result.add(0,"" + StateCode.PROCESS_SUCCESS.getCode());
+        when(userServiceMock.login("test","password")).thenReturn(result);
+        MsgResponse msgResponse = controller.login("test","password");
+        assertEquals(200, msgResponse.getCode());
+    }
+
+    @Test
+    public void loginNotFound() {
+        result.add(0,"" + StateCode.USER_NOT_FOUND.getCode());
+        when(userServiceMock.login("test","password")).thenReturn(result);
+        MsgResponse msgResponse = controller.login("test","password");
+        assertEquals(404, msgResponse.getCode());
+    }
+
+    @Test
+    public void loginFailure() {
+        result.add(0,"" + StateCode.ERROR.getCode());
+        when(userServiceMock.login("test","password")).thenReturn(result);
+        MsgResponse msgResponse = controller.login("test","password");
+        assertEquals(400, msgResponse.getCode());
+    }
 
 }

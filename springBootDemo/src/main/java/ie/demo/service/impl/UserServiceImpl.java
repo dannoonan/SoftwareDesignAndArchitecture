@@ -3,6 +3,7 @@ package ie.demo.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import ie.demo.domain.StudentCard;
 import ie.demo.mapper.StudentCardMapper;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,9 @@ public class UserServiceImpl implements UserService {
 		u.setPassword(newPassword);
 		if(u.getStudentCardId() != null) {
 			if(studentCardMapper.cardExists(u.getStudentCardId()) == 0) {
-				studentCardMapper.createCard(u.getStudentCardId());
+				StudentCard card = new StudentCard();
+				card.setStudentCardId(u.getStudentCardId());
+				studentCardMapper.createCard(card);
 			}
 		}
 		if(userMapper.userExists(username) == 0) {
