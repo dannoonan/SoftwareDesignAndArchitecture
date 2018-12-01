@@ -52,10 +52,10 @@ public class UserController {
 					.add("studentCardId: ", result.get(6));
 		}
 		else if(result.get(0).equals("404")) {
-			return MsgResponse.fail(StateCode.ERROR.getCode()).add("error", "User not found.");
+			return MsgResponse.fail(StateCode.USER_NOT_FOUND.getCode()).add("error", "User not found.");
 		}
 		else {
-			return MsgResponse.fail(StateCode.USER_NOT_FOUND.getCode()).add("error", "Login failed.");
+			return MsgResponse.fail(StateCode.ERROR.getCode()).add("error", "Login failed.");
 		}
 	}
 }
