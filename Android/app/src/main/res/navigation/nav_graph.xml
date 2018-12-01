@@ -46,11 +46,6 @@
             app:destination="@id/returnBikeFragment" />
     </fragment>
     <fragment
-        android:id="@+id/reportBikeFragment"
-        android:name="com.cs4125.bikerentalapp.view.ReportBikeFragment"
-        android:label="fragment_report_bike"
-        tools:layout="@layout/fragment_report_bike" />
-    <fragment
         android:id="@+id/returnBikeFragment"
         android:name="com.cs4125.bikerentalapp.view.ReturnBikeFragment"
         android:label="fragment_return_bike"
