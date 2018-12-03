@@ -15,7 +15,7 @@ public class AdminRepository extends UserRepositoryDecorator {
         super(decoratedRepository);
     }
 
-    // Stubbed out method implementations
+    // Additional Functionality (not implemented)
     public LiveData<ResponseBody> addBikes(int numBikes,
                                            int nodeId,
                                            String bikeType){
@@ -31,6 +31,7 @@ public class AdminRepository extends UserRepositoryDecorator {
         return null;
     }
 
+    //Existing functionality
     @Override
     public LiveData<User> getUser(String userId) {
         return decoratedRepository.getUser(userId);

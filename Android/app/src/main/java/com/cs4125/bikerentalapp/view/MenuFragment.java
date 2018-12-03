@@ -34,7 +34,6 @@ public class MenuFragment extends Fragment {
         Button findBikesButton = getView().findViewById(R.id.buttonFindBikes);
         Button rentBikeButton = getView().findViewById(R.id.buttonRentBike);
         Button returnBikeButton = getView().findViewById(R.id.buttonReturnBike);
-        Button reportBikeButton = getView().findViewById(R.id.buttonReportBike);
 
         findBikesButton.setOnClickListener(Navigation.createNavigateOnClickListener(
                 R.id.action_menuFragment_to_findBikeFragment, null));
@@ -42,7 +41,5 @@ public class MenuFragment extends Fragment {
                 R.id.action_menuFragment_to_rentBikeFragment, null));
         returnBikeButton.setOnClickListener(Navigation.createNavigateOnClickListener(
                 R.id.action_menuFragment_to_returnBikeFragment, null));
-        reportBikeButton.setOnClickListener(Navigation.createNavigateOnClickListener(
-                R.id.action_menuFragment_to_reportBikeFragment, null));
     }
 }

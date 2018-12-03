@@ -39,9 +39,6 @@
             android:id="@+id/action_menuFragment_to_rentBikeFragment"
             app:destination="@id/rentBikeFragment" />
         <action
-            android:id="@+id/action_menuFragment_to_reportBikeFragment"
-            app:destination="@id/reportBikeFragment" />
-        <action
             android:id="@+id/action_menuFragment_to_returnBikeFragment"
             app:destination="@id/returnBikeFragment" />
     </fragment>

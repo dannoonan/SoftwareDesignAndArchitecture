@@ -1,11 +1,10 @@
 package com.cs4125.bikerentalapp.repository.user;
 
 //DECORATOR PATTERN
-public abstract class UserRepositoryDecorator implements IUserRepository {
-    protected IUserRepository decoratedRepository;
+abstract class UserRepositoryDecorator implements IUserRepository {
+    IUserRepository decoratedRepository;
 
-    public UserRepositoryDecorator(IUserRepository decoratedRepository){
+    UserRepositoryDecorator(IUserRepository decoratedRepository){
         this.decoratedRepository = decoratedRepository;
     }
-
 }

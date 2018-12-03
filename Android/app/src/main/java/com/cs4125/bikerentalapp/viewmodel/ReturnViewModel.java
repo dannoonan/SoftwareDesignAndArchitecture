@@ -4,13 +4,13 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 
 import com.cs4125.bikerentalapp.model.entity.ReturnDetails;
-import com.cs4125.bikerentalapp.repository.BikeRepository;
+import com.cs4125.bikerentalapp.repository.IBikeRepository;
 import com.cs4125.bikerentalapp.web.ResponseBody;
 
 public class ReturnViewModel extends ViewModel {
-    private BikeRepository repository;
+    private IBikeRepository repository;
 
-    public void init(BikeRepository repository){
+    public void init(IBikeRepository repository){
         this.repository = repository;
     }
 

@@ -3,21 +3,14 @@ package com.cs4125.bikerentalapp.viewmodel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 
-import com.cs4125.bikerentalapp.repository.BikeRepository;
+import com.cs4125.bikerentalapp.repository.IBikeRepository;
 import com.cs4125.bikerentalapp.web.ResponseBody;
 
-import retrofit2.Response;
-
 public class RentViewModel extends ViewModel {
-    private BikeRepository repository;
+    private IBikeRepository repository;
 
-    public void init(BikeRepository repository){
+    public void init(IBikeRepository repository){
         this.repository = repository;
-    }
-
-    public LiveData<Response> setStatus(int UserId, int StatusId){
-
-        return repository.setBikeStatus(UserId, StatusId);
     }
 
     public LiveData<ResponseBody> rentBike(int bikeId, int userId){

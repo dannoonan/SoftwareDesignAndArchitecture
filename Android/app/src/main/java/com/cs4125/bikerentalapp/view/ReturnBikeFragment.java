@@ -112,11 +112,12 @@ public class ReturnBikeFragment extends Fragment {
                         intentData = barcodes.valueAt(0).displayValue;
                         ConfirmFragment confirmFragment = new ConfirmFragment(2, intentData);
                         FragmentManager manager = getFragmentManager();
-                        manager.beginTransaction()
-                                .replace(R.id.returnBikeFragment, confirmFragment, confirmFragment.getTag())
-                                .commit();
+                        if(manager != null){
+                            manager.beginTransaction()
+                                    .replace(R.id.returnBikeFragment, confirmFragment, confirmFragment.getTag())
+                                    .commit();
+                        }
                     });
-
                 }
             }
         });
