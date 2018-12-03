@@ -9,7 +9,6 @@ import com.cs4125.bikerentalapp.sl.SlConfigurationBuilder;
 
 public class MainActivity extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,11 +16,6 @@ public class MainActivity extends AppCompatActivity {
         initializeServiceLocator();
     }
 
-    /**
-     * All Repositories should be added to the ServiceLocator here
-     *
-     *
-     * */
     private void initializeServiceLocator(){
         SlConfigurationBuilder.init(this);
         SlConfigurationBuilder.addWebservice();

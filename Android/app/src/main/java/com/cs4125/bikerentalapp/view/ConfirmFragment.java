@@ -29,7 +29,7 @@ public class ConfirmFragment extends Fragment {
     private String input = "";
     private int rentOrReturn;
     private int bikeId;
-    Button confirm;
+    private Button confirm;
     private RentViewModel rentViewModel;
 
     public ConfirmFragment() {
@@ -56,14 +56,19 @@ public class ConfirmFragment extends Fragment {
 
     private void configureUiItems(View v){
         String[] data = input.split(",");
+        String bikeType = "";
+        bikeId = -1;
+        if(data.length == 2){
+            bikeId = Integer.parseInt(data[0]);
+            bikeType = data[1];
+        }
         TextView idText;
         TextView typeText;
-        bikeId = Integer.parseInt(data[0]);
         confirm = v.findViewById(R.id.confirmBtn);
         idText = v.findViewById(R.id.idText);
         typeText = v.findViewById(R.id.typeText);
-        idText.setText("Bike ID: "+ data[0]);
-        typeText.setText("Bike Type: "+ data[1]);
+        idText.setText("Bike ID: " + bikeId);
+        typeText.setText("Bike Type: "+ bikeType);
         confirm.setOnClickListener(view1 -> setBikeStatus());
     }
 

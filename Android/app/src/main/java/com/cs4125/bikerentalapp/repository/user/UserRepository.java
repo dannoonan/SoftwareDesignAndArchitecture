@@ -30,7 +30,18 @@ public class UserRepository implements IUserRepository {
     }
 
     public LiveData<User> getUser(String userId) {
-        refreshUser(userId);
+        executor.execute(() -> {
+            User user = userDao.load(userId).getValue();
+            if (!(user == null)) {
+                Response<User> response = null;
+                try {
+                    response = webservice.getUser(userId).execute();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                userDao.save(response.body());
+            }
+        });
         return userDao.load(userId);
     }
 
@@ -72,22 +83,6 @@ public class UserRepository implements IUserRepository {
         });
 
         return liveResponse;
-    }
-
-
-    private void refreshUser(String username) {
-        executor.execute(() -> {
-            User user = userDao.load(username).getValue();
-            if (!(user == null)) {
-                Response<User> response = null;
-                try {
-                    response = webservice.getUser(username).execute();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                userDao.save(response.body());
-            }
-        });
     }
 
     private Call<ResponseBody> getRegisterRequest(UserCredential credential){
