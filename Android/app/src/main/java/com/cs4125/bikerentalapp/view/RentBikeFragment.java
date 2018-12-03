@@ -30,13 +30,13 @@ import java.io.IOException;
 
 
 public class  RentBikeFragment extends Fragment { //extends Fragment {
-    SurfaceView surfaceView;
-    TextView txtBarcodeValue;
+    private SurfaceView surfaceView;
+    private TextView txtBarcodeValue;
     private BarcodeDetector barcodeDetector;
     private CameraSource cameraSource;
     private static final int REQUEST_CAMERA_PERMISSION = 201;
-    TextView txtView;
-    String intentData = "";
+    private TextView txtView;
+    private String intentData = "";
 
 
     @Override
