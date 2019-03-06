@@ -55,7 +55,8 @@ public class LoginFragment extends Fragment {
         bindUiItems(view);
         Navigation.setViewNavController(view, new NavController(getContext()));
         navController = NavHostFragment.findNavController(this);
-        loginButton.setOnClickListener(view1 -> loginUser());
+        loginButton.setOnClickListener(view1 -> navController.navigate(R.id.action_loginFragment_to_menuFragment));
+        //loginButton.setOnClickListener(view1 -> loginUser());
         goToRegisterButton.setOnClickListener(view1 -> goToRegisterScreen());
     }
 
@@ -95,5 +96,9 @@ public class LoginFragment extends Fragment {
 
     private void showToast(String message){
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    private void moveToMain(){
+        navController.navigate(R.id.action_loginFragment_to_menuFragment);
     }
 }

@@ -79,4 +79,22 @@ public class BikeRepository implements IBikeRepository{
 
         return liveResponse;
     }
+
+    public LiveData<ResponseBody> getAllBikes(){
+        MutableLiveData<ResponseBody> liveResponse = new MutableLiveData<>();
+
+        executor.execute(() -> {
+            Response<ResponseBody> response;
+            try {
+                response = webservice.getAllBikes().execute();
+
+                liveResponse.postValue(response.body());
+            }
+            catch(IOException e){
+                e.printStackTrace();
+            }
+        });
+
+        return liveResponse;
+    }
 }

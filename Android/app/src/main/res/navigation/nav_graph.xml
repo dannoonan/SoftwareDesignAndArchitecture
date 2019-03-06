@@ -16,17 +16,9 @@
         android:label="fragment_find_bike"
         tools:layout="@layout/fragment_find_bike" >
         <action
-            android:id="@+id/action_findBikeFragment_to_viewBikesFragment2"
-            app:destination="@id/viewBikesFragment" />
+            android:id="@+id/action_findBikeFragment_to_bikeInformationFragment"
+            app:destination="@id/bikeInformationFragment" />
     </fragment>
-        <action
-            android:id="@+id/action_findBikeFragment_to_viewBikesFragment"
-            app:destination="@id/viewBikesFragment" />
-    <fragment
-        android:id = "@+id/viewBikesFragment"
-        android:name="com.cs4125.bikerentalapp.view.ViewBikesFragment"
-        android:label="fragment_view_bikes"
-        tools:layout="@layout/fragment_view_bikes" />
     <fragment
         android:id="@+id/menuFragment"
         android:name="com.cs4125.bikerentalapp.view.MenuFragment"
@@ -68,5 +60,10 @@
             android:id="@+id/action_registerFragment_to_menuFragment"
             app:destination="@id/menuFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/bikeInformationFragment"
+        android:name="com.cs4125.bikerentalapp.view.BikeInformationFragment"
+        android:label="fragment_bike_information"
+        tools:layout="@layout/fragment_bike_information" />
 
 </navigation>
