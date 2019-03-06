@@ -1,10 +1,14 @@
 package ie.demo.controller;
 
+import ie.demo.domain.CustomerUser;
+import ie.demo.domain.StandardCustomer;
+import ie.demo.domain.User;
+import ie.demo.service.AbstractUserFactory;
+
+import ie.demo.service.impl.FactoryProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import ie.demo.domain.User;
-import ie.demo.service.UserFactory;
 import ie.demo.service.UserService;
 import ie.util.MsgResponse;
 import ie.util.StateCode;
@@ -17,7 +21,7 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	@Autowired
-	private UserFactory userFactory;
+	private FactoryProvider factoryProvider;
 	
 	@RequestMapping(value= "/user", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
 	public MsgResponse insertUser(@RequestParam(value = "username")String username,
@@ -25,8 +29,9 @@ public class UserController {
 								  @RequestParam(value = "studentCardId", required = false) Integer studentCardId,
 								  @RequestParam(value = "userTypeId") int userTypeId,
 								  @RequestParam(value = "email") String email) {
-		User u = userFactory.createUser(username, password, studentCardId, userTypeId, email);
-		System.out.println(u.getStudentCardId());
+		AbstractUserFactory factory = factoryProvider.getFactory(userTypeId);
+		User u = (User) factory.createUser(username, password, studentCardId, userTypeId, email);
+		//User u = new StandardCustomer(username, password, studentCardId, userTypeId, email);
 		int result = userService.register(u);
 		if(result == StateCode.SUCCESS.getCode()) {
 			return MsgResponse.success();

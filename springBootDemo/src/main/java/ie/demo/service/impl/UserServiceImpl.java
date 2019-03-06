@@ -5,7 +5,6 @@ import java.util.List;
 
 import ie.demo.domain.StudentCard;
 import ie.demo.mapper.StudentCardMapper;
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
