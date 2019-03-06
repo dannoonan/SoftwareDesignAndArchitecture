@@ -10,6 +10,7 @@ import ie.demo.domain.Bike;
 public interface BikeMapper {
 	List<Bike> findBikeByNodes(int id);
 	Bike findBikeById(int id);
+	List<Bike> findAllBikes();
 	int createBike(Bike bike);
 	int setStatus(int status, int bikeId);
 	int setRentStatus(int status, int bikeId, int userId);

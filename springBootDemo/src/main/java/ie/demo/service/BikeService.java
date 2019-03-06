@@ -9,6 +9,7 @@ public interface BikeService {
 
 	List<Bike> findBikeByNodes(int id);
 	Bike findBikeById(int id);
+	List<Bike> findAllBikes();
 	int createBike(Bike bike);
 	int setStatus(int status, int bikeId);
 	int reportBike(int bikeId, int UserId, String ReportText);

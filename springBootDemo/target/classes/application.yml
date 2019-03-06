@@ -4,7 +4,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://cs4125projectdb.ccie0ho6qgll.eu-west-1.rds.amazonaws.com:3306/BikeRental
+    url: jdbc:mysql://bikerental.csprfezhiiej.us-east-1.rds.amazonaws.com:3306/BikeRental
     username: cs4125
     password: cs4125_indigo
   

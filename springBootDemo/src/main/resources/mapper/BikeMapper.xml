@@ -15,6 +15,10 @@
 	<select id="findBikeById" resultMap="BikeResultMap">
 		SELECT * FROM Bikes WHERE BikeId = 	#{id}
 	</select>
+
+	<select id="findAllBikes" resultMap="BikeResultMap">
+		SELECT * FROM Bikes
+	</select>
 	
 	<insert id="createBike" parameterType="ie.demo.domain.Bike" flushCache="true" useGeneratedKeys="true" keyProperty="bikeId">
 		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="bikeId">    

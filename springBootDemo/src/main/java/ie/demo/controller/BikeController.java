@@ -50,6 +50,16 @@ public class BikeController {
 			return MsgResponse.success().add("bikes", bikes);
 		}
 	}
+
+	@RequestMapping(value= "/bike", method=RequestMethod.GET, produces="application/json;charset=UTF-8")
+	public MsgResponse getAllBikes() {
+		List<Bike> bikes = bikeService.findAllBikes();
+		if(bikes == null) {
+			return MsgResponse.success().add("warning", "Empty node.");
+		} else {
+			return MsgResponse.success().add("bikes", bikes);
+		}
+	}
 	
 	@RequestMapping(value= "/bike", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
 	public MsgResponse insertBike(@RequestParam(value = "bikeType")String bikeType,
