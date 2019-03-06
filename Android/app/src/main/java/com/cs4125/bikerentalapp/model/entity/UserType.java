@@ -1,10 +1,10 @@
 package com.cs4125.bikerentalapp.model.entity;
 
 public enum UserType {
-    ADMIN(1),
-    CUSTOMER(2),
-    DELIVERY_DRIVER(3),
-    REPAIR_MAN(4);
+    STANDARD_CUSTOMER(1),
+    PREMIUM_CUSTOMER(2),
+    STANDARD_ADMIN(3),
+    MAINTENANCE_ADMIN(4);
 
     private final int value;
 

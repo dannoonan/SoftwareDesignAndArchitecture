@@ -23,7 +23,7 @@ public class UserCredential {
         private String password;
         private String studentCardId;
         private String email;
-        private UserType userType = UserType.CUSTOMER; // Default value
+        private UserType userType = UserType.STANDARD_CUSTOMER; // Default value
 
         public Builder setUsername(String username){
             this.username = username;
