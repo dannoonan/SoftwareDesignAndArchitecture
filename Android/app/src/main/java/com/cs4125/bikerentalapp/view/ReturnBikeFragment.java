@@ -110,11 +110,11 @@ public class ReturnBikeFragment extends Fragment {
                     txtBarcodeValue.post(() -> {
 
                         intentData = barcodes.valueAt(0).displayValue;
-                        ConfirmFragment confirmFragment = new ConfirmFragment(2, intentData);
+                        ConfirmationFragment confirmationFragment = new ConfirmationFragment(2, intentData);
                         FragmentManager manager = getFragmentManager();
                         if(manager != null){
                             manager.beginTransaction()
-                                    .replace(R.id.returnBikeFragment, confirmFragment, confirmFragment.getTag())
+                                    .replace(R.id.returnBikeFragment, confirmationFragment, confirmationFragment.getTag())
                                     .commit();
                         }
                     });
