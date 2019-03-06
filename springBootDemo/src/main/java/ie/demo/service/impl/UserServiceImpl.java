@@ -5,7 +5,6 @@ import java.util.List;
 
 import ie.demo.domain.StudentCard;
 import ie.demo.mapper.StudentCardMapper;
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -55,7 +54,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<String> login(String username, String password) {
-		User user = findUserByUserName(username);
+		User user = (User) findUserByUserName(username);
 		List<String> result = new ArrayList<>();
 		if(user == null)
 			result.add(0, "" + StateCode.ERROR.getCode());
