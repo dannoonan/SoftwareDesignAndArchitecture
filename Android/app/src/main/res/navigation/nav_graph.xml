@@ -64,6 +64,19 @@
         android:id="@+id/bikeInformationFragment"
         android:name="com.cs4125.bikerentalapp.view.BikeInformationFragment"
         android:label="fragment_bike_information"
-        tools:layout="@layout/fragment_bike_information" />
+        tools:layout="@layout/fragment_bike_information" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <argument
+            android:name="type"
+            app:argType="string" />
+        <argument
+            android:name="node"
+            app:argType="string" />
+        <argument
+            android:name="position"
+            app:argType="string" />
+    </fragment>
 
 </navigation>

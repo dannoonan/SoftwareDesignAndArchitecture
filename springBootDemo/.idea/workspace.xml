@@ -2,24 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0f77501a-dfed-4b14-93f9-9e36a88c50e1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../Android/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/../Android/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Android/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Android/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Android/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Android/.idea/navEditor.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Android/Android.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Android/Android.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Android/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Android/app/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Android/app/src/main/java/com/cs4125/bikerentalapp/repository/BikeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Android/app/src/main/java/com/cs4125/bikerentalapp/repository/BikeRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Android/app/src/main/java/com/cs4125/bikerentalapp/repository/IBikeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Android/app/src/main/java/com/cs4125/bikerentalapp/repository/IBikeRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android/app/src/main/java/com/cs4125/bikerentalapp/view/BikeInformationFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Android/app/src/main/java/com/cs4125/bikerentalapp/view/BikeInformationFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Android/app/src/main/java/com/cs4125/bikerentalapp/view/FindBikeFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Android/app/src/main/java/com/cs4125/bikerentalapp/view/FindBikeFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Android/app/src/main/java/com/cs4125/bikerentalapp/view/LoginFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Android/app/src/main/java/com/cs4125/bikerentalapp/view/LoginFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Android/app/src/main/java/com/cs4125/bikerentalapp/web/Extend.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Android/app/src/main/java/com/cs4125/bikerentalapp/web/Extend.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Android/app/src/main/java/com/cs4125/bikerentalapp/web/ResponseBody.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Android/app/src/main/java/com/cs4125/bikerentalapp/web/ResponseBody.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Android/app/src/main/java/com/cs4125/bikerentalapp/web/Webservice.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Android/app/src/main/java/com/cs4125/bikerentalapp/web/Webservice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Android/app/src/main/res/layout/fragment_find_bike.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Android/app/src/main/res/layout/fragment_find_bike.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Android/app/src/main/res/layout/fragment_bike_information.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Android/app/src/main/res/layout/fragment_bike_information.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Android/app/src/main/res/navigation/nav_graph.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Android/app/src/main/res/navigation/nav_graph.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../Android/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Android/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../Android/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -181,7 +168,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="115" />
     <option name="y" value="281" />
     <option name="width" value="1279" />
@@ -432,7 +419,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="simpleUML" weight="0.3296131" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24925596" />

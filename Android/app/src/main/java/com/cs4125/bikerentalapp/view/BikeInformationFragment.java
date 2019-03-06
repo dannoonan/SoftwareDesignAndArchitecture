@@ -27,10 +27,7 @@ public class BikeInformationFragment extends Fragment {
 
     @SuppressLint("ValidFragment")
     public BikeInformationFragment(int ID, String type, String node, String position) {
-        this.ID=ID;
-        this.type=type;
-        this.node=node;
-        this.position=position;
+
     }
 
 
@@ -44,6 +41,12 @@ public class BikeInformationFragment extends Fragment {
     }
 
     private void configureUiItems(View v){
+
+        this.ID=getArguments().getInt("id");
+        this.type=getArguments().getString("type");
+        this.node=getArguments().getString("node");
+        this.position=getArguments().getString("position");
+
         int n;
         if(node.contains("."))
             n = Integer.parseInt(node.substring(0,node.indexOf(".")));

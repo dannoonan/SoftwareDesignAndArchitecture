@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +21,8 @@ import com.google.gson.internal.LinkedTreeMap;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import androidx.navigation.Navigation;
 
 public class FindBikeFragment extends Fragment {
 
@@ -71,7 +72,6 @@ public class FindBikeFragment extends Fragment {
             bikeList.add(id+","+type+","+node+","+position);
         }
 
-        bikeList.add("3,2,-1,150,300");
         for (int i = 0; i < bikeList.size(); i++) {
             Button myButton = new Button(getContext());
             String[]temp2=bikeList.get(i).split(",");
@@ -82,19 +82,23 @@ public class FindBikeFragment extends Fragment {
             LinearLayout layout = (LinearLayout) v.findViewById(R.id.linearLayout);
             layout.addView(myButton);
 
-            myButton.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View view) {
+            Bundle bundle = new Bundle();
+            bundle.putInt("id", id_);
+            bundle.putString("type", temp2[1]);
+            bundle.putString("node", temp2[2]);
+            bundle.putString("position", temp2[3]);
 
-                    /*myButton.setOnClickListener(Navigation.createNavigateOnClickListener(
-                        R.id.action_findBikeFragment_to_bikeInformationFragment, null));*/
+            myButton.setOnClickListener(Navigation.createNavigateOnClickListener(
+                        R.id.action_findBikeFragment_to_bikeInformationFragment, bundle));
 
+                    /*
                     BikeInformationFragment bikeInformationFragment = new BikeInformationFragment(id_,temp2[1],temp2[2],temp2[3]);
                     FragmentManager manager = getFragmentManager();
                     manager.beginTransaction()
                             .replace(R.id.findBikeFragment, bikeInformationFragment,bikeInformationFragment.getTag() )
                             .commit();
-                }
-            });
+                            */
+
 
         }
     }
