@@ -18,6 +18,16 @@ public abstract class AdminUser implements User {
 		this.email = email;
 	}
 
+	AdminUser(Long userId, Long studentCardId, Long userTypeId,  String username, String password, String email, boolean isBanned) {
+		this.userId = Math.toIntExact(userId);
+		this.userName = username;
+		this.password = password;
+		this.userTypeId = Math.toIntExact(userTypeId);
+		this.studentCardId = studentCardId != null ? studentCardId.intValue() : null;
+		this.email = email;
+		this.isBanned = isBanned;
+	}
+
 	@Override
 	public int getUserId() {
 		return userId;
