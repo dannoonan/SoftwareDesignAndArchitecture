@@ -3,7 +3,11 @@
 
 <mapper namespace="ie.demo.mapper.UserMapper">
 
-	<resultMap id="UserResultMap" type="ie.demo.domain.User">
+	<!-- THIS IS A QUICK AND DIRTY FIX!!!
+		As all users have the same parameters I'm just setting the return Object to be of type StandardCustomer
+		Not really a great solution long term as if any extra parameters are added to any users it will fail.
+		Need to look at it further at a later date but this works for now. -->
+	<resultMap id="UserResultMap" type="ie.demo.domain.StandardCustomer">
 		<result column="UserId" property="userId" />
 		<result column="StudentCardId" property="studentCardId" />
 		<result column="UserTypeId" property="userTypeId" />
