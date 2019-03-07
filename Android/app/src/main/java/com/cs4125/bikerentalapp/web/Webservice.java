@@ -75,4 +75,8 @@ public interface Webservice {
     Call<ResponseBody> reintroduceBikes(@Field("bikeIds") List<Integer> bikIds,
                                         @Field("nodeId") int nodeId);
 
+
+    @GET("/bike")
+    Call<ResponseBody> getAllBikes();
+
 }

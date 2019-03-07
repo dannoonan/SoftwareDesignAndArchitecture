@@ -96,4 +96,8 @@ public class LoginFragment extends Fragment {
     private void showToast(String message){
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
+
+    private void moveToMain(){
+        navController.navigate(R.id.action_loginFragment_to_menuFragment);
+    }
 }
