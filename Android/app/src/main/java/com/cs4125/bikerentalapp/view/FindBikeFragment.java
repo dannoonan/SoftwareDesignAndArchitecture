@@ -29,7 +29,7 @@ public class FindBikeFragment extends Fragment {
     private ArrayList<String> bikeList;
     private BikeViewModel bikeViewModel;
     private View v;
-    private HashMap<String, ArrayList> list;
+    private HashMap<String, ArrayList> incomingBikeList;
 
     @Nullable
     @Override
@@ -60,10 +60,10 @@ public class FindBikeFragment extends Fragment {
     private void configureUiItems(){
         bikeList = new ArrayList<String>();
 
-        ArrayList<Object> temp = list.get("bikes");
+        ArrayList<Object> allBikes = incomingBikeList.get("bikes");
 
-        for(int i=0; i<temp.size(); i++){
-            Object getrow = temp.get(i);
+        for(int i=0; i<allBikes.size(); i++){
+            Object getrow = allBikes.get(i);
             LinkedTreeMap<Object,Object> t = (LinkedTreeMap) getrow;
             String id = t.get("bikeId").toString().substring(0,t.get("bikeId").toString().indexOf("."));
             String type = t.get("bikeType").toString();
@@ -108,7 +108,7 @@ public class FindBikeFragment extends Fragment {
         if(response != null) {
             if (response.getResponseCode() == 200) {
                 //showToast("Successful");
-                list = response.getExtend();
+                incomingBikeList = response.getExtend();
                 configureUiItems();
             } else {
                 //showToast("Rent/Return Failed");

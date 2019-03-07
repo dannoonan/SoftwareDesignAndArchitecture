@@ -16,7 +16,7 @@ import com.cs4125.bikerentalapp.model.entity.LocationUnknown;
 
 public class BikeInformationFragment extends Fragment {
 
-    private int ID;
+    private int id;
     private String type;
     private String node;
     private String position;
@@ -42,7 +42,7 @@ public class BikeInformationFragment extends Fragment {
 
     private void configureUiItems(View v){
 
-        this.ID=getArguments().getInt("id");
+        this.id =getArguments().getInt("id");
         this.type=getArguments().getString("type");
         this.node=getArguments().getString("node");
         this.position=getArguments().getString("position");

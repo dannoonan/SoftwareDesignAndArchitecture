@@ -2,16 +2,16 @@ package com.cs4125.bikerentalapp.model.entity;
 
 public class BikeInfo extends  AbstractBikeInfo {
     private String type;
-    private String l;
+    private String bikeLocation;
 
     public BikeInfo(String type, String l, BikeLocation location){
         super(location);
         this.type=type;
-        this.l=l;
+        this.bikeLocation =l;
     }
 
     @Override
     public String showMessage() {
-        return("Bike Type: "+type+"\n"+location.Display(l));
+        return("Bike Type: "+type+"\n"+location.display(bikeLocation));
     }
 }
