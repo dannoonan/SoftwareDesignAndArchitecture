@@ -18,8 +18,8 @@ public class OrderController {
 	@Autowired
 	private OrderService orderService;
 	
-	@RequestMapping(value= "/rent/{id}", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
-	public MsgResponse rentBike(@PathVariable int id, @RequestParam(value = "userId")int userId) {
+	@RequestMapping(value= "/rent", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+	public MsgResponse rentBike(@RequestParam int id, @RequestParam(value = "userId")int userId) {
 		int result = orderService.bikeRent(id, userId);
 		if(result == StateCode.INSUFFICIENT_BALANCE.getCode()) {
 			return MsgResponse.fail(StateCode.ERROR.getCode()).add("error", "balance is not enough");
@@ -27,6 +27,8 @@ public class OrderController {
 			return MsgResponse.fail(StateCode.ERROR.getCode()).add("error", "Failed to place order.");
 		} else if(result == StateCode.NOT_EXISTS.getCode()) {
 			return MsgResponse.fail(StateCode.ERROR.getCode()).add("error", "Bike or User does not exist.");
+		} else if(result == StateCode.NOT_AVAILABLE.getCode()) {
+			return MsgResponse.fail(StateCode.ERROR.getCode()).add("error", "Bike is not available to rent.");
 		} else {
 			return MsgResponse.success().add("orderId", result);
 		}
@@ -40,18 +42,21 @@ public class OrderController {
 	
 	@RequestMapping(value= "/return", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
 	public MsgResponse returnBike(@RequestParam(value = "orderId") int orderId, 
-			@RequestParam(value = "latitude")float latitude, 
-			@RequestParam(value = "longitude")float longitude,
-			@RequestParam(value = "amountPaid") float amountPaid,
+			@RequestParam(value = "latitude", required = false) Integer latitude,
+			@RequestParam(value = "longitude", required = false) Integer longitude,
 			@RequestParam(value = "studentCardId") int studentCardId,
-			@RequestParam(value = "nodeId") int nodeId) {
-		int result = orderService.bikeReturn(orderId, latitude, longitude, amountPaid, studentCardId, nodeId);
-		if(result == StateCode.INSUFFICIENT_BALANCE.getCode()) {
-			return MsgResponse.fail(StateCode.ERROR.getCode()).add("error", "balance is not enough");
-		} else if(result == StateCode.FAIL.getCode()) {
-			return MsgResponse.fail(StateCode.ERROR.getCode()).add("error", "try again");
+			@RequestParam(value = "nodeId", required = false) Integer nodeId) {
+		if((latitude == null && longitude == null) && nodeId == null) {
+			return MsgResponse.fail(StateCode.ERROR.getCode()).add("error", "invalid location");
 		} else {
-			return MsgResponse.success();
+			int result = orderService.bikeReturn(orderId, latitude, longitude, studentCardId, nodeId);
+			if(result == StateCode.INSUFFICIENT_BALANCE.getCode()) {
+				return MsgResponse.fail(StateCode.ERROR.getCode()).add("error", "balance is not enough");
+			} else if(result == StateCode.FAIL.getCode()) {
+				return MsgResponse.fail(StateCode.ERROR.getCode()).add("error", "try again");
+			} else {
+				return MsgResponse.success();
+			}
 		}
 	}
 	

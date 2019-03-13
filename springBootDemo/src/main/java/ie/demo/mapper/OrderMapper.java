@@ -10,5 +10,5 @@ public interface OrderMapper {
 	int placeOrder(Order order);
 	int setOrder(Order order);
 	int getBikeId(int orderId);
-	
+	Order getOrder(int orderId);
 }

@@ -2,9 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ie.demo.mapper.OrderMapper">
+
 	<resultMap id="OrderResultMap" type="ie.demo.domain.Order">
 		<id column="OrderId" property="orderId" />
 		<result column="Position" property="position" />
+		<result column="BikeId" property="bikeId" />
+		<result column="UserId" property="userId" />
+		<result column="isPaid" property="paidStatus" />
+		<result column="MoneyConsumed" property="moneyConsumed" />
+		<result column="OrderTime" property="orderTime" />
 	</resultMap>
 
 	<insert id="placeOrder" parameterType="ie.demo.domain.Order" flushCache="true" useGeneratedKeys="true" keyProperty="orderId">
@@ -22,5 +28,9 @@
 	
 	<select id="getBikeId" resultType="int">
 		SELECT BikeId FROM Orders WHERE OrderId = #{orderId}
+	</select>
+
+	<select id="getOrder" resultType="ie.demo.domain.Order">
+		SELECT OrderId, BikeId, UserId, isPaid, MoneyConsumed, OrderTime FROM Orders WHERE OrderId = #{orderId}
 	</select>
 </mapper>
