@@ -16,8 +16,8 @@ public class BikeUnavailableState implements BikeState {
 	
 
 	@Override
-	public void handleState(int bikeId, int userId, int nodeId, String position) {
-		bikeMapper.setRentStatus(0, bikeId, userId);
+	public void handleState(int bikeId, int userId, Integer nodeId, String position) {
+		bikeMapper.setRentStatus(0, bikeId, userId, nodeId, position);
 	}
 
 }

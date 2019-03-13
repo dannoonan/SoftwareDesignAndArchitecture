@@ -8,17 +8,16 @@ public class Bike implements Serializable{
 	private String bikeType;
 	private int nodeId;
 	private String position;
-	private int status;
+	private int isAvailable;
 	private int lastUserId;
-	
+
 	public Bike() {
 	}
-	
+
 	public Bike(String bikeType, int nodeId, String position) {
 		this.bikeType = bikeType;
 		this.nodeId = nodeId;
 		this.position = position;
-		this.status = 0;
 	}
 	
 	public int getBikeId() {
@@ -46,10 +45,10 @@ public class Bike implements Serializable{
 		this.position = position;
 	}
 	public int getStatus() {
-		return status;
+		return isAvailable;
 	}
 	public void setStatus(int status) {
-		this.status = status;
+		this.isAvailable = status;
 	}
 	public int getLastUserId() {
 		return lastUserId;
