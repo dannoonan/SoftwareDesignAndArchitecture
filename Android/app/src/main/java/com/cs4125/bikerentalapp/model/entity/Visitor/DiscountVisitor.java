@@ -1,22 +1,13 @@
 package com.cs4125.bikerentalapp.model.entity.Visitor;
 
-import com.cs4125.bikerentalapp.model.entity.userLevel.BronzeUser;
-import com.cs4125.bikerentalapp.model.entity.userLevel.GoldUser;
-import com.cs4125.bikerentalapp.model.entity.userLevel.SilverUser;
+import com.cs4125.bikerentalapp.model.entity.userLevel.StandardUser;
+import com.cs4125.bikerentalapp.model.entity.userLevel.PremiumUser;
 
 public class DiscountVisitor implements Visitor {
-    @Override
-    public double visitBronzeUser(BronzeUser bronze) {
-        return .05;
-    }
 
     @Override
-    public double visitSilverUser(SilverUser silver) {
-        return .1;
-    }
+    public double visitStandardUser(StandardUser standard) { return 0.05; }
 
     @Override
-    public double visitGoldUser(GoldUser gold) {
-        return .2;
-    }
+    public double visitPremiumUser(PremiumUser premium) { return .1; }
 }

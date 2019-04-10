@@ -1,11 +1,9 @@
 package com.cs4125.bikerentalapp.model.entity.Visitor;
 
-import com.cs4125.bikerentalapp.model.entity.userLevel.BronzeUser;
-import com.cs4125.bikerentalapp.model.entity.userLevel.GoldUser;
-import com.cs4125.bikerentalapp.model.entity.userLevel.SilverUser;
+import com.cs4125.bikerentalapp.model.entity.userLevel.StandardUser;
+import com.cs4125.bikerentalapp.model.entity.userLevel.PremiumUser;
 
 public interface Visitor {
-    double visitBronzeUser(BronzeUser bronze);
-    double visitSilverUser(SilverUser silver);
-    double visitGoldUser(GoldUser gold);
+    double visitStandardUser(StandardUser standard);
+    double visitPremiumUser(PremiumUser premium);
 }

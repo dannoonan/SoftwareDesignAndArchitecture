@@ -2,6 +2,8 @@ package com.cs4125.bikerentalapp.repository.user;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
+import android.os.AsyncTask;
+import android.util.Log;
 
 import com.cs4125.bikerentalapp.model.dao.UserDao;
 import com.cs4125.bikerentalapp.model.db_entity.User;
@@ -20,6 +22,7 @@ public class UserRepository implements IUserRepository {
     private final Webservice webservice;
     private final UserDao userDao;
     private final Executor executor;
+    //private LiveData<User> user;
 
     public UserRepository(Webservice webservice,
                           UserDao userDao,
@@ -27,22 +30,31 @@ public class UserRepository implements IUserRepository {
         this.webservice = webservice;
         this.userDao = userDao;
         this.executor = executor;
+
+        //UserDatabase db = UserDatabase.getDatabase(application);
+        //mWordDao = db.wordDao();
     }
 
-    public LiveData<User> getUser(String userId) {
+    public LiveData<User> getUser(String username) {
+
+
+        Log.e("Test","Call");
+        User user = userDao.load(username).getValue();
+        if ((user == null)) {
         executor.execute(() -> {
-            User user = userDao.load(userId).getValue();
-            if (!(user == null)) {
                 Response<User> response = null;
+                Log.e("Test","Test");
+
                 try {
-                    response = webservice.getUser(userId).execute();
+                    response = webservice.getUser(username).execute();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                userDao.save(response.body());
-            }
-        });
-        return userDao.load(userId);
+                userDao.insert(response.body());
+
+            });
+        }
+        return userDao.load(username);
     }
 
     public LiveData<ResponseBody> registerUser(UserCredential credential){
@@ -92,6 +104,35 @@ public class UserRepository implements IUserRepository {
                 credential.getEmail(),
                 credential.getUserType(),
                 credential.getStudentCardId());
+
+    }
+
+    public void insertUser(User user) {
+
+
+        executor.execute(() -> {
+            userDao.insert(user);
+        });
+
+    }
+
+    private static class UserInsertion extends AsyncTask<User, Void, Void> {
+
+        private UserDao userDao;
+
+        private UserInsertion(UserDao userDao) {
+
+            this.userDao = userDao;
+
+        }
+
+        @Override
+        protected Void doInBackground(User... data) {
+
+
+            return null;
+
+        }
 
     }
 }

@@ -3,19 +3,21 @@ package com.cs4125.bikerentalapp.model.entity;
 import com.cs4125.bikerentalapp.model.entity.userLevel.*;
 
 public class UserLevel {
-    ILevel level;
+    IType type;
     UserLevel(int levelInt) {
         switch(levelInt) {
             case 1:
-                level = new BronzeUser();
+                type = new StandardUser();
             case 2:
-                level = new SilverUser();
+                type = new PremiumUser();
             case 3:
-                level = new GoldUser();
+                type = new StandardAdmin();
+            case 4:
+                type = new MaintenanceAdmin();
             default:
-                level = new BronzeUser();
+                type = new StandardUser();
         }
     }
 
-    public ILevel getLevel() { return level; }
+    public IType getLevel() { return type; }
 }

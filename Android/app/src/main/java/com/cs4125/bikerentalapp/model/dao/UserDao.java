@@ -13,7 +13,7 @@ import static android.arch.persistence.room.OnConflictStrategy.REPLACE;
 public interface UserDao {
 
     @Insert(onConflict = REPLACE)
-    void save(User user);
+    void insert(User user);
 
     @Query("SELECT * FROM user WHERE username LIKE :username")
     LiveData<User> load(String username);

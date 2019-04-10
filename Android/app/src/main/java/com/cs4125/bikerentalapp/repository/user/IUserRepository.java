@@ -12,4 +12,6 @@ public interface IUserRepository {
     LiveData<ResponseBody> registerUser(UserCredential credential);
 
     LiveData<ResponseBody> loginUser(UserCredential credential);
+
+    void insertUser(User user);
 }

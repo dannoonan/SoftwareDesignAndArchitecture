@@ -2,14 +2,14 @@ package com.cs4125.bikerentalapp.model.entity.userLevel;
 
 import com.cs4125.bikerentalapp.model.entity.Visitor.Visitor;
 
-public class SilverUser implements ILevel {
+public class StandardUser implements IType {
     @Override
     public String getType() {
-        return "Silver";
+        return "Standard";
     }
 
     @Override
     public void accept(Visitor v) {
-        v.visitSilverUser(this);
+        v.visitStandardUser(this);
     }
 }

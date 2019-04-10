@@ -30,7 +30,7 @@ public class SlConfigurationBuilder {
         UserDao userDao = Room.databaseBuilder(
                 context,
                 UserDatabase.class,
-                UserDatabase.class.getName())
+                "user_database")
                 .fallbackToDestructiveMigration()
                 .build()
                 .userDao();

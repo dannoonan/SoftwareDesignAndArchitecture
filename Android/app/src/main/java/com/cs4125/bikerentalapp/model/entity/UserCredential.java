@@ -23,7 +23,7 @@ public class UserCredential {
         private String password;
         private String studentCardId;
         private String email;
-        private UserType userType = UserType.STANDARD_CUSTOMER; // Default value
+        private UserType userType; // Default value
 
         public Builder setUsername(String username){
             this.username = username;
@@ -85,7 +85,7 @@ public class UserCredential {
     }
 
     public int getUserType() {
-        return userType.getValue();
+        return userType.getLevelInt();
     }
 
     @Override
@@ -94,6 +94,6 @@ public class UserCredential {
                 + "Password: " + password
                 + "Email: " + email
                 + "StudentCardId: " + studentCardId
-                + "UserType: " + userType.getValue();
+                + "UserType: " + userType.toString();
     }
 }
