@@ -10,7 +10,6 @@ public class UserViewModel extends ViewModel {
 
     private LiveData<User> user;
     private IUserRepository userRepository;
-    private String username;
 
     public void init(IUserRepository userRepo) {
         this.userRepository = userRepo;
@@ -18,7 +17,7 @@ public class UserViewModel extends ViewModel {
 
 
 
-    public LiveData<User> getUser() {
+    public LiveData<User> getUser(String username) {
         if(this.user == null){
             this.user = userRepository.getUser(username);
         }
@@ -27,7 +26,5 @@ public class UserViewModel extends ViewModel {
 
     public void insertUser(User user) {
         userRepository.insertUser(user);
-        this.user = userRepository.getUser(user.getUsername());
-        username = user.getUsername();
     }
 }
