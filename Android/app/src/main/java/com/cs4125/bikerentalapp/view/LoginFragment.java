@@ -3,9 +3,11 @@ package com.cs4125.bikerentalapp.view;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,9 +28,12 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
+import static android.content.Context.MODE_PRIVATE;
+
 
 public class LoginFragment extends Fragment {
 
+    public static final String MY_PREFS_NAME = "PrefsFile";
     private EditText usernameField;
     private EditText passwordField;
     private Button   loginButton;
@@ -88,7 +93,11 @@ public class LoginFragment extends Fragment {
             if (response.getResponseCode() == 200) {
                 showToast("Login Successful");
 
-                createUser(response);
+                SharedPreferences.Editor editor = getActivity().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+                editor.putString("username", usernameField.getText().toString());
+                editor.apply();
+
+                storeUserDetailsLocally(response);
 
                 navController.navigate(R.id.action_loginFragment_to_menuFragment);
             } else {
@@ -105,14 +114,14 @@ public class LoginFragment extends Fragment {
         navController.navigate(R.id.action_loginFragment_to_menuFragment);
     }
 
-    private void createUser(ResponseBody response){
+    private void storeUserDetailsLocally(ResponseBody response){
         Object keys[] = response.getExtend().keySet().toArray();
-        String userTypeId = (String) response.getExtend().get(keys[0]);
-        String userId = (String) response.getExtend().get(keys[1]);
+        String email = (String) response.getExtend().get(keys[0]);
+        String userTypeId = (String) response.getExtend().get(keys[1]);
         String studentCardId = (String) response.getExtend().get(keys[2]);
-        String username = (String) response.getExtend().get(keys[3]);
-        String isBanned = (String) response.getExtend().get(keys[4]);
-        String email = (String) response.getExtend().get(keys[5]);
+        String isBanned = (String) response.getExtend().get(keys[3]);
+        String username = (String) response.getExtend().get(keys[4]);
+        String userId = (String) response.getExtend().get(keys[5]);
         User user = new User();
         user.setUserType(userTypeId);
         user.setUserId(Integer.parseInt(userId));
@@ -122,6 +131,7 @@ public class LoginFragment extends Fragment {
         user.setEmail(email);
         UserViewModel userViewModel =  ViewModelProviders.of(this).get(UserViewModel.class);
         userViewModel.init(ServiceLocator.get(UserRepository.class));
+        Log.e("CREATING USER", "dfg " + username);
         userViewModel.insertUser(user);
     }
 }

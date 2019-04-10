@@ -2,6 +2,7 @@ package com.cs4125.bikerentalapp.view;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -19,6 +20,9 @@ import com.cs4125.bikerentalapp.sl.ServiceLocator;
 import com.cs4125.bikerentalapp.viewmodel.UserViewModel;
 
 import androidx.navigation.Navigation;
+
+import static android.content.Context.MODE_PRIVATE;
+import static com.cs4125.bikerentalapp.view.LoginFragment.MY_PREFS_NAME;
 
 
 public class MenuFragment extends Fragment {
@@ -41,7 +45,10 @@ public class MenuFragment extends Fragment {
         UserViewModel userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
         userViewModel.init(ServiceLocator.get(UserRepository.class));
 
-        userViewModel.getUser().observe(this, new Observer<User>() {
+        SharedPreferences prefs = getActivity().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        String username = prefs.getString("username", null);
+
+        userViewModel.getUser(username).observe(this, new Observer<User>() {
             @Override
             public void onChanged(@Nullable final User user) {
                 // Update the cached copy of the words in the adapter.
@@ -56,6 +63,7 @@ public class MenuFragment extends Fragment {
         Button findBikesButton = getView().findViewById(R.id.buttonFindBikes);
         Button rentBikeButton = getView().findViewById(R.id.buttonRentBike);
         Button returnBikeButton = getView().findViewById(R.id.buttonReturnBike);
+        Button reportBikeButton = getView().findViewById(R.id.buttonReportBike);
 
         findBikesButton.setOnClickListener(Navigation.createNavigateOnClickListener(
                 R.id.action_menuFragment_to_findBikeFragment, null));
