@@ -21,12 +21,12 @@ import com.google.gson.internal.LinkedTreeMap;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import androidx.navigation.Navigation;
 
 public class FindBikeFragment extends Fragment {
 
-    private ArrayList<String> bikeList;
     private BikeViewModel bikeViewModel;
     private View v;
     private HashMap<String, ArrayList> incomingBikeList;
@@ -58,9 +58,9 @@ public class FindBikeFragment extends Fragment {
     }
 
     private void configureUiItems(){
-        bikeList = new ArrayList<String>();
+        List<String> bikeList = new ArrayList<>();
 
-        ArrayList<Object> allBikes = incomingBikeList.get("bikes");
+        List<Object> allBikes = incomingBikeList.get("bikes");
 
         for(int i=0; i<allBikes.size(); i++){
             Object getrow = allBikes.get(i);
@@ -74,7 +74,7 @@ public class FindBikeFragment extends Fragment {
 
         for (int i = 0; i < bikeList.size(); i++) {
             Button myButton = new Button(getContext());
-            String[]temp2=bikeList.get(i).split(",");
+            String[]temp2= bikeList.get(i).split(",");
             myButton.setText("BikeID :"+temp2[0]+"\nType :"+temp2[1]);
             myButton.setId(Integer.parseInt(temp2[0]));
             final int id_ = myButton.getId();
@@ -91,27 +91,15 @@ public class FindBikeFragment extends Fragment {
             myButton.setOnClickListener(Navigation.createNavigateOnClickListener(
                         R.id.action_findBikeFragment_to_bikeInformationFragment, bundle));
 
-                    /*
-                    BikeInformationFragment bikeInformationFragment = new BikeInformationFragment(id_,temp2[1],temp2[2],temp2[3]);
-                    FragmentManager manager = getFragmentManager();
-                    manager.beginTransaction()
-                            .replace(R.id.findBikeFragment, bikeInformationFragment,bikeInformationFragment.getTag() )
-                            .commit();
-                            */
-
 
         }
     }
 
     private void observeResponse(@Nullable ResponseBody response){
-
         if(response != null) {
             if (response.getResponseCode() == 200) {
-                //showToast("Successful");
                 incomingBikeList = response.getExtend();
                 configureUiItems();
-            } else {
-                //showToast("Rent/Return Failed");
             }
         }
     }

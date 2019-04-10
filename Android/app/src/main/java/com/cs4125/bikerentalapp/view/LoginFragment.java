@@ -93,7 +93,8 @@ public class LoginFragment extends Fragment {
             if (response.getResponseCode() == 200) {
                 showToast("Login Successful");
 
-                SharedPreferences.Editor editor = getActivity().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+                SharedPreferences.Editor editor = getActivity().
+                        getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
                 editor.putString("username", usernameField.getText().toString());
                 editor.apply();
 
@@ -110,10 +111,6 @@ public class LoginFragment extends Fragment {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 
-    private void moveToMain(){
-        navController.navigate(R.id.action_loginFragment_to_menuFragment);
-    }
-
     private void storeUserDetailsLocally(ResponseBody response){
         Object keys[] = response.getExtend().keySet().toArray();
         String email = (String) response.getExtend().get(keys[0]);
@@ -122,6 +119,7 @@ public class LoginFragment extends Fragment {
         String isBanned = (String) response.getExtend().get(keys[3]);
         String username = (String) response.getExtend().get(keys[4]);
         String userId = (String) response.getExtend().get(keys[5]);
+
         User user = new User();
         user.setUserType(userTypeId);
         user.setUserId(Integer.parseInt(userId));
@@ -129,9 +127,10 @@ public class LoginFragment extends Fragment {
         user.setUsername(username);;
         user.setBanned(Boolean.parseBoolean(isBanned));
         user.setEmail(email);
+
         UserViewModel userViewModel =  ViewModelProviders.of(this).get(UserViewModel.class);
         userViewModel.init(ServiceLocator.get(UserRepository.class));
-        Log.e("CREATING USER", "dfg " + username);
+
         userViewModel.insertUser(user);
     }
 }

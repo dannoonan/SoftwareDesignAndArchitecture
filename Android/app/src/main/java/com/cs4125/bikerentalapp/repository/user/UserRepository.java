@@ -2,7 +2,6 @@ package com.cs4125.bikerentalapp.repository.user;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
-import android.util.Log;
 
 import com.cs4125.bikerentalapp.model.dao.UserDao;
 import com.cs4125.bikerentalapp.model.db_entity.User;
@@ -30,8 +29,6 @@ public class UserRepository implements IUserRepository {
     }
 
     public LiveData<User> getUser(String username) {
-        Log.e("Test","Call: " + username);
-
         MutableLiveData<User> liveResponse = new MutableLiveData<>();
 
         executor.execute(()->{
@@ -43,9 +40,9 @@ public class UserRepository implements IUserRepository {
 
     public LiveData<ResponseBody> registerUser(UserCredential credential){
         MutableLiveData<ResponseBody> liveResponse = new MutableLiveData<>();
-        Call<ResponseBody> response = getRegisterRequest(credential);
+        Call<ResponseBody> call = getRegisterRequest(credential);
 
-        response.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 liveResponse.postValue(response.body());
@@ -88,14 +85,11 @@ public class UserRepository implements IUserRepository {
                 credential.getEmail(),
                 credential.getUserType(),
                 credential.getStudentCardId());
-
     }
 
     public void insertUser(User user) {
-
         executor.execute(() -> {
-            long idGenerated = userDao.insert(user);
-            Log.e("ID GENERATED: ","" + idGenerated);
+            userDao.insert(user);
         });
 
     }

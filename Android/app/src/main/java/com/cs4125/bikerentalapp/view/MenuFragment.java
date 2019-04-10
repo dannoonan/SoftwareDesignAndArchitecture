@@ -27,6 +27,10 @@ import static com.cs4125.bikerentalapp.view.LoginFragment.MY_PREFS_NAME;
 
 public class MenuFragment extends Fragment {
 
+    Button findBikesButton;
+    Button rentBikeButton;
+    Button returnBikeButton;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +39,11 @@ public class MenuFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_menu, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_menu, container, false);
+        configureUiItems(view);
+        bindUiItems();
+        return view;
     }
 
     @Override
@@ -51,7 +59,6 @@ public class MenuFragment extends Fragment {
         userViewModel.getUser(username).observe(this, new Observer<User>() {
             @Override
             public void onChanged(@Nullable final User user) {
-                // Update the cached copy of the words in the adapter.
                 if(user!=null) {
                     Toast.makeText(getContext(), user.getStudentCardId(), Toast.LENGTH_SHORT).show();
                 }
@@ -59,12 +66,15 @@ public class MenuFragment extends Fragment {
                     Toast.makeText(getContext(), "NOPE", Toast.LENGTH_SHORT).show();
             }
         });
+    }
 
-        Button findBikesButton = getView().findViewById(R.id.buttonFindBikes);
-        Button rentBikeButton = getView().findViewById(R.id.buttonRentBike);
-        Button returnBikeButton = getView().findViewById(R.id.buttonReturnBike);
-        Button reportBikeButton = getView().findViewById(R.id.buttonReportBike);
+    private void configureUiItems(View view){
+        findBikesButton = view.findViewById(R.id.buttonFindBikes);
+        rentBikeButton = view.findViewById(R.id.buttonRentBike);
+        returnBikeButton = view.findViewById(R.id.buttonReturnBike);
+    }
 
+    private void bindUiItems(){
         findBikesButton.setOnClickListener(Navigation.createNavigateOnClickListener(
                 R.id.action_menuFragment_to_findBikeFragment, null));
         rentBikeButton.setOnClickListener(Navigation.createNavigateOnClickListener(
