@@ -5,6 +5,7 @@ public enum StateCode {
 	FAIL(0),
 	INSUFFICIENT_BALANCE(-1),
 	NOT_EXISTS(-2),
+    NOT_AVAILABLE(-3),
 	ALREADY_EXISTS(409),
 	ERROR(404),
 	USER_NOT_FOUND(400),
@@ -12,7 +13,7 @@ public enum StateCode {
 	
     private int code;
     
-    private StateCode(int code) {
+    StateCode(int code) {
         this.code = code;
     }
 
