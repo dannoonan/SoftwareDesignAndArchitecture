@@ -18,7 +18,6 @@ public class ResponseBody {
     @Expose
     private HashMap extend;
 
-
     public Integer getResponseCode() {
         return responseCode;
     }

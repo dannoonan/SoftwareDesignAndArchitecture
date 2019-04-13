@@ -16,6 +16,10 @@ import androidx.navigation.Navigation;
 
 public class MenuFragment extends Fragment {
 
+    Button findBikesButton;
+    Button rentBikeButton;
+    Button returnBikeButton;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,17 +28,25 @@ public class MenuFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_menu, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_menu, container, false);
+        configureUiItems(view);
+        bindUiItems();
+        return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
+    }
 
-        Button findBikesButton = getView().findViewById(R.id.buttonFindBikes);
-        Button rentBikeButton = getView().findViewById(R.id.buttonRentBike);
-        Button returnBikeButton = getView().findViewById(R.id.buttonReturnBike);
+    private void configureUiItems(View view){
+        findBikesButton = view.findViewById(R.id.buttonFindBikes);
+        rentBikeButton = view.findViewById(R.id.buttonRentBike);
+        returnBikeButton = view.findViewById(R.id.buttonReturnBike);
+    }
 
+    private void bindUiItems(){
         findBikesButton.setOnClickListener(Navigation.createNavigateOnClickListener(
                 R.id.action_menuFragment_to_findBikeFragment, null));
         rentBikeButton.setOnClickListener(Navigation.createNavigateOnClickListener(
