@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,18 +64,23 @@ public class FindBikeFragment extends Fragment {
         List<Object> allBikes = incomingBikeList.get("bikes");
 
         for(int i=0; i<allBikes.size(); i++){
-            Object getrow = allBikes.get(i);
-            LinkedTreeMap<Object,Object> t = (LinkedTreeMap) getrow;
-            String id = t.get("bikeId").toString().substring(0,t.get("bikeId").toString().indexOf("."));
-            String type = t.get("bikeType").toString();
-            String node = t.get("nodeId").toString();
-            String position = t.get("position").toString();
-            bikeList.add(id+","+type+","+node+","+position);
+            try {
+                Object getrow = allBikes.get(i);
+                LinkedTreeMap<Object, Object> t = (LinkedTreeMap) getrow;
+                String id = t.get("bikeId").toString().substring(0, t.get("bikeId").toString().indexOf("."));
+                String type = t.get("bikeType").toString();
+                String node = t.get("nodeId").toString();
+                String position = t.get("position").toString();
+                bikeList.add(id + "/" + type + "/" + node + "/" + position);
+            }
+            catch(Exception e){
+                Log.e("Exception", "Catch"+e.getMessage());
+            }
         }
 
         for (int i = 0; i < bikeList.size(); i++) {
             Button myButton = new Button(getContext());
-            String[]temp2= bikeList.get(i).split(",");
+            String[]temp2= bikeList.get(i).split("/");
             myButton.setText("BikeID :"+temp2[0]+"\nType :"+temp2[1]);
             myButton.setId(Integer.parseInt(temp2[0]));
             final int id_ = myButton.getId();

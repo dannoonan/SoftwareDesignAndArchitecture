@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -113,12 +112,12 @@ public class LoginFragment extends Fragment {
 
     private void storeUserDetailsLocally(ResponseBody response){
         Object keys[] = response.getExtend().keySet().toArray();
-        String email = (String) response.getExtend().get(keys[0]);
-        String userTypeId = (String) response.getExtend().get(keys[1]);
-        String studentCardId = (String) response.getExtend().get(keys[2]);
-        String isBanned = (String) response.getExtend().get(keys[3]);
-        String username = (String) response.getExtend().get(keys[4]);
-        String userId = (String) response.getExtend().get(keys[5]);
+        String userTypeId = (String) response.getExtend().get("userTypeId: ");
+        String userId = (String) response.getExtend().get("userId: ");
+        String studentCardId = (String) response.getExtend().get("studentCardId: ");
+        String username = (String) response.getExtend().get("username: ");
+        String isBanned = (String) response.getExtend().get("isBanned: ");
+        String email = (String) response.getExtend().get("email: ");
 
         User user = new User();
         user.setUserType(userTypeId);
