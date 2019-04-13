@@ -3,6 +3,8 @@ package com.cs4125.bikerentalapp.web;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.HashMap;
+
 public class ResponseBody {
     @SerializedName("code")
     @Expose
@@ -14,8 +16,7 @@ public class ResponseBody {
 
     @SerializedName("extend")
     @Expose
-    private Extend extend;
-
+    private HashMap extend;
 
     public Integer getResponseCode() {
         return responseCode;
@@ -25,7 +26,7 @@ public class ResponseBody {
         return message;
     }
 
-    public Extend getExtend() {
+    public HashMap getExtend() {
         return extend;
     }
 
@@ -37,7 +38,7 @@ public class ResponseBody {
         this.message = message;
     }
 
-    public void setExtend(Extend extend) {
+    public void setExtend(HashMap extend) {
         this.extend = extend;
     }
 
