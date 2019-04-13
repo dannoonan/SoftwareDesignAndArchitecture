@@ -4,7 +4,7 @@ import android.arch.persistence.room.Room;
 import android.content.Context;
 
 import com.cs4125.bikerentalapp.model.dao.UserDao;
-import com.cs4125.bikerentalapp.model.db.UserDatabase;
+import com.cs4125.bikerentalapp.model.db.LocalDatabase;
 import com.cs4125.bikerentalapp.repository.BikeRepository;
 import com.cs4125.bikerentalapp.repository.user.IUserRepository;
 import com.cs4125.bikerentalapp.repository.user.UserRepository;
@@ -29,8 +29,8 @@ public class SlConfigurationBuilder {
 
         UserDao userDao = Room.databaseBuilder(
                 context,
-                UserDatabase.class,
-                UserDatabase.class.getName())
+                LocalDatabase.class,
+                LocalDatabase.class.getName())
                 .fallbackToDestructiveMigration()
                 .build()
                 .userDao();
