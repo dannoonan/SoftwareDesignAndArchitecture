@@ -74,14 +74,22 @@ curl -X PUT -d "username=roryegan&password=password" http://localhost:1234/user
 
 If login is successful the standard 200 code will be returned. If password is incorrect 400 will be returned. If username is not present in the database 404 will be returned.
 
-### Place Order
+### Rent Bike
 
-To place a new order, send a POST request to "/order". Parameters required are username, bikeId and amountPaid. Example:
+To place a new order, send a POST request to "/rent". Parameters required are id (of the bike to be rented), and userId. Example:
 ```
-curl -X POST -d "userName=roryegan&bikeId=3&amountPaid=100" http://localhost:1234/order
+curl -X POST -d "id=5&userId=28" http://localhost:1234/rent
 ```
 
-If successful, code 200 will be returned, if bike or user do not exist 404 will be returned and for any other errors 400 will be returned.
+If successful, code 200 will be returned along with an orderId, if bike or user do not exist 404 will be returned and for any other errors 400 will be returned. Make sure orderId is stored as it is required to return the bike.
+
+### Return Bike
+
+To return a bike send a POST request to "return". Required parameters are orderId and studentCardId. Optionally return a nodeId or latitude and longitude values. Whichever is not passed will be set to null. Either nodeId or latitude and longitude must be returned, if nothing passed will raise an error, so pass in either one or the other. Examples:
+```
+curl -X POST -d "orderId=13&studentCardId=115&latitude=1&longitude=1" http://localhost:1234/return
+curl -X POST -d "orderId=13&studentCardId=115&nodeId=1" http://localhost:1234/return
+```
 
 ## API
 

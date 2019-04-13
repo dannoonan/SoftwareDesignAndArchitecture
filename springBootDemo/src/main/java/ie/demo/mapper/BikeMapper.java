@@ -10,8 +10,9 @@ import ie.demo.domain.Bike;
 public interface BikeMapper {
 	List<Bike> findBikeByNodes(int id);
 	Bike findBikeById(int id);
+	List<Bike> findAllBikes();
 	int createBike(Bike bike);
 	int setStatus(int status, int bikeId);
-	int setRentStatus(int status, int bikeId, int userId);
-	int setReturnStatus(int status, int bikeId, String position, int nodeId);
+	int setRentStatus(int status, int bikeId, int userId, Integer nodeId, String position);
+	int setReturnStatus(int status, int bikeId, String position, Integer nodeId);
 }

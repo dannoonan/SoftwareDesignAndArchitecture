@@ -1,16 +1,14 @@
 package ie.demo.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ie.demo.domain.Bike;
 import ie.demo.service.BikeState;
 
 @Service
 public class BikeContext {
 	private int bikeId;
 	private BikeState bikeState;
-	private int nodeId;
+	private Integer nodeId;
 	private String position;
 	private int userId;
 	
@@ -22,7 +20,7 @@ public class BikeContext {
 		this.bikeId = bikeId;
 	}
 	
-	public void setNode(int nodeId) {
+	public void setNode(Integer nodeId) {
 		this.nodeId = nodeId;
 	}
 	

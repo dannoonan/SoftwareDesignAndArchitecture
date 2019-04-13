@@ -12,8 +12,12 @@
 		SELECT * FROM Bikes WHERE NodeId = 	#{id}
 	</select>
 
-	<select id="findBikeById" resultMap="BikeResultMap">
-		SELECT * FROM Bikes WHERE BikeId = 	#{id}
+	<select id="findBikeById" resultType="ie.demo.domain.Bike">
+		SELECT BikeId, BikeType, NodeId, Position, isAvailable, LastUserId FROM Bikes WHERE BikeId = #{id}
+	</select>
+
+	<select id="findAllBikes" resultMap="BikeResultMap">
+		SELECT * FROM Bikes
 	</select>
 	
 	<insert id="createBike" parameterType="ie.demo.domain.Bike" flushCache="true" useGeneratedKeys="true" keyProperty="bikeId">
@@ -40,7 +44,7 @@
 	
 	<update id="setRentStatus" parameterType="ie.demo.domain.Bike">
 		UPDATE Bikes
-			SET isAvailable = #{status}, LastUserId = #{userId}
+			SET isAvailable = #{status}, LastUserId = #{userId}, NodeId = #{nodeId}, Position = #{position}
 		WHERE BikeID = #{bikeId}
 	</update>
 	
