@@ -3,7 +3,7 @@ package com.cs4125.bikerentalapp.repository;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 
-import com.cs4125.bikerentalapp.model.entity.ReturnDetails;
+import com.cs4125.bikerentalapp.model.entity.RentReturnDetails;
 import com.cs4125.bikerentalapp.web.ResponseBody;
 import com.cs4125.bikerentalapp.web.Webservice;
 
@@ -39,7 +39,7 @@ public class BikeRepository implements IBikeRepository{
         return liveResponse;
     }
 
-    public LiveData<ResponseBody> returnBike(ReturnDetails details){
+    public LiveData<ResponseBody> returnBike(RentReturnDetails details){
         MutableLiveData<ResponseBody> liveResponse = new MutableLiveData<>();
 
         executor.execute(() -> {

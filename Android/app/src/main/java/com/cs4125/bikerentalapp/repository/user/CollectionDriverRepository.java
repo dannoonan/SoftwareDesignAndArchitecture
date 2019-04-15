@@ -34,4 +34,9 @@ public class CollectionDriverRepository extends UserRepositoryDecorator{
     public LiveData<ResponseBody> loginUser(UserCredential credential) {
         return decoratedRepository.loginUser(credential);
     }
+
+    @Override
+    public void insertUser(User user) {
+
+    }
 }

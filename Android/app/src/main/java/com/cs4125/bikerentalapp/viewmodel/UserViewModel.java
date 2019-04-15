@@ -11,19 +11,20 @@ public class UserViewModel extends ViewModel {
     private LiveData<User> user;
     private IUserRepository userRepository;
 
-    public UserViewModel(IUserRepository userRepo) {
+    public void init(IUserRepository userRepo) {
         this.userRepository = userRepo;
     }
 
-    public void init(String username) {
-        if (this.user != null) {
-            return;
-        }
-        user = userRepository.getUser(username);
-    }
 
-    public LiveData<User> getUser() {
+
+    public LiveData<User> getUser(String username) {
+        if(this.user == null){
+            this.user = userRepository.getUser(username);
+        }
         return this.user;
     }
 
+    public void insertUser(User user) {
+        userRepository.insertUser(user);
+    }
 }

@@ -1,15 +1,20 @@
 package com.cs4125.bikerentalapp.model.entity;
 
-public class ReturnDetails {
+public class RentReturnDetails {
+
 
     private int orderId;
     private int nodeId;
     private int latitude;
     private int longitude;
     private int studentCardId;
+    private int userId;
+    private int vehicleId;
     private double amountPaid;
 
     public static class Builder{
+        private int userId;
+        private int vehicleId;
         private int orderId;
         private int nodeId;
         private int latitude;
@@ -19,6 +24,16 @@ public class ReturnDetails {
 
         public Builder setStudentCardId(int studentCardId) {
             this.studentCardId = studentCardId;
+            return this;
+        }
+
+        public Builder setUserId(int userId){
+            this.userId = userId;
+            return this;
+        }
+
+        public Builder setVehicleId(int vehicleId){
+            this.vehicleId = vehicleId;
             return this;
         }
 
@@ -47,13 +62,15 @@ public class ReturnDetails {
             return this;
         }
 
-        public ReturnDetails build(){
-            ReturnDetails details = new ReturnDetails();
+        public RentReturnDetails build(){
+            RentReturnDetails details = new RentReturnDetails();
 
             details.orderId = this.orderId;
             details.latitude = this.latitude;
             details.longitude = this.longitude;
             details.studentCardId = this.studentCardId;
+            details.userId = this.userId;
+            details.vehicleId = this.vehicleId;
             details.amountPaid = this.amountPaid;
 
             return details;
@@ -78,6 +95,14 @@ public class ReturnDetails {
 
     public int getStudentCardId() {
         return studentCardId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public int getVehicleId() {
+        return vehicleId;
     }
 
     public double getAmountPaid() {

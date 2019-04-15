@@ -9,7 +9,6 @@ import com.cs4125.bikerentalapp.model.entity.UserCredential;
 import com.cs4125.bikerentalapp.web.ResponseBody;
 import com.cs4125.bikerentalapp.web.Webservice;
 
-import java.io.IOException;
 import java.util.concurrent.Executor;
 
 import retrofit2.Call;
@@ -29,27 +28,21 @@ public class UserRepository implements IUserRepository {
         this.executor = executor;
     }
 
-    public LiveData<User> getUser(String userId) {
-        executor.execute(() -> {
-            User user = userDao.load(userId).getValue();
-            if (!(user == null)) {
-                Response<User> response = null;
-                try {
-                    response = webservice.getUser(userId).execute();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                userDao.save(response.body());
-            }
+    public LiveData<User> getUser(String username) {
+        MutableLiveData<User> liveResponse = new MutableLiveData<>();
+
+        executor.execute(()->{
+            liveResponse.postValue(userDao.load(username));
         });
-        return userDao.load(userId);
+
+        return liveResponse;
     }
 
     public LiveData<ResponseBody> registerUser(UserCredential credential){
         MutableLiveData<ResponseBody> liveResponse = new MutableLiveData<>();
-        Call<ResponseBody> response = getRegisterRequest(credential);
+        Call<ResponseBody> call = getRegisterRequest(credential);
 
-        response.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 liveResponse.postValue(response.body());
@@ -92,6 +85,12 @@ public class UserRepository implements IUserRepository {
                 credential.getEmail(),
                 credential.getUserType(),
                 credential.getStudentCardId());
+    }
+
+    public void insertUser(User user) {
+        executor.execute(() -> {
+            userDao.insert(user);
+        });
 
     }
 }

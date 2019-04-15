@@ -110,10 +110,10 @@ public class  RentBikeFragment extends Fragment { //extends Fragment {
                     txtBarcodeValue.post(() -> {
                             intentData = barcodes.valueAt(0).displayValue;
 
-                            ConfirmFragment confirmFragment = new ConfirmFragment(1, intentData);
+                            ConfirmationFragment confirmationFragment = new ConfirmationFragment(1, intentData);
                             FragmentManager manager = getFragmentManager();
                             manager.beginTransaction()
-                                    .replace(R.id.rentBikeFragment, confirmFragment, confirmFragment.getTag())
+                                    .replace(R.id.rentBikeFragment, confirmationFragment, confirmationFragment.getTag())
                                     .commit();
                     });
 
