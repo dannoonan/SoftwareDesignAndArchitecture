@@ -113,7 +113,7 @@ public class ConfirmationFragment extends Fragment {
             rentReturnDetails = new RentReturnDetails
                     .Builder()
                     .setVehicleId(Integer.parseInt(data[0]))
-                    .setUserId(12)
+                    .setUserId(27)
                     .setStudentCardId(Integer.parseInt(data[1]) )
                     .setOrderId(Integer.parseInt(data[2]))
                     .setLatitude(Integer.parseInt(data[3]))

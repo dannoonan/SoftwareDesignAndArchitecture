@@ -9,4 +9,6 @@ public interface IBikeRepository {
     LiveData<ResponseBody> rentBike(int bikeId, int userId);
 
     LiveData<ResponseBody> returnBike(RentReturnDetails details);
+
+    LiveData<ResponseBody> getAllBikes();
 }
