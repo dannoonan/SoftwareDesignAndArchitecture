@@ -52,7 +52,6 @@ public class BikeRepository implements IBikeRepository{
                         details.getAmountPaid(),
                         details.getStudentCardId(),
                         details.getNodeId()).execute();
-
                 liveResponse.postValue(response.body());
             }
             catch(IOException e){
@@ -70,7 +69,6 @@ public class BikeRepository implements IBikeRepository{
             Response<ResponseBody> response;
             try {
                 response = webservice.getAllBikes().execute();
-
                 liveResponse.postValue(response.body());
             }
             catch(IOException e){

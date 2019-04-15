@@ -6,7 +6,7 @@ import android.arch.persistence.room.PrimaryKey;
 @Entity
 public class Node {
     @PrimaryKey
-    int nodeId;
-    double longitude;
-    double latitude;
+    public int nodeId;
+    public double longitude;
+    public double latitude;
 }

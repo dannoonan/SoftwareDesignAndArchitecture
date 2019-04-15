@@ -16,9 +16,9 @@ import androidx.navigation.Navigation;
 
 public class MenuFragment extends Fragment {
 
-    Button findBikesButton;
-    Button rentBikeButton;
-    Button returnBikeButton;
+    private Button findBikesButton;
+    private Button rentBikeButton;
+    private Button returnBikeButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
