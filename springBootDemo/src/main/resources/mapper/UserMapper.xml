@@ -36,4 +36,8 @@
 		select UserId, StudentCardId, UserTypeId, UserName, Password, Email, isBanned from Users WHERE UserId=#{userID}
 	</select>
 
+	<select id="findUserType" parameterType="int" resultType="int">
+		select UserTypeId from Users WHERE UserId=#{userId}
+	</select>
+
 </mapper>

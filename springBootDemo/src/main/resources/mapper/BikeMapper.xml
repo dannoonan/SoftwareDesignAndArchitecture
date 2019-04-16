@@ -26,6 +26,20 @@
     	</selectKey>
 		INSERT INTO Bikes (BikeType, NodeId, Position) VALUES (#{bikeType}, #{nodeId}, #{position});
 	</insert>
+
+	<insert id="createCollection" parameterType="ie.demo.domain.Collection" flushCache="true" useGeneratedKeys="true" keyProperty="collectionId">
+		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="collectionId">
+			SELECT LAST_INSERT_ID() AS ID
+		</selectKey>
+		INSERT INTO Collections (DriverId, NodeId) VALUES (#{driverId}, #{nodeId});
+	</insert>
+
+	<insert id="createCollectionBikes" parameterType="Integer" flushCache="true" useGeneratedKeys="true" keyProperty="collectionId">
+		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="bikeId">
+			SELECT LAST_INSERT_ID() AS ID
+		</selectKey>
+		INSERT INTO CollectionScheduledBikes (BikeId, CollectionId) VALUES (#{bikeId}, #{collectionId});
+	</insert>
 	
 	<update id="setStatus" parameterType="Integer">
 		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="bikeId">    
