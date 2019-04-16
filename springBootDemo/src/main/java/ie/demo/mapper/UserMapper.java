@@ -10,5 +10,6 @@ public interface UserMapper {
 	int register(User u);
 	User findUserByUserName(String username);
 	int userExists(String username);
+	int findUserType(int userId);
 	User findUserByUserId(int userId);
 }
