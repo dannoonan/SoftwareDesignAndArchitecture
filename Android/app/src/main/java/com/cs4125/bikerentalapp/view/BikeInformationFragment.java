@@ -16,12 +16,6 @@ import com.cs4125.bikerentalapp.model.entity.LocationUnknown;
 
 public class BikeInformationFragment extends Fragment {
 
-    private int id;
-    private String type;
-    private String node;
-    private String position;
-    private AbstractBikeInfo bikeInfo;
-
     public BikeInformationFragment() {
     }
 
@@ -42,21 +36,22 @@ public class BikeInformationFragment extends Fragment {
 
     private void configureUiItems(View v){
 
-        this.id =getArguments().getInt("id");
-        this.type=getArguments().getString("type");
-        this.node=getArguments().getString("node");
-        this.position=getArguments().getString("position");
+        int id = getArguments().getInt("id");
+        String type = getArguments().getString("type");
+        String node = getArguments().getString("node");
+        String position = getArguments().getString("position");
 
         int n;
         if(node.contains("."))
-            n = Integer.parseInt(node.substring(0,node.indexOf(".")));
+            n = Integer.parseInt(node.substring(0, node.indexOf(".")));
         else
             n = Integer.parseInt(node);
+        AbstractBikeInfo bikeInfo;
         if(n>0){
-            bikeInfo = new BikeInfo(type,node,new LocationKnown());
+            bikeInfo = new BikeInfo(type, node,new LocationKnown());
         }
         else{
-            bikeInfo = new BikeInfo(type,position,new LocationUnknown());
+            bikeInfo = new BikeInfo(type, position,new LocationUnknown());
         }
 
         TextView textArea;

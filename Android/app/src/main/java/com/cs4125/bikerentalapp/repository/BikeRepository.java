@@ -3,7 +3,7 @@ package com.cs4125.bikerentalapp.repository;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 
-import com.cs4125.bikerentalapp.model.entity.ReturnDetails;
+import com.cs4125.bikerentalapp.model.entity.RentReturnDetails;
 import com.cs4125.bikerentalapp.web.ResponseBody;
 import com.cs4125.bikerentalapp.web.Webservice;
 
@@ -22,23 +22,6 @@ public class BikeRepository implements IBikeRepository{
     }
 
 
-    public LiveData<Response> setBikeStatus(int UserId, int StatusId){
-        MutableLiveData<Response> liveResponse = new MutableLiveData<>();
-
-        executor.execute(() -> {
-            Response response;
-            try {
-                response = webservice.setBikeStatus(UserId, StatusId).execute();
-                liveResponse.postValue(response);
-            }
-            catch(IOException e){
-                e.printStackTrace();
-            }
-        });
-
-        return liveResponse;
-    }
-
     public LiveData<ResponseBody> rentBike(int bikeId, int userId){
         MutableLiveData<ResponseBody> liveResponse = new MutableLiveData<>();
 
@@ -56,7 +39,7 @@ public class BikeRepository implements IBikeRepository{
         return liveResponse;
     }
 
-    public LiveData<ResponseBody> returnBike(ReturnDetails details){
+    public LiveData<ResponseBody> returnBike(RentReturnDetails details){
         MutableLiveData<ResponseBody> liveResponse = new MutableLiveData<>();
 
         executor.execute(() -> {
@@ -69,7 +52,6 @@ public class BikeRepository implements IBikeRepository{
                         details.getAmountPaid(),
                         details.getStudentCardId(),
                         details.getNodeId()).execute();
-
                 liveResponse.postValue(response.body());
             }
             catch(IOException e){
@@ -87,7 +69,6 @@ public class BikeRepository implements IBikeRepository{
             Response<ResponseBody> response;
             try {
                 response = webservice.getAllBikes().execute();
-
                 liveResponse.postValue(response.body());
             }
             catch(IOException e){
