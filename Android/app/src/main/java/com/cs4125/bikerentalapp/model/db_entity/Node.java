@@ -9,4 +9,14 @@ public class Node {
     public int nodeId;
     public double longitude;
     public double latitude;
+
+    public Node(){
+
+    }
+
+    public Node(int nodeId, double latitude, double longitude){
+        this.nodeId = nodeId;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
 }
