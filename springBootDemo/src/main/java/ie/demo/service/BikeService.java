@@ -14,5 +14,5 @@ public interface BikeService {
 	int setStatus(int status, int bikeId);
 	int reportBike(int bikeId, int UserId, String ReportText);
 	List<Reports> getReports();
-	int scheduleCollection(Integer[] bikeIds, int nodeId, int driverId);
+	int scheduleCollection(List<Integer> bikeIds, int nodeId, int driverId);
 }

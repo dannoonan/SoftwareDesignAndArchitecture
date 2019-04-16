@@ -79,7 +79,7 @@ public class BikeServiceImpl implements BikeService {
 	}
 
 	@Override
-	public int scheduleCollection(Integer[] bikeIds, int nodeId, int driverId) {
+	public int scheduleCollection(List<Integer> bikeIds, int nodeId, int driverId) {
 
 		int result;
 
@@ -93,9 +93,9 @@ public class BikeServiceImpl implements BikeService {
 				collection.setNodeId(nodeId);
 				result = bikeMapper.createCollection(collection);
 				if(result == 1) {
-					for(int i = 0; i < bikeIds.length; i++) {
-						bikeMapper.createCollectionBikes(bikeIds[i], collection.getCollectionId());
-						bikeMapper.setStatus(0, bikeIds[i]);
+					for(Integer bikeId: bikeIds) {
+						bikeMapper.createCollectionBikes(bikeId, collection.getCollectionId());
+						bikeMapper.setStatus(0, bikeId);
 					}
 				}
 			} catch (DataIntegrityViolationException e) {

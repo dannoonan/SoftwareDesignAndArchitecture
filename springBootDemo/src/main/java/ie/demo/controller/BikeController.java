@@ -96,8 +96,8 @@ public class BikeController {
 		}
 	}
 
-	@RequestMapping(value= "/collect/{bikeIds}", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
-	public MsgResponse collectBike(@PathVariable Integer[] bikeIds,
+	@RequestMapping(value= "/collect", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+	public MsgResponse collectBike(@RequestParam(value = "bikeIds") List<Integer> bikeIds,
 								   @RequestParam(value = "nodeId") int nodeId,
 								   @RequestParam(value = "driverId") int driverId) {
 		int result = bikeService.scheduleCollection(bikeIds, nodeId, driverId);
