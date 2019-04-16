@@ -8,26 +8,23 @@ import com.cs4125.bikerentalapp.web.ResponseBody;
 
 public class Bike implements Vehicle {
 
-    private int bikeId;
-    private int userId;
     private RentReturnDetails details;
     private IBikeRepository repository;
 
     public Bike(RentReturnDetails details, IBikeRepository repository){
-        this.bikeId = details.getVehicleId();
-        this.userId = details.getUserId();
+        this.details = details;
         this.repository = repository;
     }
 
     @Override
-    public LiveData<ResponseBody> Rent() {
+    public LiveData<ResponseBody> rentBike() {
         LiveData<ResponseBody> liveResponse;
-        liveResponse = repository.rentBike(bikeId, userId);
+        liveResponse = repository.rentBike(details.getVehicleId(), details.getUserId());
         return liveResponse;
     }
 
     @Override
-    public LiveData<ResponseBody> Return() {
+    public LiveData<ResponseBody> returnBike() {
         LiveData<ResponseBody> liveResponse;
         liveResponse = repository.returnBike(details);
         return liveResponse;

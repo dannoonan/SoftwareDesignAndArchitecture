@@ -33,7 +33,7 @@ public class ServiceLocator {
     }
 
     /**
-     * Return instance of desired class or object that implement desired interface.
+     * returnBike instance of desired class or object that implement desired interface.
      */
     @SuppressWarnings({"unchecked"})
     public static <T> T get(@NonNull Class<T> clazz) {

@@ -7,14 +7,14 @@ import com.cs4125.bikerentalapp.web.ResponseBody;
 
 public class Return implements Command {
 
-    Vehicle vehicle;
+    private Vehicle vehicle;
 
     public Return(Vehicle aVehicle){
         vehicle = aVehicle;
     }
 
     public LiveData<ResponseBody> execute(){
-       return vehicle.Return();
+       return vehicle.returnBike();
     }
 
 }

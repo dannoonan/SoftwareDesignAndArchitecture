@@ -32,19 +32,13 @@ import com.cs4125.bikerentalapp.web.ResponseBody;
  * A simple {@link Fragment} subclass.
  */
 public class ConfirmationFragment extends Fragment {
-
-
     private String input = "";
     private Vehicle vehicle;
     private int rentOrReturn;
     private String vehicleType;
     private int vehicleId;
     private RentReturnDetails rentReturnDetails;
-    private Command command;
     private Invoker invoker;
-    private Button confirm;
-    private RentViewModel rentViewModel;
-    private ReturnViewModel returnViewModel;
 
     public ConfirmationFragment() {
     }
@@ -61,9 +55,7 @@ public class ConfirmationFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_confirm_rent, container, false);
-
         configureUiItems(v);
-        configureViewModel();
 
         return v;
     }
@@ -74,7 +66,7 @@ public class ConfirmationFragment extends Fragment {
 
         TextView idText;
         TextView typeText;
-        confirm = v.findViewById(R.id.confirmBtn);
+        Button confirm = v.findViewById(R.id.confirmBtn);
         idText = v.findViewById(R.id.idText);
         typeText = v.findViewById(R.id.typeText);
         idText.setText("Vehicle ID: " + vehicleId);
@@ -82,17 +74,12 @@ public class ConfirmationFragment extends Fragment {
         confirm.setOnClickListener(view1 -> setBikeStatus());
     }
 
-    private void configureViewModel(){
-        rentViewModel = ViewModelProviders.of(this).get(RentViewModel.class);
-        rentViewModel.init(ServiceLocator.get(BikeRepository.class));
-    }
-
-
     public void createInvoker(){
         String[] data = input.split(",");
         getDetails(data);
-        makeVehicle(vehicleId, vehicleType);
+        makeVehicle();
 
+        Command command;
         if(rentOrReturn==1){
             command = new Rent(vehicle);
             invoker = new Invoker(command);
@@ -102,9 +89,9 @@ public class ConfirmationFragment extends Fragment {
         }
     }
 
-    private void makeVehicle(int vehicleId, String vehicleType){
+    private void makeVehicle(){
         //Can extend this later to accommodate more vehicle types
-        vehicle = new Bike( rentReturnDetails, ServiceLocator.get(BikeRepository.class));
+        vehicle = new Bike(rentReturnDetails, ServiceLocator.get(BikeRepository.class));
     }
 
     public void getDetails(String[] data){
@@ -137,9 +124,9 @@ public class ConfirmationFragment extends Fragment {
 
         if(response != null) {
             if (response.getResponseCode() == 200) {
-                showToast("Rent/Return Successful");
+                showToast("rentBike/returnBike Successful");
             } else {
-                showToast("Rent/Return Failed");
+                showToast("rentBike/returnBike Failed");
             }
         }
     }
