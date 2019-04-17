@@ -10,6 +10,11 @@ public class Collection {
         return this.collectionId;
     }
 
+    public  Collection(int driverId, int nodeId) {
+        this.driverId = driverId;
+        this.nodeId = nodeId;
+    }
+
     public void setCollectionId(int collectionId) {
         this.collectionId = collectionId;
     }

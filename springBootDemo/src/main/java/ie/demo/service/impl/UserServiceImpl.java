@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<String> login(String username, String password) {
-		User user = (User) findUserByUserName(username);
+		User user = findUserByUserName(username);
 		List<String> result = new ArrayList<>();
 		if(user == null)
 			result.add(0, "" + StateCode.ERROR.getCode());
@@ -82,8 +82,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User findUserByUserName(String userName) {
-		User user = userMapper.findUserByUserName(userName);
-		return user;
+		return userMapper.findUserByUserName(userName);
 	}
 
 }

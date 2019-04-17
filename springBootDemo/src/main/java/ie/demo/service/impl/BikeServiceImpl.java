@@ -2,10 +2,8 @@ package ie.demo.service.impl;
 
 import java.util.List;
 
-import com.mysql.jdbc.exceptions.MySQLDataException;
-import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import ie.demo.domain.Collection;
-import ie.demo.service.BikeFactory;
+import ie.demo.service.CollectionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -31,36 +29,31 @@ public class BikeServiceImpl implements BikeService {
 	private ReportMapper reportMapper;
 
 	@Autowired
-	private BikeFactory bikeFactory;
+	private CollectionFactory collectionFactory;
 	
 	@Override
 	public List<Bike> findBikeByNodes(int id) {
-		List<Bike> bikes = bikeMapper.findBikeByNodes(id);
-		return bikes;
+		return bikeMapper.findBikeByNodes(id);
 	}
 
 	@Override
 	public Bike findBikeById(int id) {
-		Bike bike = bikeMapper.findBikeById(id);
-		return bike;
+		return bikeMapper.findBikeById(id);
 	}
 
 	@Override
 	public List<Bike> findAllBikes() {
-		List<Bike> bikes = bikeMapper.findAllBikes();
-		return bikes;
+		return bikeMapper.findAllBikes();
 	}
 
 	@Override
 	public int createBike(Bike bike) {
-		int result = bikeMapper.createBike(bike);
-		return result;
+		return bikeMapper.createBike(bike);
 	}
 
 	@Override
 	public int setStatus(int status, int bikeId) {
-		int result = bikeMapper.setStatus(status, bikeId);
-		return result;
+		return bikeMapper.setStatus(status, bikeId);
 	}
 
 	@Override
@@ -74,8 +67,7 @@ public class BikeServiceImpl implements BikeService {
 
 	@Override
 	public List<Reports> getReports() {
-		List<Reports> reports = reportMapper.getReports();
-		return reports;
+		return reportMapper.getReports();
 	}
 
 	@Override
@@ -84,22 +76,20 @@ public class BikeServiceImpl implements BikeService {
 		int result;
 
 		if(userMapper.findUserType(driverId) != 4) {
-			result = 400;
+			result = StateCode.USER_NOT_FOUND.getCode();
 		} else {
 
 			try {
-				Collection collection = new Collection();
-				collection.setDriverId(driverId);
-				collection.setNodeId(nodeId);
+				Collection collection = collectionFactory.createCollection(driverId, nodeId);
 				result = bikeMapper.createCollection(collection);
-				if(result == 1) {
+				if(result == StateCode.SUCCESS.getCode()) {
 					for(Integer bikeId: bikeIds) {
 						bikeMapper.createCollectionBikes(bikeId, collection.getCollectionId());
 						bikeMapper.setStatus(0, bikeId);
 					}
 				}
 			} catch (DataIntegrityViolationException e) {
-				result = 404;
+				result = StateCode.ERROR.getCode();
 			}
 		}
 		return result;
