@@ -1,5 +1,4 @@
 ie/demo/mapper/UserMapper.class
-ie/util/PaymentInterceptor.class
 ie/demo/service/impl/NodeServiceImpl.class
 ie/demo/service/impl/UserServiceImpl.class
 ie/util/MsgResponse.class
@@ -21,7 +20,6 @@ ie/demo/service/impl/FreePayment.class
 ie/demo/service/impl/BikeContext.class
 ie/demo/service/impl/OrderServiceImpl.class
 ie/demo/domain/StudentCard.class
-ie/util/PaymentConfig.class
 ie/demo/service/PasswordService.class
 ie/demo/service/CalculatePayment.class
 ie/demo/domain/PremiumCustomer.class
