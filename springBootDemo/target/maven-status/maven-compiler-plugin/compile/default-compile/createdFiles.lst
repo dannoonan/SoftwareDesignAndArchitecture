@@ -9,6 +9,7 @@ ie/demo/mapper/BikeMapper.class
 ie/demo/service/OrderService.class
 ie/demo/service/BikeService.class
 ie/demo/mapper/OrderMapper.class
+ie/demo/service/CollectionFactory.class
 ie/demo/mapper/StudentCardMapper.class
 ie/demo/controller/UserController.class
 ie/demo/service/impl/CustomerUserFactory.class
@@ -24,6 +25,7 @@ ie/demo/service/CalculatePayment.class
 ie/demo/domain/PremiumCustomer.class
 ie/demo/service/impl/LessHalfHourPayment.class
 ie/demo/MySpringBootDemo.class
+ie/demo/service/impl/ConcreteCollectionFactory.class
 ie/demo/service/impl/BikeAvailableState.class
 ie/demo/service/impl/ConcreteBikeFactory.class
 ie/demo/service/impl/LessOneHourPayment.class
@@ -38,6 +40,7 @@ ie/demo/service/BikeState.class
 ie/demo/controller/BikeController.class
 ie/demo/domain/StandardCustomer.class
 ie/demo/service/UserService.class
+ie/demo/domain/Collection.class
 ie/demo/service/AbstractUserFactory.class
 ie/demo/service/impl/BikeUnavailableState.class
 ie/demo/service/NodeService.class

@@ -12,8 +12,7 @@ import ie.demo.service.BikeState;
 public class BikeUnavailableState implements BikeState {
 	
 	@Autowired
-	BikeMapper bikeMapper; 
-	
+	private BikeMapper bikeMapper;
 
 	@Override
 	public void handleState(int bikeId, int userId, Integer nodeId, String position) {

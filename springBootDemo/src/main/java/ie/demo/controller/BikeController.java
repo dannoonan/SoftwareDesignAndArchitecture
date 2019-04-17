@@ -23,13 +23,13 @@ import ie.util.StateCode;
 public class BikeController {
 	
 	@Autowired
-	BikeService bikeService;
+	private BikeService bikeService;
 	
 	@Autowired
-	NodeService nodeService;
+	private NodeService nodeService;
 	
 	@Autowired
-	BikeFactory bikeFactory;
+	private BikeFactory bikeFactory;
 	
 	@RequestMapping(value= "/node", method=RequestMethod.GET, produces="application/json;charset=UTF-8")
 	public MsgResponse getNode() {
@@ -95,7 +95,20 @@ public class BikeController {
 			return MsgResponse.success().add("reports", reports);
 		}
 	}
-	
-	
-	
+
+	@RequestMapping(value= "/collect", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+	public MsgResponse collectBike(@RequestParam(value = "bikeIds") List<Integer> bikeIds,
+								   @RequestParam(value = "nodeId") int nodeId,
+								   @RequestParam(value = "driverId") int driverId) {
+		int result = bikeService.scheduleCollection(bikeIds, nodeId, driverId);
+		if(result == StateCode.SUCCESS.getCode()) {
+			return MsgResponse.success();
+		} else if(result == StateCode.USER_NOT_FOUND.getCode()) {
+			return MsgResponse.fail(result).add("bad request", "Driver ID provided is incorrect.");
+		} else if(result == StateCode.ERROR.getCode()) {
+			return MsgResponse.fail(result).add("bad request", "One of the provided Bikes was either not found or has already been scheduled for collection.");
+		} else {
+			return MsgResponse.fail(result);
+		}
+	}
 }

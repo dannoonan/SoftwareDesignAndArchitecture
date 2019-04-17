@@ -22,23 +22,6 @@ public class BikeRepository implements IBikeRepository{
     }
 
 
-    public LiveData<Response> setBikeStatus(int UserId, int StatusId){
-        MutableLiveData<Response> liveResponse = new MutableLiveData<>();
-
-        executor.execute(() -> {
-            Response response;
-            try {
-                response = webservice.setBikeStatus(UserId, StatusId).execute();
-                liveResponse.postValue(response);
-            }
-            catch(IOException e){
-                e.printStackTrace();
-            }
-        });
-
-        return liveResponse;
-    }
-
     public LiveData<ResponseBody> rentBike(int bikeId, int userId){
         MutableLiveData<ResponseBody> liveResponse = new MutableLiveData<>();
 
@@ -69,7 +52,6 @@ public class BikeRepository implements IBikeRepository{
                         details.getAmountPaid(),
                         details.getStudentCardId(),
                         details.getNodeId()).execute();
-
                 liveResponse.postValue(response.body());
             }
             catch(IOException e){
@@ -87,7 +69,6 @@ public class BikeRepository implements IBikeRepository{
             Response<ResponseBody> response;
             try {
                 response = webservice.getAllBikes().execute();
-
                 liveResponse.postValue(response.body());
             }
             catch(IOException e){

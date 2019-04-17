@@ -1,3 +1,4 @@
+/home/rory/workarea/SoftwareDesignAndArchitecture/springBootDemo/src/main/java/ie/demo/domain/Collection.java
 /home/rory/workarea/SoftwareDesignAndArchitecture/springBootDemo/src/main/java/ie/demo/service/impl/BikeAvailableState.java
 /home/rory/workarea/SoftwareDesignAndArchitecture/springBootDemo/src/main/java/ie/demo/service/CalculatePayment.java
 /home/rory/workarea/SoftwareDesignAndArchitecture/springBootDemo/src/main/java/ie/demo/domain/StandardCustomer.java
@@ -16,6 +17,7 @@
 /home/rory/workarea/SoftwareDesignAndArchitecture/springBootDemo/src/main/java/ie/demo/service/impl/AdminUserFactory.java
 /home/rory/workarea/SoftwareDesignAndArchitecture/springBootDemo/src/main/java/ie/demo/domain/Order.java
 /home/rory/workarea/SoftwareDesignAndArchitecture/springBootDemo/src/main/java/ie/demo/service/NodeService.java
+/home/rory/workarea/SoftwareDesignAndArchitecture/springBootDemo/src/main/java/ie/demo/service/impl/ConcreteCollectionFactory.java
 /home/rory/workarea/SoftwareDesignAndArchitecture/springBootDemo/src/main/java/ie/demo/service/impl/CustomerUserFactory.java
 /home/rory/workarea/SoftwareDesignAndArchitecture/springBootDemo/src/main/java/ie/demo/service/OrderService.java
 /home/rory/workarea/SoftwareDesignAndArchitecture/springBootDemo/src/main/java/ie/demo/service/BikeService.java
@@ -42,6 +44,7 @@
 /home/rory/workarea/SoftwareDesignAndArchitecture/springBootDemo/src/main/java/ie/demo/domain/StandardAdmin.java
 /home/rory/workarea/SoftwareDesignAndArchitecture/springBootDemo/src/main/java/ie/demo/service/impl/OrderServiceImpl.java
 /home/rory/workarea/SoftwareDesignAndArchitecture/springBootDemo/src/main/java/ie/demo/domain/AdminUser.java
+/home/rory/workarea/SoftwareDesignAndArchitecture/springBootDemo/src/main/java/ie/demo/service/CollectionFactory.java
 /home/rory/workarea/SoftwareDesignAndArchitecture/springBootDemo/src/main/java/ie/demo/service/BikeFactory.java
 /home/rory/workarea/SoftwareDesignAndArchitecture/springBootDemo/src/main/java/ie/demo/domain/Node.java
 /home/rory/workarea/SoftwareDesignAndArchitecture/springBootDemo/src/main/java/ie/demo/MySpringBootDemo.java
