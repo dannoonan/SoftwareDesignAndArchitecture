@@ -104,7 +104,6 @@ public class ConfirmationFragment extends Fragment {
 
     private void makeVehicle(){
         //Can extend this later to accommodate more vehicle types
-        vehicle = new Bike( rentReturnDetails, ServiceLocator.get(BikeRepository.class));
         vehicle = new Bike(rentReturnDetails, ServiceLocator.get(BikeRepository.class));
     }
 
@@ -139,6 +138,7 @@ public class ConfirmationFragment extends Fragment {
 
         if(response != null) {
             if (response.getResponseCode() == 200) {
+                showToast("rentBike/returnBike Successful");
             } else {
                 showToast("rentBike/returnBike Failed");
             }
