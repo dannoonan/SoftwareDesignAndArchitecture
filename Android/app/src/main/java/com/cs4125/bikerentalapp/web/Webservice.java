@@ -44,17 +44,16 @@ public interface Webservice {
     Call<ResponseBody> placeOrder(@Query("userName") String username,@Query("bikeId") int bikeId, @Query("amountPaid") int paid);
 
     @FormUrlEncoded
-    @POST("/rentBike")
-    Call<ResponseBody> rentBike(@Field("id") int bikeId, @Field("userId") int userId);
+    Call<ResponseBody> rentVehicle(@Field("id") int bikeId, @Field("userId") int userId);
 
     @FormUrlEncoded
     @POST("/return}")
-    Call<ResponseBody> returnBike(@Field("orderId") int orderId,
-                                  @Field("latitude") int latitude,
-                                  @Field("longitude") int longitude,
-                                  @Field("amountPaid") double amountPaid,
-                                  @Field("studentCardId") int studentCardId,
-                                  @Field("nodeId") int nodeId);
+    Call<ResponseBody> returnVehicle(@Field("orderId") int orderId,
+                                     @Field("latitude") int latitude,
+                                     @Field("longitude") int longitude,
+                                     @Field("amountPaid") double amountPaid,
+                                     @Field("studentCardId") int studentCardId,
+                                     @Field("nodeId") int nodeId);
     @FormUrlEncoded
     @POST("/bike/add")
     Call<ResponseBody> addBikes(@Field("numBikes") int numBikes,

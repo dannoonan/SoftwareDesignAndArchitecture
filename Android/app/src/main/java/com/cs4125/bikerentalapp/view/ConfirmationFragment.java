@@ -110,7 +110,7 @@ public class ConfirmationFragment extends Fragment {
     public void getDetails(String[] data){
             getUserId();
             vehicleId = Integer.parseInt(data[0]);
-            vehicleType = data[7];
+            vehicleType = data[1];
             rentReturnDetails = new RentReturnDetails
                     .Builder()
                     .setVehicleId(Integer.parseInt(data[0]))
@@ -138,9 +138,9 @@ public class ConfirmationFragment extends Fragment {
 
         if(response != null) {
             if (response.getResponseCode() == 200) {
-                showToast("rentBike/returnBike Successful");
+                showToast("rentVehicle/returnVehicle Successful");
             } else {
-                showToast("rentBike/returnBike Failed");
+                showToast("rentVehicle/returnVehicle Failed");
             }
         }
     }

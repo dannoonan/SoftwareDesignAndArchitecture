@@ -17,16 +17,16 @@ public class Bike implements Vehicle {
     }
 
     @Override
-    public LiveData<ResponseBody> rentBike() {
+    public LiveData<ResponseBody> rentVehicle() {
         LiveData<ResponseBody> liveResponse;
-        liveResponse = repository.rentBike(details.getVehicleId(), details.getUserId());
+        liveResponse = repository.rentVehicle(details.getVehicleId(), details.getUserId());
         return liveResponse;
     }
 
     @Override
-    public LiveData<ResponseBody> returnBike() {
+    public LiveData<ResponseBody> returnVehicle() {
         LiveData<ResponseBody> liveResponse;
-        liveResponse = repository.returnBike(details);
+        liveResponse = repository.returnVehicle(details);
         return liveResponse;
     }
 }

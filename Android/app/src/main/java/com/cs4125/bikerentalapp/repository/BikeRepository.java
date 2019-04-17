@@ -22,13 +22,13 @@ public class BikeRepository implements IBikeRepository{
     }
 
 
-    public LiveData<ResponseBody> rentBike(int bikeId, int userId){
+    public LiveData<ResponseBody> rentVehicle(int bikeId, int userId){
         MutableLiveData<ResponseBody> liveResponse = new MutableLiveData<>();
 
         executor.execute(() -> {
             Response<ResponseBody> response;
             try {
-                response = webservice.rentBike(bikeId, userId).execute();
+                response = webservice.rentVehicle(bikeId, userId).execute();
                 liveResponse.postValue(response.body());
             }
             catch(IOException e){
@@ -39,13 +39,13 @@ public class BikeRepository implements IBikeRepository{
         return liveResponse;
     }
 
-    public LiveData<ResponseBody> returnBike(RentReturnDetails details){
+    public LiveData<ResponseBody> returnVehicle(RentReturnDetails details){
         MutableLiveData<ResponseBody> liveResponse = new MutableLiveData<>();
 
         executor.execute(() -> {
             Response<ResponseBody> response;
             try {
-                response = webservice.returnBike(
+                response = webservice.returnVehicle(
                         details.getOrderId(),
                         details.getLatitude(),
                         details.getLongitude(),
