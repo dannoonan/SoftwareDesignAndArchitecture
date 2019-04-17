@@ -6,9 +6,10 @@ import com.cs4125.bikerentalapp.model.entity.RentReturnDetails;
 import com.cs4125.bikerentalapp.web.ResponseBody;
 
 public interface IBikeRepository {
-    LiveData<ResponseBody> rentBike(int bikeId, int userId);
+    LiveData<ResponseBody> rentVehicle(int bikeId, int userId);
 
-    LiveData<ResponseBody> returnBike(RentReturnDetails details);
+    LiveData<ResponseBody> returnVehicle(RentReturnDetails details);
 
     LiveData<ResponseBody> getAllBikes();
+
 }

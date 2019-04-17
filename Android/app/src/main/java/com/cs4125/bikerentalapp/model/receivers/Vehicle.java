@@ -6,7 +6,7 @@ import com.cs4125.bikerentalapp.web.ResponseBody;
 
 public interface Vehicle {
 
-    LiveData<ResponseBody> rentBike();
+    LiveData<ResponseBody> rentVehicle();
 
-    LiveData<ResponseBody> returnBike();
+    LiveData<ResponseBody> returnVehicle();
 }

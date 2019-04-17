@@ -51,6 +51,8 @@ public class ConfirmationFragment extends Fragment {
     private RentViewModel rentViewModel;
     private ReturnViewModel returnViewModel;
     private static int userId=0;
+    private static int studentCardId=0;
+
 
 
     public ConfirmationFragment() {
@@ -108,19 +110,19 @@ public class ConfirmationFragment extends Fragment {
     }
 
     public void getDetails(String[] data){
-            getUserId();
+            getUserIds();
             vehicleId = Integer.parseInt(data[0]);
-            vehicleType = data[7];
+            vehicleType = data[1];
             rentReturnDetails = new RentReturnDetails
                     .Builder()
                     .setVehicleId(Integer.parseInt(data[0]))
                     .setUserId(userId)
-                    .setStudentCardId(Integer.parseInt(data[1]) )
-                    .setOrderId(Integer.parseInt(data[2]))
+                    .setStudentCardId(studentCardId)
+                    .setOrderId(0)
                     .setLatitude(Integer.parseInt(data[3]))
                     .setLongitude(Integer.parseInt(data[4]))
-                    .setAmountPaid(Integer.parseInt(data[5]))
-                    .setNodeId(Integer.parseInt(data[6]))
+                    .setAmountPaid(0)
+                    .setNodeId(0)
                     .build();
     }
 
@@ -138,14 +140,14 @@ public class ConfirmationFragment extends Fragment {
 
         if(response != null) {
             if (response.getResponseCode() == 200) {
-                showToast("rentBike/returnBike Successful");
+                showToast("rentVehicle/returnVehicle Successful");
             } else {
-                showToast("rentBike/returnBike Failed");
+                showToast("rentVehicle/returnVehicle Failed");
             }
         }
     }
 
-    public void getUserId(){
+    public void getUserIds(){
         UserViewModel userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
         userViewModel.init(ServiceLocator.get(UserRepository.class));
 
@@ -158,6 +160,7 @@ public class ConfirmationFragment extends Fragment {
             public void onChanged(@Nullable final User user){
                 if(user!=null){
                     ConfirmationFragment.setUserId(user.getUserId());
+                    ConfirmationFragment.setStudentCardId(Integer.parseInt(user.getStudentCardId()));
                 }else
                     System.out.println("null");
             }
@@ -167,6 +170,10 @@ public class ConfirmationFragment extends Fragment {
 
     public static void setUserId(int id){
         userId = id;
+    }
+
+    public static void setStudentCardId(int id){
+        studentCardId = id;
     }
 
     private void showToast(String message){
