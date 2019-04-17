@@ -111,9 +111,7 @@ public class OrderServiceImpl implements OrderService {
 		lessOneHourPayment.setNextPaymentMethod(greaterOneHourPayment);
 		
 		freePayment.calculatePaidAmount(minutes);
-		float payment = freePayment.getFinalPay();
-		
-		return payment;
+		return freePayment.getFinalPay();
 	}
 
 	@Override
