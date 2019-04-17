@@ -85,10 +85,10 @@ If successful, code 200 will be returned along with an orderId, if bike or user 
 
 ### Return Bike
 
-To return a bike send a POST request to "return". Required parameters are orderId and studentCardId. Optionally return a nodeId or latitude and longitude values. Whichever is not passed will be set to null. Either nodeId or latitude and longitude must be returned, if nothing passed will raise an error, so pass in either one or the other. Examples:
+To return a bike send a POST request to "return". Required parameters are userId and studentCardId. Optionally return a nodeId or latitude and longitude values. Whichever is not passed will be set to null. Either nodeId or latitude and longitude must be returned, if nothing passed will raise an error, so pass in either one or the other. Examples:
 ```
-curl -X POST -d "orderId=13&studentCardId=115&latitude=1&longitude=1" http://localhost:1234/return
-curl -X POST -d "orderId=13&studentCardId=115&nodeId=1" http://localhost:1234/return
+curl -X POST -d "userId=13&studentCardId=115&latitude=1&longitude=1" http://localhost:1234/return
+curl -X POST -d "userId=27&studentCardId=1122&nodeId=1" http://localhost:1234/return
 ```
 
 ## API

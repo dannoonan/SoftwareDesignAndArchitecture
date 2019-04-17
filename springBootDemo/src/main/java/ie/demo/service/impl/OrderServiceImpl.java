@@ -115,9 +115,9 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public int bikeReturn(int orderId, Integer latitude, Integer longitude, int studentCardId, Integer nodeId) {
+	public int bikeReturn(int userId, Integer latitude, Integer longitude, int studentCardId, Integer nodeId) {
 		Date now = new Date();
-		Order currentOrder = orderMapper.getOrder(orderId);
+		Order currentOrder = orderMapper.getMostRecentUserOrder(userId);
 		Date timePlaced = currentOrder.getOrderTime();
 		float minutes = ((now.getTime()/60000) - (timePlaced.getTime()/60000));
 		float amountPaid = calculateDeductions(minutes);
@@ -132,12 +132,12 @@ public class OrderServiceImpl implements OrderService {
 			Order order = new Order();
 			order.setMoneyConsumed(amountPaid);
 			order.setPaidStatus(1);
-			order.setOrderId(orderId);
+			order.setOrderId(currentOrder.getOrderId());
 			
 			int result = orderMapper.setOrder(order);
 			
 			if(result == StateCode.SUCCESS.getCode()) {
-				int bikeId = orderMapper.getBikeId(orderId);
+				int bikeId = currentOrder.getBikeId();
 				String position;
 
 				if(latitude == null && longitude == null) {
