@@ -1,8 +1,9 @@
 package ie.demo.service;
 
 public abstract class CalculatePayment {
+
 	protected CalculatePayment nextPaymentMethod;
-	protected static float finalPay;
+	private static float finalPay;
 	
 	public void setNextPaymentMethod(CalculatePayment next) {
 		this.nextPaymentMethod = next;
@@ -12,7 +13,7 @@ public abstract class CalculatePayment {
 		return finalPay;
 	}
 	
-	public void setFinalPay(float finalPay) {
+	protected void setFinalPay(float finalPay) {
 		CalculatePayment.finalPay = finalPay;
 	}
 	

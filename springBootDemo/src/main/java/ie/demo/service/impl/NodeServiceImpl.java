@@ -16,7 +16,6 @@ public class NodeServiceImpl implements NodeService {
 
 	@Override
 	public List<Node> findNode() {
-		List<Node> nodeList = (List<Node>) nodeMapper.findNode();
-		return nodeList;
+		return nodeMapper.findNode();
 	}
 }

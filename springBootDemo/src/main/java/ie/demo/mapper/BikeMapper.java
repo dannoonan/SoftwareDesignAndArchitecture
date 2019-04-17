@@ -2,8 +2,6 @@ package ie.demo.mapper;
 
 import java.util.List;
 
-import com.mysql.jdbc.exceptions.MySQLDataException;
-import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import ie.demo.domain.Collection;
 import org.apache.ibatis.annotations.Mapper;
 

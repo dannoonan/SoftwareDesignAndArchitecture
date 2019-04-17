@@ -12,7 +12,7 @@ import ie.demo.service.BikeState;
 public class BikeAvailableState implements BikeState {
 	
 	@Autowired
-	BikeMapper bikeMapper;
+	private BikeMapper bikeMapper;
 	
 	@Override
 	public void handleState(int bikeId, int userId, Integer nodeId, String position) {

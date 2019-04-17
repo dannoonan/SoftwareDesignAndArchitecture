@@ -23,13 +23,13 @@ import ie.util.StateCode;
 public class BikeController {
 	
 	@Autowired
-	BikeService bikeService;
+	private BikeService bikeService;
 	
 	@Autowired
-	NodeService nodeService;
+	private NodeService nodeService;
 	
 	@Autowired
-	BikeFactory bikeFactory;
+	private BikeFactory bikeFactory;
 	
 	@RequestMapping(value= "/node", method=RequestMethod.GET, produces="application/json;charset=UTF-8")
 	public MsgResponse getNode() {

@@ -6,5 +6,5 @@ import ie.demo.domain.Node;
 
 public interface NodeService {
 
-	public List<Node> findNode();
+	List<Node> findNode();
 }
