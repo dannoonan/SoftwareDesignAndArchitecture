@@ -33,4 +33,12 @@
 	<select id="getOrder" resultType="ie.demo.domain.Order">
 		SELECT OrderId, BikeId, UserId, isPaid, MoneyConsumed, OrderTime FROM Orders WHERE OrderId = #{orderId}
 	</select>
+
+	<select id="getMostRecentUserOrder" resultType="ie.demo.domain.Order">
+		SELECT OrderId, BikeId, UserId, isPaid, MoneyConsumed, OrderTime
+			FROM Orders
+			WHERE UserId = #{userId}
+			ORDER BY OrderTime DESC
+			LIMIT 1
+	</select>
 </mapper>
