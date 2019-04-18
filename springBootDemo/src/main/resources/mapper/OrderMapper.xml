@@ -30,6 +30,10 @@
 		SELECT BikeId FROM Orders WHERE OrderId = #{orderId}
 	</select>
 
+	<select id="getNumOrders" resultType="int">
+		SELECT count(*) FROM Orders WHERE UserId = #{userId} AND isPaid = 1
+	</select>
+
 	<select id="getOrder" resultType="ie.demo.domain.Order">
 		SELECT OrderId, BikeId, UserId, isPaid, MoneyConsumed, OrderTime FROM Orders WHERE OrderId = #{orderId}
 	</select>

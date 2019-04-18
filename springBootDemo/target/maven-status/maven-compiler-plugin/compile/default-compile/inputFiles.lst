@@ -1,4 +1,6 @@
+/home/rory/workarea/SoftwareDesignAndArchitecture/springBootDemo/src/main/java/ie/util/NormalStrategy.java
 /home/rory/workarea/SoftwareDesignAndArchitecture/springBootDemo/src/main/java/ie/demo/domain/Collection.java
+/home/rory/workarea/SoftwareDesignAndArchitecture/springBootDemo/src/main/java/ie/util/PremiumStrategy.java
 /home/rory/workarea/SoftwareDesignAndArchitecture/springBootDemo/src/main/java/ie/demo/service/impl/BikeAvailableState.java
 /home/rory/workarea/SoftwareDesignAndArchitecture/springBootDemo/src/main/java/ie/demo/service/CalculatePayment.java
 /home/rory/workarea/SoftwareDesignAndArchitecture/springBootDemo/src/main/java/ie/demo/domain/StandardCustomer.java
@@ -6,6 +8,7 @@
 /home/rory/workarea/SoftwareDesignAndArchitecture/springBootDemo/src/main/java/ie/demo/mapper/UserMapper.java
 /home/rory/workarea/SoftwareDesignAndArchitecture/springBootDemo/src/main/java/ie/demo/service/impl/ConcreteBikeFactory.java
 /home/rory/workarea/SoftwareDesignAndArchitecture/springBootDemo/src/main/java/ie/util/MsgResponse.java
+/home/rory/workarea/SoftwareDesignAndArchitecture/springBootDemo/src/main/java/ie/util/BillingStrategy.java
 /home/rory/workarea/SoftwareDesignAndArchitecture/springBootDemo/src/main/java/ie/demo/domain/Bike.java
 /home/rory/workarea/SoftwareDesignAndArchitecture/springBootDemo/src/main/java/ie/demo/domain/CustomerUser.java
 /home/rory/workarea/SoftwareDesignAndArchitecture/springBootDemo/src/main/java/ie/demo/domain/User.java
