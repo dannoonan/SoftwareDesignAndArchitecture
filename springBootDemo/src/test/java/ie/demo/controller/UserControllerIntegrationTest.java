@@ -1,12 +1,8 @@
 package ie.demo.controller;
 
-import ie.demo.service.UserService;
-import ie.demo.service.impl.FactoryProvider;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -20,19 +16,9 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.context.WebApplicationContext;
 
-
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class UserControllerIntegrationTest {
-
-//    @Mock
-//    private FactoryProvider factoryProvider;
-//
-//    @Mock
-//    private UserService userService;
-
-    //@InjectMocks
-    //private UserController userController;
 
     @Autowired
     private WebApplicationContext webApplicationContext;
@@ -71,5 +57,22 @@ public class UserControllerIntegrationTest {
         this.mockMvc.perform(builder)
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code").value("400"));
+    }
+
+    @Test
+    public void testRegisterConflict() throws Exception {
+
+        MultiValueMap<String, String> paraMap = new LinkedMultiValueMap<>();
+        paraMap.add("username", "integrationuser");
+        paraMap.add("password", "password");
+        paraMap.add("userTypeId", "1");
+        paraMap.add("email", "integrationuser@gmail.com");
+
+        MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.post("/user")
+                .params(paraMap);
+
+        this.mockMvc.perform(builder)
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.code").value("409"));
     }
 }

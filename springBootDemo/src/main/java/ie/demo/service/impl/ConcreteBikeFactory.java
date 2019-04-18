@@ -8,8 +8,8 @@ import ie.demo.service.BikeFactory;
 public class ConcreteBikeFactory implements BikeFactory {
 
 	@Override
-	public Bike createBike(String bikeType, int nodeId, String position) {
-		return new Bike(bikeType, nodeId, position);
+	public Bike createBike(String bikeType, int nodeId) {
+		return new Bike(bikeType, nodeId);
 	}
 
 }

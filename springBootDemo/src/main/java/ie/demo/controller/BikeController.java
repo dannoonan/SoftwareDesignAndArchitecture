@@ -62,10 +62,9 @@ public class BikeController {
 	}
 	
 	@RequestMapping(value= "/bike", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
-	public MsgResponse insertBike(@RequestParam(value = "bikeType")String bikeType,
-			  @RequestParam(value = "nodeId")int nodeId,
-			  @RequestParam(value = "position") String position) {
-		Bike bike = bikeFactory.createBike(bikeType, nodeId, position);
+	public MsgResponse insertBike(@RequestParam(value = "bikeType") String bikeType,
+			  		@RequestParam(value = "nodeId") int nodeId) {
+		Bike bike = bikeFactory.createBike(bikeType, nodeId);
 		int result = bikeService.createBike(bike);
 		if(result == StateCode.SUCCESS.getCode()) {
 			return MsgResponse.success();
