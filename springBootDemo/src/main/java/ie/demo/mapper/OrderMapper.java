@@ -10,6 +10,7 @@ public interface OrderMapper {
 	int placeOrder(Order order);
 	int setOrder(Order order);
 	int getBikeId(int orderId);
+	int getNumOrders(int userId);
 	Order getOrder(int orderId);
 	Order getMostRecentUserOrder(int userId);
 }

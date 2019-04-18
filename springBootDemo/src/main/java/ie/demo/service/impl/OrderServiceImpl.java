@@ -10,7 +10,10 @@ import ie.demo.mapper.UserMapper;
 import ie.demo.service.BikeState;
 import ie.demo.service.CalculatePayment;
 import ie.demo.service.OrderService;
+import ie.util.NormalStrategy;
+import ie.util.PremiumStrategy;
 import ie.util.StateCode;
+import ie.util.BillingStrategy;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -116,11 +119,12 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public int bikeReturn(int userId, Integer latitude, Integer longitude, int studentCardId, Integer nodeId) {
+		BillingStrategy strategy = decideStrategy(userId);
 		Date now = new Date();
 		Order currentOrder = orderMapper.getMostRecentUserOrder(userId);
 		Date timePlaced = currentOrder.getOrderTime();
 		float minutes = ((now.getTime()/60000) - (timePlaced.getTime()/60000));
-		float amountPaid = calculateDeductions(minutes);
+		float amountPaid = strategy.getActPrice(calculateDeductions(minutes));
 		float balance = studentCardMapper.getBalance(studentCardId);
 		balance = balance - amountPaid;
 		if(balance < 0) {
@@ -162,6 +166,15 @@ public class OrderServiceImpl implements OrderService {
 			} else  {
 				return StateCode.FAIL.getCode();
 			}
+		}
+	}
+
+	private BillingStrategy decideStrategy(int userId) {
+		int numOrders = orderMapper.getNumOrders(userId);
+		if(numOrders > 2) {
+			return new PremiumStrategy();
+		} else {
+			return new NormalStrategy();
 		}
 	}
 
