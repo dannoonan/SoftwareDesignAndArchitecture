@@ -1,4 +1,4 @@
-package com.cs4125.bikerentalapp.inventorymanagement;
+package ie.demo.inventorymanagement;
 
 // Concrete framework
 public class Framework {

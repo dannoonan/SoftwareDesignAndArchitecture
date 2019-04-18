@@ -1,9 +1,6 @@
-package com.cs4125.bikerentalapp.inventorymanagement;
+package ie.demo.inventorymanagement;
 
-import android.os.Build;
-import android.support.annotation.RequiresApi;
-
-import com.cs4125.bikerentalapp.inventorymanagement.interceptor.Interceptor;
+import ie.demo.inventorymanagement.interceptor.Interceptor;
 
 import java.util.Collection;
 
@@ -23,7 +20,6 @@ public class Dispatcher {
         interceptors.remove(interceptor);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public void dispatchInterceptor(Context context){
         interceptors.forEach(i -> i.execute(context));
     }

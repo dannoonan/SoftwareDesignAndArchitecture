@@ -55,6 +55,7 @@ public interface Webservice {
                                      @Field("amountPaid") double amountPaid,
                                      @Field("studentCardId") int studentCardId,
                                      @Field("nodeId") int nodeId);
+
     @FormUrlEncoded
     @POST("/bike/add")
     Call<ResponseBody> addBikes(@Field("numBikes") int numBikes,
@@ -75,6 +76,9 @@ public interface Webservice {
     Call<ResponseBody> reintroduceBikes(@Field("bikeIds") List<Integer> bikIds,
                                         @Field("nodeId") int nodeId);
 
+
+    @GET("/nodes")
+    Call<ResponseBody> getAllNodes();
 
     @GET("/bike")
     Call<ResponseBody> getAllBikes();
