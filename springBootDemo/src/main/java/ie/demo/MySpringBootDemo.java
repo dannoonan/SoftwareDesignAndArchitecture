@@ -1,5 +1,7 @@
 package ie.demo;
 
+import com.sun.corba.se.impl.protocol.giopmsgheaders.FragmentMessage;
+import ie.demo.inventorymanagement.Framework;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,6 +12,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 public class MySpringBootDemo extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
+        Framework.getInstance(); // Create instance of interception framework to be used throughout
         SpringApplication.run(MySpringBootDemo.class, args);
     }
 }

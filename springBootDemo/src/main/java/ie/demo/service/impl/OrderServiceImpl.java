@@ -23,6 +23,9 @@ import java.util.Date;
 
 @Service
 public class OrderServiceImpl implements OrderService {
+
+	public final int STATUS_PAID = 1;
+	public final int STATUS_UNPAID = 0;
 	
 	@Autowired
 	private OrderMapper orderMapper;
@@ -88,7 +91,7 @@ public class OrderServiceImpl implements OrderService {
 					order.setUserId(userId);
 					order.setOrderTime(new java.util.Date());
 					order.setMoneyConsumed(0);
-					order.setPaidStatus(0);
+					order.setPaidStatus(STATUS_UNPAID);
 
 					int result = orderMapper.placeOrder(order);
 
@@ -123,10 +126,11 @@ public class OrderServiceImpl implements OrderService {
 		Date now = new Date();
 		Order currentOrder = orderMapper.getMostRecentUserOrder(userId);
 		Date timePlaced = currentOrder.getOrderTime();
-		float minutes = ((now.getTime()/60000) - (timePlaced.getTime()/60000));
+		float minutes = (float)((now.getTime()/60000.0) - (timePlaced.getTime()/60000.0));
 		float amountPaid = strategy.getActPrice(calculateDeductions(minutes));
 		float balance = studentCardMapper.getBalance(studentCardId);
 		balance = balance - amountPaid;
+
 		if(balance < 0) {
 			return StateCode.INSUFFICIENT_BALANCE.getCode();
 		} else {
@@ -135,7 +139,7 @@ public class OrderServiceImpl implements OrderService {
 			
 			Order order = new Order();
 			order.setMoneyConsumed(amountPaid);
-			order.setPaidStatus(1);
+			order.setPaidStatus(STATUS_PAID);
 			order.setOrderId(currentOrder.getOrderId());
 			
 			int result = orderMapper.setOrder(order);

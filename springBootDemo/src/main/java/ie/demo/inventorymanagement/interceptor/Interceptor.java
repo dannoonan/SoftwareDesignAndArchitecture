@@ -3,7 +3,7 @@ package ie.demo.inventorymanagement.interceptor;
 import ie.demo.inventorymanagement.Context;
 
 // Interceptor interface
-public interface Interceptor {
+public interface Interceptor<T extends Context> {
 
-    void execute(Context context);
+    void execute(T context);
 }

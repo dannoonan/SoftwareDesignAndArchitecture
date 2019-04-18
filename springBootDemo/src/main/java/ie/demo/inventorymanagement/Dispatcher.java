@@ -2,25 +2,34 @@ package ie.demo.inventorymanagement;
 
 import ie.demo.inventorymanagement.interceptor.Interceptor;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 // Dispatcher
-public class Dispatcher {
-    private Collection<Interceptor> interceptors;
+public class Dispatcher<T extends Context> {
+    private Collection<Interceptor<T>> interceptors;
+    private Class type;
 
-    public Dispatcher(Collection<Interceptor> interceptors){
-        this.interceptors = interceptors;
+    Dispatcher(Context c){
+        interceptors = new ArrayList<>();
+        type = c.getClass();
     }
 
-    public void register(Interceptor interceptor){
+    void register(Interceptor<T> interceptor){
         interceptors.add(interceptor);
     }
 
-    public void unRegister(Interceptor interceptor){
+    public void unRegister(Interceptor<T> interceptor){
         interceptors.remove(interceptor);
     }
 
-    public void dispatchInterceptor(Context context){
-        interceptors.forEach(i -> i.execute(context));
+    public void setInterceptors(Collection<Interceptor<T>> interceptors){
+        this.interceptors = interceptors;
+    }
+
+    void dispatchInterceptor(T context){
+        if(type == context.getClass()){
+            interceptors.forEach(i -> i.execute(context));
+        }
     }
 }
