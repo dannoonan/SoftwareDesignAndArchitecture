@@ -24,17 +24,14 @@ import java.util.List;
 @RunWith(MockitoJUnitRunner.class)
 public class UserControllerUnitTest {
 
-    @Mock
-    private AbstractUserFactory factory;
-
-    @Mock
-    private FactoryProvider fp;
+//    @Mock
+//    private FactoryProvider fp;
+//
+//    @Mock
+//    private StandardAdmin mockUser;
 
     @Mock
     private UserServiceImpl userServiceMock;
-
-    @Mock
-    private StandardAdmin mockUser;
 
     @InjectMocks
     private UserController controller;
