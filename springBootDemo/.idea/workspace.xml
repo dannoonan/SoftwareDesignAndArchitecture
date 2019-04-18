@@ -3,18 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="0f77501a-dfed-4b14-93f9-9e36a88c50e1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ie/demo/controller/BikeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ie/demo/controller/BikeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ie/demo/domain/Bike.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ie/demo/domain/Bike.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ie/demo/service/BikeFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ie/demo/service/BikeFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ie/demo/service/impl/ConcreteBikeFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ie/demo/service/impl/ConcreteBikeFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/BikeMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/BikeMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ie/demo/controller/UserControllerIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ie/demo/controller/UserControllerIntegrationTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ie/demo/controller/UserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ie/demo/controller/UserControllerUnitTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ie/demo/controller/UserControllerUnitTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ie/demo/controller/UserControllerUnitTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/ie/demo/controller/BikeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ie/demo/controller/BikeController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/ie/demo/domain/Bike.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ie/demo/domain/Bike.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/ie/demo/service/BikeFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ie/demo/service/BikeFactory.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/ie/demo/service/impl/ConcreteBikeFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ie/demo/service/impl/ConcreteBikeFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapper/BikeMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/BikeMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/springBootDemo-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/springBootDemo-0.0.1-SNAPSHOT.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/springBootDemo-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/target/springBootDemo-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
     </list>
@@ -41,14 +34,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="180" />
+          <entry key="java" value="182" />
           <entry key="xml" value="20" />
           <entry key="yml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="180" />
+          <entry key="JAVA" value="182" />
           <entry key="XML" value="20" />
           <entry key="YAML" value="1" />
         </counts>
@@ -56,14 +49,14 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="26" />
-          <entry key="java" value="5240" />
+          <entry key="java" value="5245" />
           <entry key="xml" value="1059" />
           <entry key="yml" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="5240" />
+          <entry key="JAVA" value="5245" />
           <entry key="PLAIN_TEXT" value="26" />
           <entry key="XML" value="1059" />
           <entry key="YAML" value="5" />
@@ -90,24 +83,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="368">
               <caret line="26" column="75" selection-start-line="26" selection-start-column="75" selection-end-line="26" selection-end-column="75" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/ie/demo/service/AbstractUserFactory.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/ie/demo/service/BikeFactory.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="47" selection-start-line="3" selection-start-column="47" selection-end-line="3" selection-end-column="47" />
             </state>
           </provider>
         </entry>
@@ -146,11 +121,36 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/ie/demo/service/impl/OrderServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="390">
               <caret line="134" column="38" lean-forward="true" selection-start-line="134" selection-start-column="38" selection-end-line="134" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/ie/demo/controller/UserControllerIntegrationTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="467">
+              <caret line="74" column="12" selection-start-line="74" selection-start-column="12" selection-end-line="74" selection-end-column="12" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/ie/demo/controller/UserControllerUnitTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="223">
+              <caret line="30" column="37" lean-forward="true" selection-start-line="30" selection-start-column="37" selection-end-line="30" selection-end-column="37" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <marker date="1555590606894" expanded="true" signature="1125:1951" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -243,6 +243,7 @@
         <option value="$PROJECT_DIR$/src/main/java/ie/demo/service/impl/ConcreteBikeFactory.java" />
         <option value="$PROJECT_DIR$/src/main/java/ie/demo/domain/Bike.java" />
         <option value="$PROJECT_DIR$/src/main/resources/mapper/BikeMapper.xml" />
+        <option value="$PROJECT_DIR$/src/test/java/ie/demo/controller/UserControllerUnitTest.java" />
       </list>
     </option>
   </component>
@@ -405,7 +406,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555581361333" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555590610037" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
@@ -428,7 +429,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.UserControllerIntegrationTest">
+  <component name="RunManager">
     <configuration name="UserControllerIntegrationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="springBootDemo" />
       <extension name="coverage">
@@ -463,8 +464,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.UserControllerIntegrationTest" />
         <item itemvalue="JUnit.UserControllerUnitTest" />
+        <item itemvalue="JUnit.UserControllerIntegrationTest" />
       </list>
     </recent_temporary>
   </component>
@@ -482,9 +483,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="UserTest - 2019.04.17 at 19h 48m 52s.xml">
-      <configuration name="UserTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="UserTest - 2019.04.17 at 19h 51m 34s.xml">
       <configuration name="UserTest" configurationId="JUnit" />
     </history-entry>
@@ -512,6 +510,9 @@
     <history-entry file="UserControllerIntegrationTest - 2019.04.18 at 10h 21m 49s.xml">
       <configuration name="UserControllerIntegrationTest" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="UserControllerUnitTest - 2019.04.18 at 13h 27m 58s.xml">
+      <configuration name="UserControllerUnitTest" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -526,7 +527,7 @@
     <frame x="64" y="-11" width="1303" height="780" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.27250996" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27250996" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -870,29 +871,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/ie/demo/controller/UserControllerUnitTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="91" column="16" selection-start-line="91" selection-start-column="16" selection-end-line="91" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1555577942841" expanded="true" signature="1167:1993" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/ie/demo/controller/UserControllerIntegrationTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="74" column="12" selection-start-line="74" selection-start-column="12" selection-end-line="74" selection-end-column="12" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1747#1748#0" expanded="true" />
-            <element signature="e#1838#1839#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ie/demo/service/AbstractUserFactory.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -976,6 +954,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
           <caret line="134" column="38" lean-forward="true" selection-start-line="134" selection-start-column="38" selection-end-line="134" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/ie/demo/controller/UserControllerIntegrationTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="467">
+          <caret line="74" column="12" selection-start-line="74" selection-start-column="12" selection-end-line="74" selection-end-column="12" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/ie/demo/controller/UserControllerUnitTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="223">
+          <caret line="30" column="37" lean-forward="true" selection-start-line="30" selection-start-column="37" selection-end-line="30" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <marker date="1555590606894" expanded="true" signature="1125:1951" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
