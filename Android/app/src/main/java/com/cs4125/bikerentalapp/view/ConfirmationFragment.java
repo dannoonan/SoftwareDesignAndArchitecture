@@ -115,14 +115,14 @@ public class ConfirmationFragment extends Fragment {
             vehicleType = data[1];
             rentReturnDetails = new RentReturnDetails
                     .Builder()
-                    .setVehicleId(Integer.parseInt(data[0]))
+                    .setVehicleId(vehicleId)
                     .setUserId(userId)
                     .setStudentCardId(studentCardId)
                     .setOrderId(0)
-                    .setLatitude(Integer.parseInt(data[3]))
-                    .setLongitude(Integer.parseInt(data[4]))
+                    .setLatitude(Integer.parseInt(data[2]))
+                    .setLongitude(Integer.parseInt(data[3]))
                     .setAmountPaid(0)
-                    .setNodeId(0)
+                    .setNodeId(1)
                     .build();
     }
 

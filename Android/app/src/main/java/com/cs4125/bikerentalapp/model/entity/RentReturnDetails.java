@@ -72,6 +72,7 @@ public class RentReturnDetails {
             details.userId = this.userId;
             details.vehicleId = this.vehicleId;
             details.amountPaid = this.amountPaid;
+            details.nodeId = this.nodeId;
 
             return details;
         }

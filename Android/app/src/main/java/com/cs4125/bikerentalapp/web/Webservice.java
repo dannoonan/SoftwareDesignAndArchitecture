@@ -48,8 +48,8 @@ public interface Webservice {
     Call<ResponseBody> rentVehicle(@Field("id") int bikeId, @Field("userId") int userId);
 
     @FormUrlEncoded
-    @POST("/return}")
-    Call<ResponseBody> returnVehicle(@Field("orderId") int orderId,
+    @POST("/return")
+    Call<ResponseBody> returnVehicle(@Field("userId") int userId,
                                      @Field("latitude") int latitude,
                                      @Field("longitude") int longitude,
                                      @Field("amountPaid") double amountPaid,
