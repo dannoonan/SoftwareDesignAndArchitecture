@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(MockitoJUnitRunner.class)
-public class UserTest {
+public class UserControllerUnitTest {
 
     @Mock
     private AbstractUserFactory factory;
