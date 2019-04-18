@@ -54,6 +54,8 @@ public interface Webservice {
                                      @Field("longitude") int longitude,
                                      @Field("amountPaid") double amountPaid,
                                      @Field("studentCardId") int studentCardId,
+                                     @Field("nodeId") int nodeId);
+
     @FormUrlEncoded
     @POST("/bike/add")
     Call<ResponseBody> addBikes(@Field("numBikes") int numBikes,
