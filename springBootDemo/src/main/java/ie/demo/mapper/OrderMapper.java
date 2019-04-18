@@ -11,4 +11,5 @@ public interface OrderMapper {
 	int setOrder(Order order);
 	int getBikeId(int orderId);
 	Order getOrder(int orderId);
+	Order getMostRecentUserOrder(int userId);
 }

@@ -14,8 +14,8 @@ public class ReturnViewModel extends ViewModel {
         this.repository = repository;
     }
 
-    public LiveData<ResponseBody> returnBike(RentReturnDetails details){
+    public LiveData<ResponseBody> returnVehicle(RentReturnDetails details){
 
-        return repository.returnBike(details);
+        return repository.returnVehicle(details);
     }
 }

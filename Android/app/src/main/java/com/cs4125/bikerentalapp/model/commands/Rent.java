@@ -14,6 +14,6 @@ public class Rent implements Command {
     }
 
     public LiveData<ResponseBody> execute(){
-        return vehicle.rentBike();
+        return vehicle.rentVehicle();
     }
 }

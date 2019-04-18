@@ -14,7 +14,7 @@ public class Return implements Command {
     }
 
     public LiveData<ResponseBody> execute(){
-       return vehicle.returnBike();
+       return vehicle.returnVehicle();
     }
 
 }

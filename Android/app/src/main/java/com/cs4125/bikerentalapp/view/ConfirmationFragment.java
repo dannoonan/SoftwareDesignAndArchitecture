@@ -4,6 +4,8 @@ package com.cs4125.bikerentalapp.view;
 import android.annotation.SuppressLint;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModelProviders;
+import android.arch.lifecycle.Observer;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,15 +20,21 @@ import com.cs4125.bikerentalapp.R;
 import com.cs4125.bikerentalapp.model.commands.Command;
 import com.cs4125.bikerentalapp.model.commands.Rent;
 import com.cs4125.bikerentalapp.model.commands.Return;
+import com.cs4125.bikerentalapp.model.db_entity.User;
 import com.cs4125.bikerentalapp.model.entity.RentReturnDetails;
 import com.cs4125.bikerentalapp.model.invokers.Invoker;
 import com.cs4125.bikerentalapp.model.receivers.Bike;
 import com.cs4125.bikerentalapp.model.receivers.Vehicle;
 import com.cs4125.bikerentalapp.repository.BikeRepository;
+import com.cs4125.bikerentalapp.repository.user.UserRepository;
 import com.cs4125.bikerentalapp.sl.ServiceLocator;
 import com.cs4125.bikerentalapp.viewmodel.RentViewModel;
 import com.cs4125.bikerentalapp.viewmodel.ReturnViewModel;
+import com.cs4125.bikerentalapp.viewmodel.UserViewModel;
 import com.cs4125.bikerentalapp.web.ResponseBody;
+
+import static android.content.Context.MODE_PRIVATE;
+import static com.cs4125.bikerentalapp.view.LoginFragment.MY_PREFS_NAME;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,6 +47,13 @@ public class ConfirmationFragment extends Fragment {
     private int vehicleId;
     private RentReturnDetails rentReturnDetails;
     private Invoker invoker;
+    private Button confirm;
+    private RentViewModel rentViewModel;
+    private ReturnViewModel returnViewModel;
+    private static int userId=0;
+    private static int studentCardId=0;
+
+
 
     public ConfirmationFragment() {
     }
@@ -95,18 +110,19 @@ public class ConfirmationFragment extends Fragment {
     }
 
     public void getDetails(String[] data){
+            getUserIds();
             vehicleId = Integer.parseInt(data[0]);
-            vehicleType = data[7];
+            vehicleType = data[1];
             rentReturnDetails = new RentReturnDetails
                     .Builder()
-                    .setVehicleId(Integer.parseInt(data[0]))
-                    .setUserId(27)
-                    .setStudentCardId(Integer.parseInt(data[1]) )
-                    .setOrderId(Integer.parseInt(data[2]))
-                    .setLatitude(Integer.parseInt(data[3]))
-                    .setLongitude(Integer.parseInt(data[4]))
-                    .setAmountPaid(Integer.parseInt(data[5]))
-                    .setNodeId(Integer.parseInt(data[6]))
+                    .setVehicleId(vehicleId)
+                    .setUserId(userId)
+                    .setStudentCardId(studentCardId)
+                    .setOrderId(0)
+                    .setLatitude(Integer.parseInt(data[2]))
+                    .setLongitude(Integer.parseInt(data[3]))
+                    .setAmountPaid(0)
+                    .setNodeId(1)
                     .build();
     }
 
@@ -124,11 +140,40 @@ public class ConfirmationFragment extends Fragment {
 
         if(response != null) {
             if (response.getResponseCode() == 200) {
-                showToast("rentBike/returnBike Successful");
+                showToast("rentVehicle/returnVehicle Successful");
             } else {
-                showToast("rentBike/returnBike Failed");
+                showToast("rentVehicle/returnVehicle Failed");
             }
         }
+    }
+
+    public void getUserIds(){
+        UserViewModel userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
+        userViewModel.init(ServiceLocator.get(UserRepository.class));
+
+        SharedPreferences prefs = getActivity().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        String username = prefs.getString("username", null);
+
+
+        userViewModel.getUser(username).observe(this, new Observer<User>(){
+            @Override
+            public void onChanged(@Nullable final User user){
+                if(user!=null){
+                    ConfirmationFragment.setUserId(user.getUserId());
+                    ConfirmationFragment.setStudentCardId(Integer.parseInt(user.getStudentCardId()));
+                }else
+                    System.out.println("null");
+            }
+        });
+
+    }
+
+    public static void setUserId(int id){
+        userId = id;
+    }
+
+    public static void setStudentCardId(int id){
+        studentCardId = id;
     }
 
     private void showToast(String message){

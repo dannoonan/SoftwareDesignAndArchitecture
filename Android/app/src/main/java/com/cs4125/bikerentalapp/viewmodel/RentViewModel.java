@@ -13,8 +13,8 @@ public class RentViewModel extends ViewModel {
         this.repository = repository;
     }
 
-    public LiveData<ResponseBody> rentBike(int bikeId, int userId){
+    public LiveData<ResponseBody> rentVehicle(int bikeId, int userId){
 
-        return repository.rentBike(bikeId, userId);
+        return repository.rentVehicle(bikeId, userId);
     }
 }

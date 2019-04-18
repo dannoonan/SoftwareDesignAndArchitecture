@@ -14,10 +14,9 @@ public class Bike implements Serializable{
 	public Bike() {
 	}
 
-	public Bike(String bikeType, int nodeId, String position) {
+	public Bike(String bikeType, int nodeId) {
 		this.bikeType = bikeType;
 		this.nodeId = nodeId;
-		this.position = position;
 	}
 	
 	public int getBikeId() {
