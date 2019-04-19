@@ -125,6 +125,9 @@ public class OrderServiceImpl implements OrderService {
 		BillingStrategy strategy = decideStrategy(userId);
 		Date now = new Date();
 		Order currentOrder = orderMapper.getMostRecentUserOrder(userId);
+
+		if(currentOrder == null) return StateCode.NOT_EXISTS.getCode();
+
 		Date timePlaced = currentOrder.getOrderTime();
 		float minutes = (float)((now.getTime()/60000.0) - (timePlaced.getTime()/60000.0));
 		float amountPaid = strategy.getActPrice(calculateDeductions(minutes));

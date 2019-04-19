@@ -1,6 +1,5 @@
 package ie.demo.controller;
 
-import ie.demo.inventorymanagement.Context;
 import ie.demo.inventorymanagement.Framework;
 import ie.demo.inventorymanagement.RentContext;
 import ie.demo.inventorymanagement.ReturnContext;
@@ -63,17 +62,20 @@ public class OrderController {
 
 		Framework framework = Framework.getInstance();
 		framework.handleRequest(new ReturnContext.Builder()
-				.setuserId(userId)
+				.setUserId(userId)
 				.setLatitude(latitude)
 				.setLongitude(longitude)
 				.setStudentCardId(studentCardId)
-				.setnodeId(nodeId)
+				.setNodeId(nodeId)
 				.build(framework));
 
 		if((latitude == null && longitude == null) && nodeId == null) {
 			return MsgResponse.fail(StateCode.ERROR.getCode()).add("error", "invalid location");
 		} else {
 			int result = orderService.bikeReturn(userId, latitude, longitude, studentCardId, nodeId);
+			if(result == StateCode.NOT_EXISTS.getCode()){
+				return MsgResponse.fail(StateCode.NOT_EXISTS.getCode()).add("error", "cannot return vehicle - none rented");
+			}
 			if(result == StateCode.INSUFFICIENT_BALANCE.getCode()) {
 				return MsgResponse.fail(StateCode.ERROR.getCode()).add("error", "balance is not enough");
 			} else if(result == StateCode.FAIL.getCode()) {

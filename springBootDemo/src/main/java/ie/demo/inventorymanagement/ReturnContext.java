@@ -6,10 +6,10 @@ import java.util.Map;
 
 public class ReturnContext extends Context {
     private int userId;
-    private int latitude;
-    private int longitude;
+    private Integer latitude;
+    private Integer longitude;
     private int studentCardId;
-    private int nodeId;
+    private Integer nodeId;
     private Date time;
 
     private ReturnContext(Framework framework) {
@@ -17,7 +17,6 @@ public class ReturnContext extends Context {
     }
 
     ReturnContext(){}
-
 
     @Override
     public String toString(){
@@ -33,33 +32,33 @@ public class ReturnContext extends Context {
 
     public static class Builder{
         private int userId;
-        private int latitude;
-        private int longitude;
+        private Integer latitude;
+        private Integer longitude;
         private int studentCardId;
-        private int nodeId;
+        private Integer nodeId;
 
-        public Builder setuserId(int userId) {
+        public Builder setUserId(int userId) {
             this.userId = userId;
             return this;
         }
 
-        public Builder setLatitude(int latitude) {
+        public Builder setLatitude(Integer latitude) {
             this.latitude = latitude;
             return this;
         }
 
-        public Builder setLongitude(int logitude) {
-            this.longitude = logitude;
+        public Builder setLongitude(Integer longitude) {
+            this.longitude = longitude;
             return this;
         }
 
-        public Builder setnodeId(int nodeId) {
-            this.longitude = nodeId;
+        public Builder setNodeId(Integer nodeId) {
+            this.nodeId = nodeId;
             return this;
         }
 
         public Builder setStudentCardId(int studentCardId) {
-            this.latitude = studentCardId;
+            this.studentCardId = studentCardId;
             return this;
         }
 
@@ -70,7 +69,7 @@ public class ReturnContext extends Context {
             context.latitude = this.latitude;
             context.longitude = this.longitude;
             context.nodeId = this.nodeId;
-            context.studentCardId = this.nodeId;
+            context.studentCardId = this.studentCardId;
             context.time = new Date();
 
             return context;
