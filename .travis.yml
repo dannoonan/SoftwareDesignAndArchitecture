@@ -19,13 +19,13 @@ script: mvn verify -B
 #	- mvn verify -B
 
 before_deploy:
-     - openssl aes-256-cbc -K CS4125_ec2_ssh_key.pem.enc -iv CS4125_ec2_ssh_key.pem.enc_iv -in deploy_rsa.enc -out /tmp/deploy_rsa -d
+     - openssl aes-256-cbc -K CS4125_ec2_ssh_key.pem.enc -iv CS4125_ec2_ssh_key.pem.enc_iv -in CS4125_ec2_ssh_key.pem.enc -out /tmp/CS4125_ec2_ssh_key -d
 
 deploy:
     provider: script
     skip_cleanup: true
     before_script:
-       - scp -i "cs4227_key.pem" -r springBootDemo/. ubuntu@ec2-54-208-196-22.compute-1.amazonaws.com:~/SoftwareDesignAndArchitecture
-    script: ssh -i "cs4227_key.pem" ubuntu@ec2-54-208-196-22.compute-1.amazonaws.com 'bash -s' < deploy.sh
+       - scp -i "/tmp/CS4125_ec2_ssh_key" -r springBootDemo/. ubuntu@ec2-54-208-196-22.compute-1.amazonaws.com:~/SoftwareDesignAndArchitecture
+    script: ssh -i "/tmp/CS4125_ec2_ssh_key" ubuntu@ec2-54-208-196-22.compute-1.amazonaws.com 'bash -s' < deploy.sh
     on:
        branch: master
