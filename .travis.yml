@@ -25,7 +25,7 @@ deploy:
     provider: script
     skip_cleanup: true
     before_script:
-	- scp -i "cs4227_key.pem" -r springBootDemo/. ubuntu@ec2-54-208-196-22.compute-1.amazonaws.com:~/SoftwareDesignAndArchitecture
+       - scp -i "cs4227_key.pem" -r springBootDemo/. ubuntu@ec2-54-208-196-22.compute-1.amazonaws.com:~/SoftwareDesignAndArchitecture
     script: ssh -i "cs4227_key.pem" ubuntu@ec2-54-208-196-22.compute-1.amazonaws.com 'bash -s' < deploy.sh
     on:
-	branch: master
+       branch: master
