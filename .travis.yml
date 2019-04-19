@@ -8,11 +8,11 @@ jdk:
 #  - name: deploy
 #    if: branch = master
 
-#test:
-#    before_script:
-#	- cd springBootDemo
-#    script:
-#	- mvn verify -B
+test:
+    before_script:
+	- cd springBootDemo
+    script:
+	- mvn verify -B
 
 #deploy:
 #    provider: script
