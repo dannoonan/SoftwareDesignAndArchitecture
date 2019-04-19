@@ -75,6 +75,8 @@ public class ConfirmationFragment extends Fragment {
         return v;
     }
 
+// comment
+
     private void configureUiItems(View v){
 
         createInvoker();
