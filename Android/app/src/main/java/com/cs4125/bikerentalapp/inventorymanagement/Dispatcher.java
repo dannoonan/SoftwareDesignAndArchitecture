@@ -1,6 +1,9 @@
 package com.cs4125.bikerentalapp.inventorymanagement;
 
-import com.cs4125.bikerentalapp.inventorymanagement.mapper.Interceptor;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+
+import com.cs4125.bikerentalapp.inventorymanagement.interceptor.Interceptor;
 
 import java.util.Collection;
 
@@ -12,14 +15,15 @@ public class Dispatcher {
         this.interceptors = interceptors;
     }
 
-    public void register(Interceptor i){
-        interceptors.add(i);
+    public void register(Interceptor interceptor){
+        interceptors.add(interceptor);
     }
 
-    public void unRegister(Interceptor i){
-        interceptors.remove(i);
+    public void unRegister(Interceptor interceptor){
+        interceptors.remove(interceptor);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public void dispatchInterceptor(Context context){
         interceptors.forEach(i -> i.execute(context));
     }

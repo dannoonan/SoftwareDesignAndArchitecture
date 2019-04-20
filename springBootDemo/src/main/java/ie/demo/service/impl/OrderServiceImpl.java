@@ -10,7 +10,10 @@ import ie.demo.mapper.UserMapper;
 import ie.demo.service.BikeState;
 import ie.demo.service.CalculatePayment;
 import ie.demo.service.OrderService;
+import ie.util.NormalStrategy;
+import ie.util.PremiumStrategy;
 import ie.util.StateCode;
+import ie.util.BillingStrategy;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,6 +23,9 @@ import java.util.Date;
 
 @Service
 public class OrderServiceImpl implements OrderService {
+
+	public final int STATUS_PAID = 1;
+	public final int STATUS_UNPAID = 0;
 	
 	@Autowired
 	private OrderMapper orderMapper;
@@ -85,7 +91,7 @@ public class OrderServiceImpl implements OrderService {
 					order.setUserId(userId);
 					order.setOrderTime(new java.util.Date());
 					order.setMoneyConsumed(0);
-					order.setPaidStatus(0);
+					order.setPaidStatus(STATUS_UNPAID);
 
 					int result = orderMapper.placeOrder(order);
 
@@ -115,14 +121,19 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public int bikeReturn(int orderId, Integer latitude, Integer longitude, int studentCardId, Integer nodeId) {
+	public int bikeReturn(int userId, Integer latitude, Integer longitude, int studentCardId, Integer nodeId) {
+		BillingStrategy strategy = decideStrategy(userId);
 		Date now = new Date();
-		Order currentOrder = orderMapper.getOrder(orderId);
+		Order currentOrder = orderMapper.getMostRecentUserOrder(userId);
+
+		if(currentOrder == null) return StateCode.NOT_EXISTS.getCode();
+
 		Date timePlaced = currentOrder.getOrderTime();
-		float minutes = ((now.getTime()/60000) - (timePlaced.getTime()/60000));
-		float amountPaid = calculateDeductions(minutes);
+		float minutes = (float)((now.getTime()/60000.0) - (timePlaced.getTime()/60000.0));
+		float amountPaid = strategy.getActPrice(calculateDeductions(minutes));
 		float balance = studentCardMapper.getBalance(studentCardId);
 		balance = balance - amountPaid;
+
 		if(balance < 0) {
 			return StateCode.INSUFFICIENT_BALANCE.getCode();
 		} else {
@@ -131,13 +142,13 @@ public class OrderServiceImpl implements OrderService {
 			
 			Order order = new Order();
 			order.setMoneyConsumed(amountPaid);
-			order.setPaidStatus(1);
-			order.setOrderId(orderId);
+			order.setPaidStatus(STATUS_PAID);
+			order.setOrderId(currentOrder.getOrderId());
 			
 			int result = orderMapper.setOrder(order);
 			
 			if(result == StateCode.SUCCESS.getCode()) {
-				int bikeId = orderMapper.getBikeId(orderId);
+				int bikeId = currentOrder.getBikeId();
 				String position;
 
 				if(latitude == null && longitude == null) {
@@ -162,6 +173,15 @@ public class OrderServiceImpl implements OrderService {
 			} else  {
 				return StateCode.FAIL.getCode();
 			}
+		}
+	}
+
+	private BillingStrategy decideStrategy(int userId) {
+		int numOrders = orderMapper.getNumOrders(userId);
+		if(numOrders > 2) {
+			return new PremiumStrategy();
+		} else {
+			return new NormalStrategy();
 		}
 	}
 

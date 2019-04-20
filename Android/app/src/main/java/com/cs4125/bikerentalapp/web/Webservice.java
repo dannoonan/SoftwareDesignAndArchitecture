@@ -51,10 +51,8 @@ public interface Webservice {
     @POST("/return}")
     Call<ResponseBody> returnVehicle(@Field("orderId") int orderId,
                                      @Field("latitude") double latitude,
-                                     @Field("longitude") double longitude,
-                                     @Field("amountPaid") double amountPaid,
-                                     @Field("studentCardId") int studentCardId,
-                                     @Field("nodeId") int nodeId);
+                                     @Field("longitude") double longitude);
+
     @FormUrlEncoded
     @POST("/bike/add")
     Call<ResponseBody> addBikes(@Field("numBikes") int numBikes,
@@ -75,6 +73,9 @@ public interface Webservice {
     Call<ResponseBody> reintroduceBikes(@Field("bikeIds") List<Integer> bikIds,
                                         @Field("nodeId") int nodeId);
 
+
+    @GET("/nodes")
+    Call<ResponseBody> getAllNodes();
 
     @GET("/bike")
     Call<ResponseBody> getAllBikes();

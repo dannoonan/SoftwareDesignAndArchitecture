@@ -74,6 +74,15 @@ curl -X PUT -d "username=roryegan&password=password" http://localhost:1234/user
 
 If login is successful the standard 200 code will be returned. If password is incorrect 400 will be returned. If username is not present in the database 404 will be returned.
 
+### Create Bike
+
+To create a new bike, send a POST request to "/bike". Parameters are bikeType and nodeId. As new bikes can only be added to nodes, position defaults to null, as does lastUserId. Bike is automatically available upon creation. Example:
+```
+curl -X POST -d "bikeType=1&nodeId=1" http://localhost:1234/bike
+```
+
+200 code should be returned upon success, otherwise a generic error code as there is no danger of conflicts.
+
 ### Rent Bike
 
 To place a new order, send a POST request to "/rent". Parameters required are id (of the bike to be rented), and userId. Example:
@@ -85,10 +94,10 @@ If successful, code 200 will be returned along with an orderId, if bike or user 
 
 ### Return Bike
 
-To return a bike send a POST request to "return". Required parameters are orderId and studentCardId. Optionally return a nodeId or latitude and longitude values. Whichever is not passed will be set to null. Either nodeId or latitude and longitude must be returned, if nothing passed will raise an error, so pass in either one or the other. Examples:
+To return a bike send a POST request to "return". Required parameters are userId and studentCardId. Optionally return a nodeId or latitude and longitude values. Whichever is not passed will be set to null. Either nodeId or latitude and longitude must be returned, if nothing passed will raise an error, so pass in either one or the other. Examples:
 ```
-curl -X POST -d "orderId=13&studentCardId=115&latitude=1&longitude=1" http://localhost:1234/return
-curl -X POST -d "orderId=13&studentCardId=115&nodeId=1" http://localhost:1234/return
+curl -X POST -d "userId=13&studentCardId=115&latitude=1&longitude=1" http://localhost:1234/return
+curl -X POST -d "userId=27&studentCardId=1122&nodeId=1" http://localhost:1234/return
 ```
 
 ## API
@@ -97,11 +106,11 @@ curl -X POST -d "orderId=13&studentCardId=115&nodeId=1" http://localhost:1234/re
 * register `POST /user` Body required: username, password, studentCardId, userTypeId, email
 * nodes `GET /node`
 * bikeByNodes `GET /node/{nodeId}`
-* creatBike `POST /bike` Body required: bikeType, nodeId, position (ps: position format would be string for instance 120, 129)
+* createBike `POST /bike` Body required: bikeType, nodeId
 * **ABORTED** ~~setStatus `PUT /bike/{bikeId}` Body required: status~~
 * reportBike `POST /report/{bikeId}` Body required: userId, reportText
 * reports `GET /reports`
-* rent `POST /rent/{bikeId}` Body required: userId
+* rent `POST /rent` Body required: id(bikeId), userId
 * reductions `GET /money/{minutes}`
-* return `POST /return` Body required: orderId, latitude, longitude, amountPaid, studentCardId, nodeId
+* return `POST /return` Body required: userId, studentCardId AND: latitude&longitude OR nodeId
 * **ABORTED** ~~playOrder `POST /order` Body required: userName, bikeId, amountPaid~~
