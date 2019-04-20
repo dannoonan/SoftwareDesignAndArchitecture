@@ -57,9 +57,8 @@ public interface Webservice {
                                      @Field("nodeId") int nodeId);
 
     @FormUrlEncoded
-    @POST("/bike/add")
-    Call<ResponseBody> addBikes(@Field("numBikes") int numBikes,
-                                @Field("bikeType") String bikeType,
+    @POST("/bike")
+    Call<ResponseBody> addBikes(@Field("bikeType") String bikeType,
                                 @Field("nodeId") int nodeId);
 
     @FormUrlEncoded

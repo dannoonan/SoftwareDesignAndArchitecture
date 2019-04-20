@@ -86,6 +86,9 @@
         android:name="com.cs4125.bikerentalapp.view.AddBikeFragment"
         android:label="fragment_add_bike"
         tools:layout="@layout/fragment_add_bike" >
+        <action
+            android:id="@+id/action_addBikeFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
     </fragment>
 
 </navigation>

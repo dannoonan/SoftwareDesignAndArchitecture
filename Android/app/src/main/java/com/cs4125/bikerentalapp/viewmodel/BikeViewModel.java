@@ -3,6 +3,7 @@ package com.cs4125.bikerentalapp.viewmodel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 
+import com.cs4125.bikerentalapp.model.entity.BikeCredential;
 import com.cs4125.bikerentalapp.repository.IBikeRepository;
 import com.cs4125.bikerentalapp.web.ResponseBody;
 
@@ -16,5 +17,9 @@ public class BikeViewModel extends ViewModel {
     public LiveData<ResponseBody> getAllBikes(){
 
         return repository.getAllBikes();
+    }
+
+    public LiveData<ResponseBody> addBike(BikeCredential bikeCredential) {
+        return repository.addBike(bikeCredential);
     }
 }

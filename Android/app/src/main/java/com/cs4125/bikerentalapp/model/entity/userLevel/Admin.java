@@ -4,7 +4,7 @@ import com.cs4125.bikerentalapp.model.entity.Visitor.Visitor;
 
 public class Admin implements IType{
 
-    Boolean returnedValue;
+    Boolean booleanValue;
 
     @Override
     public String getType() {
@@ -14,12 +14,12 @@ public class Admin implements IType{
     @Override
     public void accept(Visitor v) {
         if(v.visitAdmin(this).equals("true"))
-            returnedValue=true;
+            booleanValue=true;
         else
-            returnedValue=false;
+            booleanValue=false;
     }
 
     public boolean returnBoolean(){
-        return returnedValue;
+        return booleanValue;
     }
 }

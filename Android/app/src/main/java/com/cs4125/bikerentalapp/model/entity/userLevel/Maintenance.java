@@ -4,7 +4,7 @@ import com.cs4125.bikerentalapp.model.entity.Visitor.Visitor;
 
 public class Maintenance implements IType {
 
-    boolean returnedValue;
+    boolean booleanValue;
 
     @Override
     public String getType() {
@@ -14,12 +14,12 @@ public class Maintenance implements IType {
     @Override
     public void accept(Visitor v) {
         if(v.visitMaintenance(this).equals("true"))
-            returnedValue=true;
+            booleanValue=true;
         else
-            returnedValue=false;
+            booleanValue=false;
     }
 
     public boolean returnBoolean(){
-        return returnedValue;
+        return booleanValue;
     }
 }
