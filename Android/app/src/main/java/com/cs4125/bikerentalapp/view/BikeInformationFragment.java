@@ -42,12 +42,11 @@ public class BikeInformationFragment extends Fragment {
         String position = getArguments().getString("position");
 
         int n;
-        AbstractBikeInfo bikeInfo;
-
         if(node.contains("."))
             n = Integer.parseInt(node.substring(0, node.indexOf(".")));
         else
             n = Integer.parseInt(node);
+        AbstractBikeInfo bikeInfo;
         if(n>0){
             bikeInfo = new BikeInfo(type, node,new LocationKnown());
         }
