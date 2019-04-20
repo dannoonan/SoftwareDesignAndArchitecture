@@ -3,6 +3,9 @@ package com.cs4125.bikerentalapp.model.entity.userLevel;
 import com.cs4125.bikerentalapp.model.entity.Visitor.Visitor;
 
 public class PremiumUser implements IType {
+
+    boolean returnedValue;
+
     @Override
     public String getType() {
         return "Silver";
@@ -10,6 +13,10 @@ public class PremiumUser implements IType {
 
     @Override
     public void accept(Visitor v) {
-        v.visitPremiumUser(this);
+        returnedValue = v.visitPremiumUser(this);
+    }
+
+    public boolean returnBoolean(){
+        return returnedValue;
     }
 }

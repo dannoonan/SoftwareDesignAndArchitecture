@@ -1,9 +1,9 @@
 package com.cs4125.bikerentalapp.model.entity;
 
 import com.cs4125.bikerentalapp.model.entity.userLevel.IType;
-import com.cs4125.bikerentalapp.model.entity.userLevel.MaintenanceAdmin;
+import com.cs4125.bikerentalapp.model.entity.userLevel.Maintenance;
 import com.cs4125.bikerentalapp.model.entity.userLevel.PremiumUser;
-import com.cs4125.bikerentalapp.model.entity.userLevel.StandardAdmin;
+import com.cs4125.bikerentalapp.model.entity.userLevel.Admin;
 import com.cs4125.bikerentalapp.model.entity.userLevel.StandardUser;
 
 public class UserType {
@@ -18,9 +18,9 @@ public class UserType {
             case 2:
                 type = new PremiumUser();
             case 3:
-                type = new StandardAdmin();
+                type = new Admin();
             case 4:
-                type = new MaintenanceAdmin();
+                type = new Maintenance();
             default:
                 type = new StandardUser();
         }
