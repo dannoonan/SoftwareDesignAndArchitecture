@@ -1,12 +1,16 @@
 package ie.demo.inventorymanagement;
 
+import javafx.util.Pair;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 public class ReturnContext extends Context {
+    // TODO: modify return so that bike id is also passed
     private int userId;
+    private int bikeId;
     private Double latitude;
     private Double longitude;
     private int studentCardId;
@@ -17,7 +21,7 @@ public class ReturnContext extends Context {
         super(framework);
     }
 
-    ReturnContext(){}
+    public ReturnContext(){}
 
     @Override
     public String toString(){
@@ -31,8 +35,29 @@ public class ReturnContext extends Context {
                 + "\n";
     }
 
-    private Map<Integer, List<Integer>> getBikesDueForCollections(){
-        return framework.getBikesDueForCollection();
+    public List<Integer> getBikesDueForCollections(Integer nodeId){
+        return framework.getBikesDueForCollection(nodeId);
+    }
+
+    public Map<Integer,Pair<Double,Double>> getNodeLocations(){
+        return framework.getNodeLocations();
+    }
+
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public Integer getNodeId() {
+        return nodeId;
+    }
+
+    public void addBikeDueForCollection(int nodeId){
+        framework.addBikeDueForCollection(nodeId, bikeId);
     }
 
     public static class Builder{
