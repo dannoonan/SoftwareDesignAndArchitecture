@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.cs4125.bikerentalapp.R;
 import com.cs4125.bikerentalapp.model.entity.UserCredential;
+import com.cs4125.bikerentalapp.model.entity.UserType;
 import com.cs4125.bikerentalapp.repository.user.UserRepository;
 import com.cs4125.bikerentalapp.sl.ServiceLocator;
 import com.cs4125.bikerentalapp.viewmodel.RegisterViewModel;
@@ -76,6 +77,7 @@ public class RegisterUserFragment extends Fragment {
                 .setEmail(emailField.getText().toString())
                 .setPassword(passwordField.getText().toString())
                 .setStudentCardId(studentCardId.getText().toString())
+                .setUserType(new UserType(1))
                 .build();
 
         LiveData<ResponseBody> liveResponse = registerViewModel.register(registerCredential);
