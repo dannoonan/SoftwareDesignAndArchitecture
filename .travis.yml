@@ -14,4 +14,4 @@ deploy:
        - scp -i "/tmp/CS4125_ec2_ssh_key" -r springBootDemo/. ubuntu@ec2-54-208-196-22.compute-1.amazonaws.com:~/SoftwareDesignAndArchitecture
     script: ssh -i "/tmp/CS4125_ec2_ssh_key" ubuntu@ec2-54-208-196-22.compute-1.amazonaws.com 'bash -s' < deploy.sh
     on:
-       branch: master
+       branch: integration-tests
