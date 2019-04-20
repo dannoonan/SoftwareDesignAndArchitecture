@@ -11,7 +11,7 @@ deploy:
     provider: script
     skip_cleanup: true
     script: 
-         - eval "$(ssh-agent -s)"
+#         - eval "$(ssh-agent -s)"
          - chmod 600 CS4125_ec2_ssh_key.pem
 #         - scp -i "CS4125_ec2_ssh_key.pem" -r springBootDemo/. ubuntu@ec2-54-208-196-22.compute-1.amazonaws.com:~/SoftwareDesignAndArchitecture
          - ssh-add CS4125_ec2_ssh_key.pem
