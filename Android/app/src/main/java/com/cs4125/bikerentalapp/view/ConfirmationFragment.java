@@ -5,7 +5,9 @@ import android.annotation.SuppressLint;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModelProviders;
 import android.arch.lifecycle.Observer;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -21,6 +23,7 @@ import com.cs4125.bikerentalapp.model.commands.Command;
 import com.cs4125.bikerentalapp.model.commands.Rent;
 import com.cs4125.bikerentalapp.model.commands.Return;
 import com.cs4125.bikerentalapp.model.db_entity.User;
+
 import com.cs4125.bikerentalapp.model.entity.RentReturnDetails;
 import com.cs4125.bikerentalapp.model.invokers.Invoker;
 import com.cs4125.bikerentalapp.model.receivers.Bike;
@@ -52,6 +55,9 @@ public class ConfirmationFragment extends Fragment {
     private ReturnViewModel returnViewModel;
     private static int userId=0;
     private static int studentCardId=0;
+    public static Location location;
+    private static double latitude =0;
+    private static double longitude = 0;
 
 
 
@@ -111,6 +117,19 @@ public class ConfirmationFragment extends Fragment {
 
     public void getDetails(String[] data){
             getUserIds();
+            getLocation();
+            latitude = 0;
+            longitude = 0;
+
+            if(rentOrReturn==1){
+                //Code to assign latitude and longitude to the node's location
+
+            }else if(!location.equals(null)){
+                latitude = getLatitude();
+                longitude = getLongitude();
+            }
+            
+
             vehicleId = Integer.parseInt(data[0]);
             vehicleType = data[1];
             rentReturnDetails = new RentReturnDetails
@@ -119,14 +138,22 @@ public class ConfirmationFragment extends Fragment {
                     .setUserId(userId)
                     .setStudentCardId(studentCardId)
                     .setOrderId(0)
-                    .setLatitude(Integer.parseInt(data[3]))
-                    .setLongitude(Integer.parseInt(data[4]))
+                    .setLatitude(latitude)
+                    .setLongitude(longitude)
                     .setAmountPaid(0)
                     .setNodeId(0)
                     .build();
     }
 
+    private double getLongitude() {
+        double longitude = location.getLongitude();
+        return longitude;
+    }
 
+    private double getLatitude() {
+        double latitude = location.getLatitude();
+        return latitude;
+    }
 
     private void setBikeStatus(){
         LiveData<ResponseBody> liveResponse =  invoker.executeCommand();
@@ -174,6 +201,12 @@ public class ConfirmationFragment extends Fragment {
 
     public static void setStudentCardId(int id){
         studentCardId = id;
+    }
+
+
+    public void getLocation(){
+        MainActivity main = (MainActivity) getActivity();
+        location = main.getLocation();
     }
 
     private void showToast(String message){
