@@ -55,8 +55,8 @@ public class OrderController {
 	
 	@RequestMapping(value= "/return", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
 	public MsgResponse returnBike(@RequestParam(value = "userId") int userId,
-			@RequestParam(value = "latitude", required = false) Integer latitude,
-			@RequestParam(value = "longitude", required = false) Integer longitude,
+			@RequestParam(value = "latitude", required = false) Double latitude,
+			@RequestParam(value = "longitude", required = false) Double longitude,
 			@RequestParam(value = "studentCardId") int studentCardId,
 			@RequestParam(value = "nodeId", required = false) Integer nodeId) {
 

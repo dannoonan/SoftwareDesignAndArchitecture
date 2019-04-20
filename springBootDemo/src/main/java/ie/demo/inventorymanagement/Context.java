@@ -2,7 +2,7 @@ package ie.demo.inventorymanagement;
 
 // Context interface
 public class Context {
-    private Framework framework;
+    protected Framework framework;
 
     public Context(Framework framework){
         this.framework = framework;

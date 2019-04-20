@@ -12,4 +12,8 @@ public class CollectionSchedulerInterceptor implements Interceptor<ReturnContext
     public void execute(ReturnContext context) {
 
     }
+
+    private int getNearestNode(double latitude, double longitude){
+
+    }
 }

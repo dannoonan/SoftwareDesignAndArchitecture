@@ -2,12 +2,13 @@ package ie.demo.inventorymanagement;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 public class ReturnContext extends Context {
     private int userId;
-    private Integer latitude;
-    private Integer longitude;
+    private Double latitude;
+    private Double longitude;
     private int studentCardId;
     private Integer nodeId;
     private Date time;
@@ -30,10 +31,14 @@ public class ReturnContext extends Context {
                 + "\n";
     }
 
+    private Map<Integer, List<Integer>> getBikesDueForCollections(){
+        return framework.getBikesDueForCollection();
+    }
+
     public static class Builder{
         private int userId;
-        private Integer latitude;
-        private Integer longitude;
+        private Double latitude;
+        private Double longitude;
         private int studentCardId;
         private Integer nodeId;
 
@@ -42,12 +47,12 @@ public class ReturnContext extends Context {
             return this;
         }
 
-        public Builder setLatitude(Integer latitude) {
+        public Builder setLatitude(Double latitude) {
             this.latitude = latitude;
             return this;
         }
 
-        public Builder setLongitude(Integer longitude) {
+        public Builder setLongitude(Double longitude) {
             this.longitude = longitude;
             return this;
         }

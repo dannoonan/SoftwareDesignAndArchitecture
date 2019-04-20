@@ -28,6 +28,10 @@ public class Framework {
         return instance;
     }
 
+    public Map<Integer, List<Integer>> getBikesDueForCollection(){
+        return bikesDueForCollection;
+    }
+
     public void handleRequest(Context context){
         dispatchers.forEach(d -> d.dispatchInterceptor(context));
     }
