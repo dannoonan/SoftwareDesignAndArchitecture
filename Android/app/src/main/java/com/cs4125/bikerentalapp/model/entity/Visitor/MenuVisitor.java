@@ -5,21 +5,21 @@ import com.cs4125.bikerentalapp.model.entity.userLevel.Maintenance;
 import com.cs4125.bikerentalapp.model.entity.userLevel.StandardUser;
 import com.cs4125.bikerentalapp.model.entity.userLevel.PremiumUser;
 
-public class MenuVisitor implements Visitor {
+public class MenuVisitor implements Visitor<String> {
 
     @Override
-    public boolean visitStandardUser(StandardUser standard) { return false; }
+    public String visitStandardUser(StandardUser standard) { return "false"; }
 
     @Override
-    public boolean visitPremiumUser(PremiumUser premium) { return false; }
+    public String visitPremiumUser(PremiumUser premium) { return "false"; }
 
     @Override
-    public boolean visitAdmin(Admin admin) {
-        return true;
+    public String visitAdmin(Admin admin) {
+        return "true";
     }
 
     @Override
-    public boolean visitMaintenance(Maintenance miantenance) {
-        return false;
+    public String visitMaintenance(Maintenance miantenance) {
+        return "false";
     }
 }

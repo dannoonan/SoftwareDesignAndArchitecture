@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.cs4125.bikerentalapp.R;
 import com.cs4125.bikerentalapp.model.db_entity.User;
@@ -74,10 +73,8 @@ public class MenuFragment extends Fragment {
                 if(user!=null) {
                     UserType userType = new UserType(Integer.parseInt(user.getUserType()));
                     userType.getLevel().accept(visitor);
-                    if(userType.getLevel().returnBoolean())
-                        Toast.makeText(getContext(), "true", Toast.LENGTH_SHORT).show();
-                    else
-                        Toast.makeText(getContext(), "false", Toast.LENGTH_SHORT).show();
+                    if(!userType.getLevel().returnBoolean())
+                        addBikeButton.setVisibility(View.GONE);
                 }
             }
         });

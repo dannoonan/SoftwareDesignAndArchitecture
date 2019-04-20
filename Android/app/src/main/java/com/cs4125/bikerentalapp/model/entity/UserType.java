@@ -15,14 +15,19 @@ public class UserType {
         switch(levelInt) {
             case 1:
                 type = new StandardUser();
+                break;
             case 2:
                 type = new PremiumUser();
+                break;
             case 3:
                 type = new Admin();
+                break;
             case 4:
                 type = new Maintenance();
+                break;
             default:
                 type = new StandardUser();
+                break;
         }
     }
 

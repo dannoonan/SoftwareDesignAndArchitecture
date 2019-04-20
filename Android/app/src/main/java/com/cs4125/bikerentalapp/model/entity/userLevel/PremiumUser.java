@@ -13,7 +13,10 @@ public class PremiumUser implements IType {
 
     @Override
     public void accept(Visitor v) {
-        returnedValue = v.visitPremiumUser(this);
+        if(v.visitPremiumUser(this).equals("true"))
+            returnedValue=true;
+        else
+            returnedValue=false;
     }
 
     public boolean returnBoolean(){

@@ -13,7 +13,10 @@ public class Admin implements IType{
 
     @Override
     public void accept(Visitor v) {
-        returnedValue = v.visitAdmin(this);
+        if(v.visitAdmin(this).equals("true"))
+            returnedValue=true;
+        else
+            returnedValue=false;
     }
 
     public boolean returnBoolean(){
