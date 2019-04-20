@@ -70,7 +70,11 @@ public class FindBikeFragment extends Fragment {
                 String id = t.get("bikeId").toString().substring(0, t.get("bikeId").toString().indexOf("."));
                 String type = t.get("bikeType").toString();
                 String node = t.get("nodeId").toString();
-                String position = t.get("position").toString();
+                String position;
+                if(t.get("position")==null)
+                    position="0,0";
+                else
+                    position=t.get("position").toString();
                 bikeList.add(id + "/" + type + "/" + node + "/" + position);
             }
             catch(Exception e){
