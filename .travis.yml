@@ -12,6 +12,6 @@ deploy:
     skip_cleanup: true
     before_script:
        - scp -i "/tmp/CS4125_ec2_ssh_key" -r springBootDemo/. ubuntu@ec2-54-208-196-22.compute-1.amazonaws.com:~/SoftwareDesignAndArchitecture
-    script: ssh -i "/tmp/CS4125_ec2_ssh_key" ubuntu@ec2-54-208-196-22.compute-1.amazonaws.com 'bash -s' < deploy.sh
+    script: - ssh -oStrictHostKeyChecking=no -i "CS4125_ec2_ssh_key" ubuntu@ec2-54-208-196-22.compute-1.amazonaws.com "cd SoftwareDesignAndArchitecture/springBootDemo && mvn clean install -DskipTests && nohup mvn spring-boot:run -DskipTests &"
     on:
        branch: integration-tests
