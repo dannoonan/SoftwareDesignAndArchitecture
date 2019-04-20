@@ -14,7 +14,7 @@ deploy:
 #         - eval "$(ssh-agent -s)"
 #         - chmod 600 CS4125_ec2_ssh_key.pem
 #         - scp -i "CS4125_ec2_ssh_key.pem" -r springBootDemo/. ubuntu@ec2-54-208-196-22.compute-1.amazonaws.com:~/SoftwareDesignAndArchitecture
-#         - ssh-add CS4125_ec2_ssh_key.pem
+         - ssh-add CS4125_ec2_ssh_key.pem
          - ssh -oStrictHostKeyChecking=no -i "CS4125_ec2_ssh_key.pem" ubuntu@ec2-54-208-196-22.compute-1.amazonaws.com "cd SoftwareDesignAndArchitecture/springBootDemo && mvn clean install -DskipTests && nohup mvn spring-boot:run -DskipTests &"
     on:
        branch: integration-tests
