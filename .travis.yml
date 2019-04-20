@@ -1,31 +1,19 @@
 language: java
-
 jdk:
 - oraclejdk8
-
 before_script: cd springBootDemo
 script: mvn verify -B
-
-
-#stages:
-#  - test
-#  - name: deploy
-#    if: branch = master
-
-#test:
-#    before_script:
-#	- cd springBootDemo
-#    script:
-#	- mvn verify -B
-
-before_deploy:
-     - openssl aes-256-cbc -K CS4125_ec2_ssh_key.pem.enc -iv CS4125_ec2_ssh_key.pem.enc_iv -in CS4125_ec2_ssh_key.pem.enc -out /tmp/CS4125_ec2_ssh_key -d
+before_install:
+- openssl aes-256-cbc -K $encrypted_4611c519b298_key -iv $encrypted_4611c519b298_iv
+  -in CS4125_ec2_ssh_key.pem.enc -out CS4125_ec2_ssh_key.pem -d
 
 deploy:
     provider: script
     skip_cleanup: true
     before_script:
        - scp -i "/tmp/CS4125_ec2_ssh_key" -r springBootDemo/. ubuntu@ec2-54-208-196-22.compute-1.amazonaws.com:~/SoftwareDesignAndArchitecture
-    script: ssh -i "/tmp/CS4125_ec2_ssh_key" ubuntu@ec2-54-208-196-22.compute-1.amazonaws.com 'bash -s' < deploy.sh
+    script: 
+       - ssh-add ./CS4125_ec2_ssh_key
+       - ssh -oStrictHostKeyChecking=no -i "CS4125_ec2_ssh_key" ubuntu@ec2-54-208-196-22.compute-1.amazonaws.com "cd SoftwareDesignAndArchitecture/springBootDemo && mvn clean install -DskipTests && nohup mvn spring-boot:run -DskipTests &"
     on:
        branch: master
