@@ -17,7 +17,7 @@ before_deploy:
 - chmod 600 cs4227_key.pem
 - ssh-add cs4227_key.pem
 #- scp -oStrictHostKeyChecking=no -i "cs4227_key.pem" -r springBootDemo/. ubuntu@ec2-54-208-196-22.compute-1.amazonaws.com:~/#SoftwareDesignAndArchitecture
-- rsync -azvL --progress -e "ssh -i cs4227_key.pem" springBootDemo/* ubuntu@ec2-54-208-196-22.compute-1.amazonaws.com:/home/ubuntu/SoftwareDesignAndArchitecture
+- rsync -azvL --progress -e "ssh -oStrictHostKeyChecking=no -i cs4227_key.pem" springBootDemo/* ubuntu@ec2-54-208-196-22.compute-1.amazonaws.com:/home/ubuntu/SoftwareDesignAndArchitecture
 deploy:
   provider: script
   skip_cleanup: true
