@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import ie.demo.domain.Node;
 import ie.demo.inventorymanagement.interceptor.Interceptor;
 import ie.demo.inventorymanagement.interceptor.LoggingInterceptor;
-import javafx.util.Pair;
 
 import javax.annotation.PostConstruct;
 import java.util.*;
