@@ -16,6 +16,7 @@ before_deploy:
 - eval "$(ssh-agent -s)"
 - chmod 600 cs4227_key.pem
 - ssh-add cs4227_key.pem
+- scp -i "cs4227_key.pem" -r springBootDemo/. ubuntu@ec2-54-208-196-22.compute-1.amazonaws.com:~/SoftwareDesignAndArchitecture
 deploy:
   provider: script
   skip_cleanup: true
