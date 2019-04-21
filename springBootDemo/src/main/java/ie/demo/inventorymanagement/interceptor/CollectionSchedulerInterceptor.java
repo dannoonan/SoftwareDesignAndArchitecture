@@ -1,7 +1,7 @@
 package ie.demo.inventorymanagement.interceptor;
 
+import ie.demo.inventorymanagement.Pair;
 import ie.demo.inventorymanagement.ReturnContext;
-import javafx.util.Pair;
 
 import java.util.Map;
 
@@ -31,8 +31,8 @@ public class CollectionSchedulerInterceptor implements Interceptor<ReturnContext
         double longitude = context.getLongitude();
 
         for (Integer nodeId : locations.keySet()) {
-            double lat = locations.get(nodeId).getKey();
-            double lon = locations.get(nodeId).getValue();
+            double lat = locations.get(nodeId).getFirst();
+            double lon = locations.get(nodeId).getSecond();
             double distance = distance(latitude, longitude, lat, lon, 0, 0);
             if (distance < nearestDistance){
                 nearestDistance = distance;

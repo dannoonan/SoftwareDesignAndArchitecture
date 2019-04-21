@@ -1,7 +1,5 @@
 package ie.demo.inventorymanagement;
 
-import javafx.util.Pair;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
