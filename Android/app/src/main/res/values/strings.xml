@@ -25,4 +25,5 @@
     <string name="username">Username</string>
     <string name="email">Email</string>
     <string name="studentCardNum">Student card number</string>
+    <string name="title_activity_bike_locator">BikeLocator</string>
 </resources>

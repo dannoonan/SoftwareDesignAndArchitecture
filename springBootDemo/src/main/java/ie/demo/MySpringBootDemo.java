@@ -1,6 +1,5 @@
 package ie.demo;
 
-import com.sun.corba.se.impl.protocol.giopmsgheaders.FragmentMessage;
 import ie.demo.inventorymanagement.Framework;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;

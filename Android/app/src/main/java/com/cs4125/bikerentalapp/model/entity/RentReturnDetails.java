@@ -5,8 +5,8 @@ public class RentReturnDetails {
 
     private int orderId;
     private int nodeId;
-    private int latitude;
-    private int longitude;
+    private double latitude;
+    private double longitude;
     private int studentCardId;
     private int userId;
     private int vehicleId;
@@ -17,8 +17,8 @@ public class RentReturnDetails {
         private int vehicleId;
         private int orderId;
         private int nodeId;
-        private int latitude;
-        private int longitude;
+        private double latitude;
+        private double longitude;
         private int studentCardId;
         private double amountPaid;
 
@@ -37,12 +37,12 @@ public class RentReturnDetails {
             return this;
         }
 
-        public Builder setLatitude(int latitude) {
+        public Builder setLatitude(double latitude) {
             this.latitude = latitude;
             return this;
         }
 
-        public Builder setLongitude(int longitude) {
+        public Builder setLongitude(double longitude) {
             this.longitude = longitude;
             return this;
         }
@@ -86,11 +86,11 @@ public class RentReturnDetails {
         return nodeId;
     }
 
-    public int getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public int getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
