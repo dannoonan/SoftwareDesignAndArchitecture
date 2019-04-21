@@ -11,7 +11,6 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 public class MySpringBootDemo extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
-        Framework.getInstance(); // Create instance of interception framework to be used throughout
         SpringApplication.run(MySpringBootDemo.class, args);
     }
 }

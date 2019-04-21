@@ -1,11 +1,11 @@
 package ie.demo.inventorymanagement;
 
 public class ReportContext extends Context{
-    ReportContext(Framework framework) {
+    public ReportContext(Framework framework) {
         super(framework);
     }
 
-    ReportContext(){}
+    public ReportContext(){}
 
     @Override
     public String toString(){

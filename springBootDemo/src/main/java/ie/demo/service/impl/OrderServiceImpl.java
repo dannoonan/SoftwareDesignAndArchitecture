@@ -121,7 +121,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public int bikeReturn(int userId, Integer latitude, Integer longitude, int studentCardId, Integer nodeId) {
+	public int bikeReturn(int userId, Double latitude, Double longitude, int studentCardId, Integer nodeId) {
 		BillingStrategy strategy = decideStrategy(userId);
 		Date now = new Date();
 		Order currentOrder = orderMapper.getMostRecentUserOrder(userId);

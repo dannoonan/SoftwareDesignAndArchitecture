@@ -15,7 +15,7 @@ public class Dispatcher<T extends Context> {
         type = c.getClass();
     }
 
-    void register(Interceptor<T> interceptor){
+    public void register(Interceptor<T> interceptor){
         interceptors.add(interceptor);
     }
 

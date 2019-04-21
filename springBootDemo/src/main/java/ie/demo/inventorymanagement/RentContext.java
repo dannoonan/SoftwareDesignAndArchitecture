@@ -12,7 +12,7 @@ public class RentContext extends Context {
         super(framework);
     }
 
-    RentContext(){super();}
+    public RentContext(){super();}
 
     @Override
     public String toString(){
