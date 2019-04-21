@@ -7,13 +7,14 @@ before_install:
 - openssl aes-256-cbc -K $encrypted_4611c519b298_key -iv $encrypted_4611c519b298_iv
   -in CS4125_ec2_ssh_key.pem.enc -out CS4125_ec2_ssh_key.pem -d
 
+before_deploy:
+     - eval "$(ssh-agent -s)"
+     - chmod 600 CS4125_ec2_ssh_key.pem
+     - ssh-add CS4125_ec2_ssh_key.pem
+
 deploy:
     provider: script
     skip_cleanup: true
-    before_script:
-         - eval "$(ssh-agent -s)"
-         - chmod 600 CS4125_ec2_ssh_key.pem
-         - ssh-add CS4125_ec2_ssh_key.pem
     script:
 #         - scp -i "CS4125_ec2_ssh_key.pem" -r springBootDemo/. ubuntu@ec2-54-208-196-22.compute-1.amazonaws.com:~/SoftwareDesignAndArchitecture
          - ssh -oStrictHostKeyChecking=no -i "CS4125_ec2_ssh_key.pem" ubuntu@ec2-54-208-196-22.compute-1.amazonaws.com "cd SoftwareDesignAndArchitecture/springBootDemo && mvn clean install -DskipTests && nohup mvn spring-boot:run -DskipTests &"
