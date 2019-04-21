@@ -19,7 +19,7 @@ public class MenuVisitor implements Visitor<String> {
     }
 
     @Override
-    public String visitMaintenance(Maintenance msintenance) {
+    public String visitMaintenance(Maintenance miantenance) {
         return "false";
     }
 }
