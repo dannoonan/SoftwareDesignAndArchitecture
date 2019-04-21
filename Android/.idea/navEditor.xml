@@ -8,6 +8,18 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
+                  <entry key="addBikeFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="12" />
+                            <option name="y" value="12" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="bikeInformationFragment">
                     <value>
                       <LayoutPositions>
@@ -78,6 +90,11 @@
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="action_menuFragment_to_addBikeFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_menuFragment_to_findBikeFragment">
                               <value>
                                 <LayoutPositions />
