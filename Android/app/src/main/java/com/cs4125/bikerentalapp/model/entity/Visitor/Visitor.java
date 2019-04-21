@@ -9,5 +9,5 @@ public interface Visitor<T> {
     T visitStandardUser(StandardUser standard);
     T visitPremiumUser(PremiumUser premium);
     T visitAdmin(Admin admin);
-    T visitMaintenance(Maintenance miantenance);
+    T visitMaintenance(Maintenance maintenance);
 }
