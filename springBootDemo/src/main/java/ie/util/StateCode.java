@@ -8,7 +8,7 @@ public enum StateCode {
     NOT_AVAILABLE(-3),
 	ALREADY_EXISTS(409),
 	ERROR(404),
-	USER_NOT_FOUND(400),
+	BAD_REQUEST(400),
 	PROCESS_SUCCESS(200);
 	
     private int code;

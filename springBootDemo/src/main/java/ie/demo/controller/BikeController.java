@@ -102,7 +102,7 @@ public class BikeController {
 		int result = bikeService.scheduleCollection(bikeIds, nodeId, driverId);
 		if(result == StateCode.SUCCESS.getCode()) {
 			return MsgResponse.success();
-		} else if(result == StateCode.USER_NOT_FOUND.getCode()) {
+		} else if(result == StateCode.BAD_REQUEST.getCode()) {
 			return MsgResponse.fail(result).add("bad request", "Driver ID provided is incorrect.");
 		} else if(result == StateCode.ERROR.getCode()) {
 			return MsgResponse.fail(result).add("bad request", "One of the provided Bikes was either not found or has already been scheduled for collection.");

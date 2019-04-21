@@ -62,6 +62,7 @@ public class ReturnContext extends Context {
 
     public static class Builder{
         private int userId;
+        private int bikeId;
         private Double latitude;
         private Double longitude;
         private int studentCardId;
@@ -69,6 +70,11 @@ public class ReturnContext extends Context {
 
         public Builder setUserId(int userId) {
             this.userId = userId;
+            return this;
+        }
+
+        public Builder setBikeId(int bikeId) {
+            this.bikeId = bikeId;
             return this;
         }
 
@@ -96,6 +102,7 @@ public class ReturnContext extends Context {
             ReturnContext context = new ReturnContext(framework);
 
             context.userId = this.userId;
+            context.bikeId = this.bikeId;
             context.latitude = this.latitude;
             context.longitude = this.longitude;
             context.nodeId = this.nodeId;

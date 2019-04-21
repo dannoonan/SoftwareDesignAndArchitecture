@@ -3,9 +3,6 @@ package ie.demo.controller;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
-import ie.demo.domain.StandardAdmin;
-import ie.demo.service.AbstractUserFactory;
-import ie.demo.service.impl.FactoryProvider;
 import ie.demo.service.impl.UserServiceImpl;
 import ie.util.MsgResponse;
 
@@ -95,7 +92,7 @@ public class UserControllerUnitTest {
 
     @Test
     public void loginNotFound() {
-        result.add(0,"" + StateCode.USER_NOT_FOUND.getCode());
+        result.add(0,"" + StateCode.BAD_REQUEST.getCode());
         when(userServiceMock.login("test","password")).thenReturn(result);
         MsgResponse msgResponse = controller.login("test","password");
         assertEquals(404, msgResponse.getCode());
