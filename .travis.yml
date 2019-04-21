@@ -24,4 +24,4 @@ deploy:
     "cd SoftwareDesignAndArchitecture && git pull && cd springBootDemo && mvn clean install -DskipTests
     && nohup mvn spring-boot:run -DskipTests &"
   on:
-    branch: master
+    branch: fix-import
