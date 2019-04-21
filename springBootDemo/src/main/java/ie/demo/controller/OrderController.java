@@ -55,14 +55,16 @@ public class OrderController {
 	
 	@RequestMapping(value= "/return", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
 	public MsgResponse returnBike(@RequestParam(value = "userId") int userId,
-			@RequestParam(value = "latitude", required = false) Double latitude,
-			@RequestParam(value = "longitude", required = false) Double longitude,
-			@RequestParam(value = "studentCardId") int studentCardId,
-			@RequestParam(value = "nodeId", required = false) Integer nodeId) {
+								  @RequestParam(value = "bikeId", required = false) int bikeId,
+								  @RequestParam(value = "latitude", required = false) Double latitude,
+								  @RequestParam(value = "studentCardId") int studentCardId,
+								  @RequestParam(value = "longitude", required = false) Double longitude,
+								  @RequestParam(value = "nodeId", required = false) Integer nodeId) {
 
 		Framework framework = Framework.getInstance();
 		framework.handleRequest(new ReturnContext.Builder()
 				.setUserId(userId)
+				.setBikeId(bikeId)
 				.setLatitude(latitude)
 				.setLongitude(longitude)
 				.setStudentCardId(studentCardId)
@@ -72,12 +74,12 @@ public class OrderController {
 		if((latitude == null && longitude == null) && nodeId == null) {
 			return MsgResponse.fail(StateCode.ERROR.getCode()).add("error", "invalid location");
 		} else {
-			int result = orderService.bikeReturn(userId, latitude, longitude, studentCardId, nodeId);
+			int result = orderService.bikeReturn(userId, bikeId, latitude, longitude, studentCardId, nodeId);
 			if(result == StateCode.NOT_EXISTS.getCode()){
 				return MsgResponse.fail(StateCode.NOT_EXISTS.getCode()).add("error", "cannot return vehicle - none rented");
 			}
 			if(result == StateCode.INSUFFICIENT_BALANCE.getCode()) {
-				return MsgResponse.fail(StateCode.ERROR.getCode()).add("error", "balance is not enough");
+				return MsgResponse.fail(StateCode.BAD_REQUEST.getCode()).add("error", "balance is not enough");
 			} else if(result == StateCode.FAIL.getCode()) {
 				return MsgResponse.fail(StateCode.ERROR.getCode()).add("error", "try again");
 			} else {

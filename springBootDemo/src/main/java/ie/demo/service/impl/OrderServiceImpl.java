@@ -121,10 +121,10 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public int bikeReturn(int userId, Double latitude, Double longitude, int studentCardId, Integer nodeId) {
+	public int bikeReturn(int userId, int bikeId, Double latitude, Double longitude, int studentCardId, Integer nodeId) {
 		BillingStrategy strategy = decideStrategy(userId);
 		Date now = new Date();
-		Order currentOrder = orderMapper.getMostRecentUserOrder(userId);
+		Order currentOrder = orderMapper.getMostRecentOrder(userId, bikeId);
 
 		if(currentOrder == null) return StateCode.NOT_EXISTS.getCode();
 
@@ -148,7 +148,6 @@ public class OrderServiceImpl implements OrderService {
 			int result = orderMapper.setOrder(order);
 			
 			if(result == StateCode.SUCCESS.getCode()) {
-				int bikeId = currentOrder.getBikeId();
 				String position;
 
 				if(latitude == null && longitude == null) {

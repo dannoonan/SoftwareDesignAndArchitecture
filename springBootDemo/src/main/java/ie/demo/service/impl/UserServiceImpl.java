@@ -73,7 +73,7 @@ public class UserServiceImpl implements UserService {
 				}
 			}
 			else {
-				result.add(0,"" + StateCode.USER_NOT_FOUND.getCode());
+				result.add(0,"" + StateCode.BAD_REQUEST.getCode());
 			}
 		}
 

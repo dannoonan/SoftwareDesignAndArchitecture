@@ -76,7 +76,7 @@ public class BikeServiceImpl implements BikeService {
 		int result;
 
 		if(userMapper.findUserType(driverId) != 4) {
-			result = StateCode.USER_NOT_FOUND.getCode();
+			result = StateCode.BAD_REQUEST.getCode();
 		} else {
 
 			try {
