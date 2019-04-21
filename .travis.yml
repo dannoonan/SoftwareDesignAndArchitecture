@@ -8,6 +8,7 @@ before_install:
   -in CS4125_ec2_ssh_key.pem.enc -out CS4125_ec2_ssh_key.pem -d
 
 before_deploy:
+     - cd ..
      - pwd
      - ls
      - eval "$(ssh-agent -s)"
