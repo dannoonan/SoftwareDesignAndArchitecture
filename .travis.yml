@@ -16,7 +16,6 @@ before_deploy:
 - eval "$(ssh-agent -s)"
 - chmod 600 cs4227_key.pem
 - ssh-add cs4227_key.pem
-#- scp -oStrictHostKeyChecking=no -i "cs4227_key.pem" -r springBootDemo/. ubuntu@ec2-54-208-196-22.compute-1.amazonaws.com:~/#SoftwareDesignAndArchitecture
 - rsync -azvL --progress -e "ssh -oStrictHostKeyChecking=no -i cs4227_key.pem" springBootDemo/* ubuntu@ec2-54-208-196-22.compute-1.amazonaws.com:/home/ubuntu/SoftwareDesignAndArchitecture
 deploy:
   provider: script
@@ -26,4 +25,4 @@ deploy:
     "cd SoftwareDesignAndArchitecture/springBootDemo && mvn clean install -DskipTests
     && nohup mvn spring-boot:run -DskipTests &"
   on:
-    branch: integration-tests
+    branch: master
