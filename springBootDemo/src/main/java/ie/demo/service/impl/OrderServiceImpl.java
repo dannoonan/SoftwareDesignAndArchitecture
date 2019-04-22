@@ -122,7 +122,7 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public int bikeReturn(int userId, int bikeId, Double latitude, Double longitude, int studentCardId, Integer nodeId) {
-		BillingStrategy strategy = decideStrategy(userId);
+		BillingStrategyContext strategyContext = decideStrategy(userId);
 		Date now = new Date();
 		Order currentOrder = orderMapper.getMostRecentOrder(userId, bikeId);
 
@@ -130,7 +130,7 @@ public class OrderServiceImpl implements OrderService {
 
 		Date timePlaced = currentOrder.getOrderTime();
 		float minutes = (float)((now.getTime()/60000.0) - (timePlaced.getTime()/60000.0));
-		float amountPaid = strategy.getActPrice(calculateDeductions(minutes));
+		float amountPaid = strategyContext.executeStrategy(calculateDeductions(minutes));
 		float balance = studentCardMapper.getBalance(studentCardId);
 		balance = balance - amountPaid;
 
@@ -175,12 +175,12 @@ public class OrderServiceImpl implements OrderService {
 		}
 	}
 
-	private BillingStrategy decideStrategy(int userId) {
+	private BillingStrategyContext decideStrategy(int userId) {
 		int userType = userMapper.findUserType(userId);
 		if(userType == 2) {
-			return new PremiumStrategy();
+			return new BillingStrategyContext(new PremiumStrategy());
 		} else {
-			return new NormalStrategy();
+			return new BillingStrategyContext(new NormalStrategy());
 		}
 	}
 
