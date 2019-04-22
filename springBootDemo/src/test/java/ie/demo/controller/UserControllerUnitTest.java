@@ -51,9 +51,6 @@ public class UserControllerUnitTest {
 
     @Test
     public void insertUserFailure() {
-        when(factory.createUser("unittest","test", 12,
-                3, "test@gmail.com")).thenReturn(mockUser);
-        when(userServiceMock.register(mockUser)).thenReturn(0);
         MsgResponse msgResponse = controller.insertUser("unittest","test", 12,
                 3, "test@gmail.com");
         assertEquals(0, msgResponse.getCode());
