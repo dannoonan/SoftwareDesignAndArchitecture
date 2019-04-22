@@ -56,7 +56,6 @@ ie/demo/controller/BikeController.class
 ie/demo/inventorymanagement/RentContext$Builder.class
 ie/demo/domain/StandardCustomer.class
 ie/demo/service/UserService.class
-ie/demo/domain/UserBuilder.class
 ie/demo/domain/Collection.class
 ie/demo/inventorymanagement/ReportContext.class
 ie/demo/inventorymanagement/Context.class

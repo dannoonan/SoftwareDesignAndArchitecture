@@ -3,6 +3,8 @@ package ie.demo.controller;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
+import ie.demo.domain.StandardAdmin;
+import ie.demo.service.impl.AdminUserFactory;
 import ie.demo.service.impl.UserServiceImpl;
 import ie.util.MsgResponse;
 
@@ -21,11 +23,11 @@ import java.util.List;
 @RunWith(MockitoJUnitRunner.class)
 public class UserControllerUnitTest {
 
-//    @Mock
-//    private FactoryProvider fp;
-//
-//    @Mock
-//    private StandardAdmin mockUser;
+    @Mock
+    private StandardAdmin mockUser;
+
+    @Mock
+    private AdminUserFactory factory;
 
     @Mock
     private UserServiceImpl userServiceMock;
@@ -47,40 +49,15 @@ public class UserControllerUnitTest {
     }
 
 
-//    @Test
-//    public void insertUserSuccess() {
-////        User mockUser = new StandardAdmin(Mockito.anyString(),Mockito.anyString(), Mockito.anyInt(),
-////                Mockito.anyInt(), Mockito.anyString());
-//        when(fp.getFactory(1)).thenReturn(new AdminUserFactory());
-//        when(factory.createUser(Mockito.anyString(),Mockito.anyString(), Mockito.anyInt(),
-//                Mockito.anyInt(), Mockito.anyString())).thenReturn(mockUser);
-////        when(factory.createUser("unittest","test", 12,
-////                1, "test@gmail.com")).thenReturn(mockUser);
-//        when(userServiceMock.register(mockUser)).thenReturn(1);
-//        MsgResponse msgResponse = controller.insertUser("unittest","test", 12,
-//                1, "test@gmail.com");
-//        assertEquals(200, msgResponse.getCode());
-//    }
-//
-//    @Test
-//    public void insertUserConflict() {
-//        when(factory.createUser(Mockito.anyString(),Mockito.anyString(), Mockito.anyInt(),
-//                Mockito.anyInt(), Mockito.anyString())).thenReturn(mockUser);
-//        when(userServiceMock.register(mockUser)).thenReturn(409);
-//        MsgResponse msgResponse = controller.insertUser(Mockito.anyString(),Mockito.anyString(), Mockito.anyInt(),
-//                Mockito.anyInt(), Mockito.anyString());
-//        assertEquals(409, msgResponse.getCode());
-//    }
-//
-//    @Test
-//    public void insertUserFailure() {
-//        when(factory.createUser(Mockito.anyString(),Mockito.anyString(), Mockito.anyInt(),
-//                Mockito.anyInt(), Mockito.anyString())).thenReturn(mockUser);
-//        when(userServiceMock.register(mockUser)).thenReturn(400);
-//        MsgResponse msgResponse = controller.insertUser(Mockito.anyString(),Mockito.anyString(), Mockito.anyInt(),
-//                Mockito.anyInt(), Mockito.anyString());
-//        assertEquals(400, msgResponse.getCode());
-//    }
+    @Test
+    public void insertUserFailure() {
+        when(factory.createUser("unittest","test", 12,
+                3, "test@gmail.com")).thenReturn(mockUser);
+        when(userServiceMock.register(mockUser)).thenReturn(0);
+        MsgResponse msgResponse = controller.insertUser("unittest","test", 12,
+                3, "test@gmail.com");
+        assertEquals(0, msgResponse.getCode());
+    }
 
     @Test
     public void loginSuccess() {
