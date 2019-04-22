@@ -176,8 +176,8 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	private BillingStrategy decideStrategy(int userId) {
-		int numOrders = orderMapper.getNumOrders(userId);
-		if(numOrders > 2) {
+		int userType = userMapper.findUserType(userId);
+		if(userType == 2) {
 			return new PremiumStrategy();
 		} else {
 			return new NormalStrategy();
