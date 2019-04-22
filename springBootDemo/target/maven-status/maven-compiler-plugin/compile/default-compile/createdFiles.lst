@@ -24,6 +24,7 @@ ie/demo/domain/Node.class
 ie/demo/inventorymanagement/Dispatcher.class
 ie/demo/domain/StandardAdmin.class
 ie/demo/service/impl/FreePayment.class
+ie/demo/inventorymanagement/Pair.class
 ie/demo/service/impl/BikeContext.class
 ie/demo/service/impl/OrderServiceImpl.class
 ie/demo/domain/StudentCard.class
@@ -41,6 +42,7 @@ ie/util/BillingStrategy.class
 ie/demo/service/impl/BikeAvailableState.class
 ie/demo/service/impl/ConcreteBikeFactory.class
 ie/demo/service/impl/LessOneHourPayment.class
+ie/demo/service/impl/BillingStrategyContext.class
 ie/demo/service/impl/GreaterOneHourPayment.class
 ie/demo/domain/Order.class
 ie/demo/mapper/NodeMapper.class
@@ -54,6 +56,7 @@ ie/demo/controller/BikeController.class
 ie/demo/inventorymanagement/RentContext$Builder.class
 ie/demo/domain/StandardCustomer.class
 ie/demo/service/UserService.class
+ie/demo/domain/UserBuilder.class
 ie/demo/domain/Collection.class
 ie/demo/inventorymanagement/ReportContext.class
 ie/demo/inventorymanagement/Context.class
