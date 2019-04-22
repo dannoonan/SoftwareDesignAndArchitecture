@@ -66,7 +66,7 @@ public class FindBikeFragment extends Fragment {
         for(int i=0; i<allBikes.size(); i++){
             try {
                 Object getrow = allBikes.get(i);
-                LinkedTreeMap<Object, Object> t = (LinkedTreeMap) getrow;
+                LinkedTreeMap t = (LinkedTreeMap) getrow;
                 String id = t.get("bikeId").toString().substring(0, t.get("bikeId").toString().indexOf("."));
                 String type = t.get("bikeType").toString();
                 String node = t.get("nodeId").toString();

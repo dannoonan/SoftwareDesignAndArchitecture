@@ -7,7 +7,7 @@ import com.cs4125.bikerentalapp.model.entity.RentReturnDetails;
 import com.cs4125.bikerentalapp.repository.IBikeRepository;
 import com.cs4125.bikerentalapp.web.ResponseBody;
 
-public class ReturnViewModel extends ViewModel {
+class ReturnViewModel extends ViewModel {
     private IBikeRepository repository;
 
     public void init(IBikeRepository repository){

@@ -12,7 +12,7 @@ import static android.arch.persistence.room.OnConflictStrategy.REPLACE;
 public interface UserDao {
 
     @Insert(onConflict = REPLACE)
-    long insert(User user);
+    void insert(User user);
 
     @Query("SELECT * FROM user WHERE username LIKE :username")
     User load(String username);

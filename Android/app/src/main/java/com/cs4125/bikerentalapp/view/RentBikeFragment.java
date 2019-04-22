@@ -32,7 +32,6 @@ import java.io.IOException;
 public class  RentBikeFragment extends Fragment { //extends Fragment {
     private SurfaceView surfaceView;
     private TextView txtBarcodeValue;
-    private BarcodeDetector barcodeDetector;
     private CameraSource cameraSource;
     private static final int REQUEST_CAMERA_PERMISSION = 201;
     private TextView txtView;
@@ -59,7 +58,7 @@ public class  RentBikeFragment extends Fragment { //extends Fragment {
 
         Toast.makeText(getContext(), "Barcode scanner started", Toast.LENGTH_SHORT).show();
 
-        barcodeDetector = new BarcodeDetector.Builder(getContext())
+        BarcodeDetector barcodeDetector = new BarcodeDetector.Builder(getContext())
                 .setBarcodeFormats(Barcode.ALL_FORMATS)
                 .build();
 

@@ -6,5 +6,5 @@ import com.cs4125.bikerentalapp.web.ResponseBody;
 
 public interface Command {
 
-    public LiveData<ResponseBody> execute();
+    LiveData<ResponseBody> execute();
 }

@@ -8,7 +8,7 @@ import com.cs4125.bikerentalapp.web.ResponseBody;
 
 public class Bike implements Vehicle {
 
-    private RentReturnDetails details;
+    private final RentReturnDetails details;
     private IBikeRepository repository;
 
     public Bike(RentReturnDetails details, IBikeRepository repository){

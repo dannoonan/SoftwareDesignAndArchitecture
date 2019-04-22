@@ -31,8 +31,6 @@ import com.cs4125.bikerentalapp.model.receivers.Vehicle;
 import com.cs4125.bikerentalapp.repository.BikeRepository;
 import com.cs4125.bikerentalapp.repository.user.UserRepository;
 import com.cs4125.bikerentalapp.sl.ServiceLocator;
-import com.cs4125.bikerentalapp.viewmodel.RentViewModel;
-import com.cs4125.bikerentalapp.viewmodel.ReturnViewModel;
 import com.cs4125.bikerentalapp.viewmodel.UserViewModel;
 import com.cs4125.bikerentalapp.web.ResponseBody;
 
@@ -50,15 +48,9 @@ public class ConfirmationFragment extends Fragment {
     private int vehicleId;
     private RentReturnDetails rentReturnDetails;
     private Invoker invoker;
-    private Button confirm;
-    private RentViewModel rentViewModel;
-    private ReturnViewModel returnViewModel;
     private static int userId=0;
     private static int studentCardId=0;
-    public static Location location;
-    private static double latitude =0;
-    private static double longitude = 0;
-
+    private static Location location;
 
 
     public ConfirmationFragment() {
@@ -120,8 +112,8 @@ public class ConfirmationFragment extends Fragment {
     public void getDetails(String[] data){
             getUserIds();
             getLocation();
-            latitude = 0;
-            longitude = 0;
+        double latitude = 0;
+        double longitude = 0;
 
             if(rentOrReturn==1){
                 //Code to assign latitude and longitude to the node's location
@@ -148,13 +140,11 @@ public class ConfirmationFragment extends Fragment {
     }
 
     private double getLongitude() {
-        double longitude = location.getLongitude();
-        return longitude;
+        return location.getLongitude();
     }
 
     private double getLatitude() {
-        double latitude = location.getLatitude();
-        return latitude;
+        return location.getLatitude();
     }
 
     private void setBikeStatus(){
@@ -184,15 +174,12 @@ public class ConfirmationFragment extends Fragment {
         String username = prefs.getString("username", null);
 
 
-        userViewModel.getUser(username).observe(this, new Observer<User>(){
-            @Override
-            public void onChanged(@Nullable final User user){
-                if(user!=null){
-                    ConfirmationFragment.setUserId(user.getUserId());
-                    ConfirmationFragment.setStudentCardId(Integer.parseInt(user.getStudentCardId()));
-                }else
-                    System.out.println("null");
-            }
+        userViewModel.getUser(username).observe(this, user -> {
+            if(user!=null){
+                ConfirmationFragment.setUserId(user.getUserId());
+                ConfirmationFragment.setStudentCardId(Integer.parseInt(user.getStudentCardId()));
+            }else
+                System.out.println("null");
         });
 
     }

@@ -123,7 +123,7 @@ public class LoginFragment extends Fragment {
         user.setUserType(userTypeId);
         user.setUserId(Integer.parseInt(userId));
         user.setStudentCardId(studentCardId);
-        user.setUsername(username);;
+        user.setUsername(username);
         user.setBanned(Boolean.parseBoolean(isBanned));
         user.setEmail(email);
 

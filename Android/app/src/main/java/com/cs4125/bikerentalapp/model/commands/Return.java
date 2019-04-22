@@ -7,7 +7,7 @@ import com.cs4125.bikerentalapp.web.ResponseBody;
 
 public class Return implements Command {
 
-    private Vehicle vehicle;
+    private final Vehicle vehicle;
 
     public Return(Vehicle aVehicle){
         vehicle = aVehicle;

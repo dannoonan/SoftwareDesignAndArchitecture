@@ -7,7 +7,7 @@ import com.cs4125.bikerentalapp.web.ResponseBody;
 
 public class Invoker {
 
-    Command command;
+    private final Command command;
 
     public Invoker(Command aCommand){
         command = aCommand;

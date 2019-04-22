@@ -4,7 +4,7 @@ import com.cs4125.bikerentalapp.model.entity.Visitor.Visitor;
 
 public class StandardUser implements IType {
 
-    boolean booleanValue;
+    private boolean booleanValue;
 
     @Override
     public String getType() {

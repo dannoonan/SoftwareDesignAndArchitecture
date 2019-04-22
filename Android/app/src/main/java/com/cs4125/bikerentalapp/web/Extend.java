@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.HashMap;
 
-public class Extend{
+class Extend{
     @SerializedName("error")
     @Expose
     private HashMap returned;

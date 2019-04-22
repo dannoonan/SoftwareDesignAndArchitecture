@@ -16,7 +16,7 @@ import java.util.Objects;
 import java.util.concurrent.Executor;
 
 public class NodeRepository implements INodeRepository {
-    private Webservice webservice;
+    private final Webservice webservice;
     private NodeDao nodeDao;
     private Executor executor;
 

@@ -67,15 +67,12 @@ public class MenuFragment extends Fragment {
         SharedPreferences prefs = getActivity().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         String username = prefs.getString("username", null);
 
-        userViewModel.getUser(username).observe(this, new Observer<User>() {
-            @Override
-            public void onChanged(@Nullable final User user) {
-                if(user!=null) {
-                    UserType userType = new UserType(Integer.parseInt(user.getUserType()));
-                    userType.getLevel().accept(visitor);
-                    if(!userType.getLevel().returnBoolean())
-                        addBikeButton.setVisibility(View.GONE);
-                }
+        userViewModel.getUser(username).observe(this, user -> {
+            if(user!=null) {
+                UserType userType = new UserType(Integer.parseInt(user.getUserType()));
+                userType.getLevel().accept(visitor);
+                if(!userType.getLevel().returnBoolean())
+                    addBikeButton.setVisibility(View.GONE);
             }
         });
     }

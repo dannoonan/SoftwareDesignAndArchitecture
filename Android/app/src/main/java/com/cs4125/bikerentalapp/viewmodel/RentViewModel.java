@@ -6,7 +6,7 @@ import android.arch.lifecycle.ViewModel;
 import com.cs4125.bikerentalapp.repository.IBikeRepository;
 import com.cs4125.bikerentalapp.web.ResponseBody;
 
-public class RentViewModel extends ViewModel {
+class RentViewModel extends ViewModel {
     private IBikeRepository repository;
 
     public void init(IBikeRepository repository){

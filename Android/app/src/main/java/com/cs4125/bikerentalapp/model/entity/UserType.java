@@ -8,7 +8,7 @@ import com.cs4125.bikerentalapp.model.entity.userLevel.StandardUser;
 
 public class UserType {
 
-    private IType type;
+    private final IType type;
     private int levelInt;
     public UserType(int levelInt) {
         this.levelInt = levelInt;

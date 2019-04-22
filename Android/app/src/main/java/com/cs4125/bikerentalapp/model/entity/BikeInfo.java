@@ -2,7 +2,7 @@ package com.cs4125.bikerentalapp.model.entity;
 
 public class BikeInfo extends  AbstractBikeInfo {
     private String type;
-    private String bikeLocation;
+    private final String bikeLocation;
 
     public BikeInfo(String type, String l, BikeLocation location){
         super(location);

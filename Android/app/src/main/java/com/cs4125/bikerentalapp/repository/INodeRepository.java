@@ -6,6 +6,6 @@ import com.cs4125.bikerentalapp.model.db_entity.Node;
 
 import java.util.List;
 
-public interface INodeRepository {
+interface INodeRepository {
     LiveData<List<Node>> getNodes();
 }
