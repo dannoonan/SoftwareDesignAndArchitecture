@@ -1,6 +1,6 @@
-package ie.demo.inventorymanagement.interceptor;
+package ie.demo.interceptorframework.interceptor;
 
-import ie.demo.inventorymanagement.Context;
+import ie.demo.interceptorframework.Context;
 
 // Interceptor interface
 public interface Interceptor<T extends Context> {

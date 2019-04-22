@@ -1,4 +1,4 @@
-package ie.demo.inventorymanagement;
+package ie.demo.interceptorframework;
 
 public class Pair<F, S> {
     private F first; //first member of pair

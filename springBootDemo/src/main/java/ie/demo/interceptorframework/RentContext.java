@@ -1,4 +1,4 @@
-package ie.demo.inventorymanagement;
+package ie.demo.interceptorframework;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

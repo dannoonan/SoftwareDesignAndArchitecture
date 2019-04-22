@@ -1,4 +1,6 @@
-package ie.demo.inventorymanagement;
+package ie.demo.interceptorframework;
+
+import ie.demo.service.BikeService;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -54,6 +56,14 @@ public class ReturnContext extends Context {
         return nodeId;
     }
 
+    public int getBikeId(){
+        return bikeId;
+    }
+
+    public BikeService getService(){
+        return framework.getBikeService();
+    }
+
     public void addBikeDueForCollection(int nodeId){
         framework.addBikeDueForCollection(nodeId, bikeId);
     }
@@ -65,6 +75,7 @@ public class ReturnContext extends Context {
         private Double longitude;
         private int studentCardId;
         private Integer nodeId;
+
 
         public Builder setUserId(int userId) {
             this.userId = userId;
