@@ -1,8 +1,10 @@
 package ie.demo.controller;
 
-import ie.demo.inventorymanagement.Framework;
-import ie.demo.inventorymanagement.RentContext;
-import ie.demo.inventorymanagement.ReturnContext;
+import ie.demo.interceptorframework.Framework;
+import ie.demo.interceptorframework.RentContext;
+import ie.demo.interceptorframework.ReturnContext;
+import ie.demo.service.BikeService;
+import ie.demo.service.NodeService;
 import ie.demo.service.OrderService;
 import ie.util.MsgResponse;
 import ie.util.StateCode;
@@ -21,6 +23,12 @@ public class OrderController {
 
 	@Autowired
 	private OrderService orderService;
+
+	@Autowired
+	private BikeService bikeService;
+
+	@Autowired
+	private NodeService nodeService;
 	
 	@RequestMapping(value= "/rent", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
 	public MsgResponse rentBike(@RequestParam int id, @RequestParam(value = "userId")int userId) {
@@ -62,6 +70,9 @@ public class OrderController {
 								  @RequestParam(value = "nodeId", required = false) Integer nodeId) {
 
 		Framework framework = Framework.getInstance();
+		framework.supplyNodeService(nodeService);
+		framework.supplyBikeService(bikeService);
+
 		framework.handleRequest(new ReturnContext.Builder()
 				.setUserId(userId)
 				.setBikeId(bikeId)

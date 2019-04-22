@@ -1,4 +1,4 @@
-package ie.demo.inventorymanagement;
+package ie.demo.interceptorframework;
 
 // Context interface
 public class Context {

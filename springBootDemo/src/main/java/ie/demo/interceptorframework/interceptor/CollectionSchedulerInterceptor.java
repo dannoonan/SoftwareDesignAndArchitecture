@@ -1,8 +1,9 @@
-package ie.demo.inventorymanagement.interceptor;
+package ie.demo.interceptorframework.interceptor;
 
-import ie.demo.inventorymanagement.Pair;
-import ie.demo.inventorymanagement.ReturnContext;
+import ie.demo.interceptorframework.Pair;
+import ie.demo.interceptorframework.ReturnContext;
 
+import java.util.List;
 import java.util.Map;
 
 // Concrete interceptor
@@ -17,9 +18,13 @@ public class CollectionSchedulerInterceptor implements Interceptor<ReturnContext
 
         int nearestNode = getNearestNode(context);
 
+
         context.addBikeDueForCollection(nearestNode);
-        if (context.getBikesDueForCollections(nearestNode).size() > 10){
-            // TODO: schedule collection.
+        List<Integer> bikesDueForCollection = context.getBikesDueForCollections(nearestNode);
+        if (bikesDueForCollection.size() > 2){
+            int result = context.getService().scheduleCollection(bikesDueForCollection, nearestNode, 29);
+
+            System.out.println("Collection scheduled. RESULT: " + result);
         }
     }
 

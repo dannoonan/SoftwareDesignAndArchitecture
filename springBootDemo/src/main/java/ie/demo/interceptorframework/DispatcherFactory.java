@@ -1,6 +1,4 @@
-package ie.demo.inventorymanagement;
-
-import java.util.Collection;
+package ie.demo.interceptorframework;
 
 public class DispatcherFactory {
 

@@ -1,4 +1,4 @@
-package ie.demo.inventorymanagement;
+package ie.demo.interceptorframework;
 
 public class ReportContext extends Context{
     public ReportContext(Framework framework) {

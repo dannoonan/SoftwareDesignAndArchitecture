@@ -1,6 +1,6 @@
-package ie.demo.inventorymanagement;
+package ie.demo.interceptorframework;
 
-import ie.demo.inventorymanagement.interceptor.Interceptor;
+import ie.demo.interceptorframework.interceptor.Interceptor;
 
 import java.util.ArrayList;
 import java.util.Collection;
