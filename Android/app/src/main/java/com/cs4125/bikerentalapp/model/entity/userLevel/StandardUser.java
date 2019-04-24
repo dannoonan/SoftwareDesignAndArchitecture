@@ -13,7 +13,7 @@ public class StandardUser implements IType {
 
     @Override
     public void accept(Visitor v) {
-        if(v.visitStandardUser(this).equals("true"))
+        if(v.visit(this).equals("true"))
             booleanValue=true;
         else
             booleanValue=false;

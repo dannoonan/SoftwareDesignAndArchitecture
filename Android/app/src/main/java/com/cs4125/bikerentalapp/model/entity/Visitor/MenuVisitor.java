@@ -8,18 +8,18 @@ import com.cs4125.bikerentalapp.model.entity.userLevel.PremiumUser;
 public class MenuVisitor implements Visitor<String> {
 
     @Override
-    public String visitStandardUser(StandardUser standard) { return "false"; }
+    public String visit(StandardUser standard) { return "false"; }
 
     @Override
-    public String visitPremiumUser(PremiumUser premium) { return "false"; }
+    public String visit(PremiumUser premium) { return "false"; }
 
     @Override
-    public String visitAdmin(Admin admin) {
+    public String visit(Admin admin) {
         return "true";
     }
 
     @Override
-    public String visitMaintenance(Maintenance maintenance) {
+    public String visit(Maintenance maintenance) {
         return "false";
     }
 }

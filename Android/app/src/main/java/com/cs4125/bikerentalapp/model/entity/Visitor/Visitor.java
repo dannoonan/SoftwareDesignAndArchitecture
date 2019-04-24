@@ -6,8 +6,8 @@ import com.cs4125.bikerentalapp.model.entity.userLevel.PremiumUser;
 import com.cs4125.bikerentalapp.model.entity.userLevel.StandardUser;
 
 public interface Visitor<T> {
-    T visitStandardUser(StandardUser standard);
-    T visitPremiumUser(PremiumUser premium);
-    T visitAdmin(Admin admin);
-    T visitMaintenance(Maintenance maintenance);
+    T visit(StandardUser standard);
+    T visit(PremiumUser premium);
+    T visit(Admin admin);
+    T visit(Maintenance maintenance);
 }

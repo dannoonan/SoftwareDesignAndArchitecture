@@ -13,7 +13,7 @@ public class Maintenance implements IType {
 
     @Override
     public void accept(Visitor v) {
-        booleanValue = v.visitMaintenance(this).equals("true");
+        booleanValue = v.visit(this).equals("true");
     }
 
     public boolean returnBoolean(){
